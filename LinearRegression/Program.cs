@@ -4,8 +4,7 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.Random;
 
-TestLinearModel();
-TestKernelModel();
+Test();
 Console.ReadKey();
 
 void TestLinearModel()
@@ -33,6 +32,35 @@ void TestKernelModel()
     var res = K.LU().Solve(Y);
 
     var predictY = (K * res).ToColumnMajorArray();
+    var loss = y.Zip(predictY, (a, b) => a - b).Sum();
+    Console.WriteLine($"KernelModel loss:\t{loss}");
+}
+
+void Test()
+{
+    var datas = generateXY(-3, 3, 50);
+    var x = datas.Item1;
+    var y = datas.Item2;
+    var K = raisingDimsByKernel(x);
+    var Y = Matrix.Build.DenseOfColumnArrays(y);
+
+
+    var t0 = Matrix.Build.Random(50, 1);
+    var learningRate = 0.1;
+    for (var i = 0; i < 5000; i++)
+    {
+        var index = SystemRandomSource.Default.Next(0, 50);
+        var ki = raisingDimsByKernel_1(x, x[index]);
+        var t = t0 - learningRate * ki * (ki.Transpose() * t0 - y[index]);
+        var dis = (t - t0).L2Norm();
+        Console.WriteLine($"{i}\t{dis}");
+        if (dis < 0.00001)
+            break;
+        t0 = t;
+    }
+
+
+    var predictY = (K * t0).ToColumnMajorArray();
     var loss = y.Zip(predictY, (a, b) => a - b).Sum();
     Console.WriteLine($"KernelModel loss:\t{loss}");
 }
@@ -77,6 +105,15 @@ Matrix<double> raisingDimsByKernel(double[] x)
 {
     var m = x.Select(x1 => x.Select(x2 => get_kernel(x1, x2, 0.3)).ToArray());
     return Matrix.Build.DenseOfRowArrays(m);
+}
+
+/// <summary>
+/// 通过高斯核升维
+/// </summary>
+Matrix<double> raisingDimsByKernel_1(double[] x, double x0)
+{
+    var m = x.Select(x1 => get_kernel(x1, x0, 0.3)).ToArray();
+    return Matrix.Build.DenseOfColumnArrays(m);
 }
 
 
