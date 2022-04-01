@@ -1,10 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System;
+using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.Random;
 
-Test();
+
+
+TestLinearModel();
 Console.ReadKey();
 
 void TestLinearModel()
@@ -18,6 +22,11 @@ void TestLinearModel()
     var res = X.Svd().Solve(Y);
     var predictY = (X * res).ToColumnMajorArray();
 
+    rows=rows.Select(a => { var alist = a.ToList();alist.Add(1.0);return alist.ToArray(); }).ToList();
+     X = Matrix.Build.DenseOfRowArrays(rows);
+    var res2 = (X.Transpose() * X).Inverse() * X.Transpose() * Y;
+
+    var predictY2 = X * res2;
     var loss = y.Zip(predictY, (a, b) => a - b).Sum();
     Console.WriteLine($"LinearModel loss:\t{loss}");
 }
@@ -115,7 +124,6 @@ Matrix<double> raisingDimsByKernel_1(double[] x, double x0)
     var m = x.Select(x1 => get_kernel(x1, x0, 0.3)).ToArray();
     return Matrix.Build.DenseOfColumnArrays(m);
 }
-
 
 double get_kernel(double x, double l, double sigma)
 {

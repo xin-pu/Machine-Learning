@@ -5,3 +5,7 @@
 /.vs
 /LinearRegression/bin
 /LinearRegression/obj
+/MLNet/bin
+/MLNet/obj
+/MLNetTest/bin
+/MLNetTest/obj
