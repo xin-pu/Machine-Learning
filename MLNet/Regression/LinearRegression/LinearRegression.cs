@@ -13,10 +13,17 @@ namespace MLNet.Regression.LinearRegression
         {
         }
 
-
+        /// <summary>
+        ///     X/Y
+        ///     np.linalg.lstsq(A, B)
+        ///     np.linalg.pinv(A).dot(A)
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <returns></returns>
         internal override NDarray fit(NDarray X, NDarray Y)
         {
-            return np.linalg.solve(X, Y);
+            return np.linalg.pinv(X).dot(Y);
         }
     }
 }
