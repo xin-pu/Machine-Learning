@@ -1,35 +1,22 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using MLNet.Model;
+﻿using MLNet.LearningModel;
+using MLNet.Utils;
+using Numpy;
 
-namespace MLNet.Regression.LinearRegression;
-
-public abstract class LinearRegression : MLModel
+namespace MLNet.Regression.LinearRegression
 {
-    protected LinearRegression()
-        : base("LinearRegression")
+    public class LinearRegression : LinearModel
     {
-    }
+        public LinearRegression(
+            PrimaryType primaryType,
+            int alpha)
+            : base("LinearRegression", primaryType, alpha)
+        {
+        }
 
-    public Matrix Theta { set; get; }
 
-    public override double Evaluate(Matrix X, Matrix Y)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override Matrix Predict(Matrix X)
-    {
-        var yPred = Theta.Multiply(X);
-        return (Matrix)yPred;
-    }
-
-    public override void Save(string path)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override MLModel Load(string path)
-    {
-        throw new NotImplementedException();
+        internal override NDarray fit(NDarray X, NDarray Y)
+        {
+            return np.linalg.solve(X, Y);
+        }
     }
 }
