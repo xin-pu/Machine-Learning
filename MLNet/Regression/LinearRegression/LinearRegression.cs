@@ -27,7 +27,7 @@ namespace MLNet.Regression.LinearRegression
 
         public override NDarray Pred(NDarray x)
         {
-            return x.multiply(Theda);
+            return x.multiply(TheDa);
         }
     }
 }

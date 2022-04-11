@@ -9,8 +9,7 @@ namespace MLNetTest.Regression
 {
     public class LinearRegressionTest : AbstractUnitTest
     {
-        private readonly double[,] x = {{1}, {2}, {3}, {4}};
-        private readonly double[,] y = {{3}, {3.9}, {5}, {6.1}};
+        private readonly NDarray x = np.arange(-3, 3, 0.05);
 
         public LinearRegressionTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
@@ -18,16 +17,44 @@ namespace MLNetTest.Regression
             Log.Print = Print;
         }
 
+        public NDarray X => np.expand_dims(x, -1);
+        public NDarray Y => np.expand_dims(np.sin(x) + 0.3 * x, -1);
 
         [Fact]
-        public void Solve()
+        public void PolynomialFeatures()
         {
-            var pf = new PolynomialFeatures(2) {SloveFunc = SloveFuc.Slove};
-            pf.Fit(np.array(x), np.array(y));
+            var pf = new PolynomialFeatures(degree: 5)
+            {
+                SloveFunc = SloveFuc.Slove
+            };
+            pf.Fit(X, Y);
+            Print(Y);
+            var y_pred = pf.Predict(X);
+        }
+
+        [Fact]
+        public void Ridge()
+        {
+            var ridge = new Ridge(alpha: 0.1, degree: 5)
+            {
+                SloveFunc = SloveFuc.Slove
+            };
+            ridge.Fit(X, Y);
+            Print(Y);
+            var y_pred = ridge.Predict(X);
+        }
 
 
-            var x_val = np.array(new double[,] {{5}});
-            var y_pred = pf.Predict(x_val);
+        [Fact]
+        public void Lasso()
+        {
+            var lasso = new Lasso(alpha: 0.1, degree: 5)
+            {
+                SloveFunc = SloveFuc.Slove
+            };
+            lasso.Fit(X, Y);
+            Print(Y);
+            var y_pred = lasso.Predict(X);
         }
     }
 }

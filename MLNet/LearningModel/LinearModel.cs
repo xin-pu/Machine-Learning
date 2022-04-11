@@ -9,7 +9,7 @@ namespace MLNet.LearningModel
         {
         }
 
-        public NDarray? Theda { set; get; }
+        public NDarray? TheDa { set; get; }
 
         public SloveFuc SloveFunc { set; get; }
 
@@ -35,16 +35,16 @@ namespace MLNet.LearningModel
             switch (SloveFunc)
             {
                 case SloveFuc.Slove:
-                    Theda = Slove(x, y);
+                    TheDa = Slove(x, y);
                     break;
                 case SloveFuc.SGD:
-                    Theda = SGD(x, y);
+                    TheDa = SGD(x, y);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            Log.Print?.Invoke($"{Name} Fit:\r\n{Theda}");
+            Log.Print?.Invoke($"{Name} Fit:\r\n{TheDa}");
         }
 
         public abstract NDarray Slove(NDarray x, NDarray y);

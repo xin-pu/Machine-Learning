@@ -1,32 +1,13 @@
-﻿using MLNet.LearningModel;
-using Numpy;
-
-namespace MLNet.Regression.LinearRegression
+﻿namespace MLNet.Regression.LinearRegression
 {
     /// <summary>
-    ///     多元线性回归
-    ///     y=α + β1*x1 + β2*x2 + ... + βn*xn
+    ///     岭回归
     /// </summary>
-    public class Ridge : LinearModel
+    public class Ridge : PolynomialFeatures
     {
-        public Ridge()
-            : base("LinearRegression")
+        public Ridge(int degree = 5, double alpha = 0.3)
+            : base(Constraint.L2, degree, alpha)
         {
-        }
-
-        public override NDarray Slove(NDarray x, NDarray y)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override NDarray SGD(NDarray x, NDarray y)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override NDarray Pred(NDarray x)
-        {
-            throw new NotImplementedException();
         }
     }
 }
