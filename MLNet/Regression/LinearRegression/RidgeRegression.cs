@@ -1,3 +1,1 @@
-﻿namespace MLNet.Regression.LinearRegression
-{
-}
+﻿

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using MLNet.Regression.LinearRegression;
 using MLNet.Utils;
 using Xunit;
 using Xunit.Abstractions;
@@ -25,9 +24,9 @@ namespace MLNetTest
             var x = EnumerableExt.GetList(0, 3, 50);
             var y = x.ToList().Select(func).ToArray();
 
-            var lm = new LinearRegression(PrimaryType.Polynomial, 15);
-            lm.Fit(EnumerableExt.GetList(x), y);
-            if (lm.Theda != null) Print(lm.Theda);
+            //var lm = new LinearRegression(PrimaryType.Polynomial, 15);
+            //lm.Fit(EnumerableExt.GetList(x), y);
+            //if (lm.Theda != null) Print(lm.Theda);
         }
     }
 }
