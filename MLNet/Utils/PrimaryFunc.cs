@@ -1,7 +1,4 @@
-﻿using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Double;
-
-namespace MLNet.Utils
+﻿namespace MLNet.Utils
 {
     public class PrimaryFunc
     {
@@ -30,24 +27,18 @@ namespace MLNet.Utils
         {
             return Enumerable.Range(0, order).Select(o => Math.Pow(x, o)).ToArray();
         };
-
-
-        public static Func<double[], int, Matrix<double>> getTrigPrimaryS = (x, order) =>
-        {
-            var rows = x.Select(i => getTrigPrimary(i, order));
-            return Matrix.Build.DenseOfRowArrays(rows);
-        };
-
-        public static Func<double[], int, Matrix<double>> getPolyPrimaryS = (x, order) =>
-        {
-            var rows = x.Select(i => getPolyPrimary(i, order));
-            return Matrix.Build.DenseOfRowArrays(rows);
-        };
     }
 
     public enum PrimaryType
     {
+        Original,
         Polynomial,
         Triangle
+    }
+
+    public enum MultiPrimaryType
+    {
+        ADD,
+        MUL
     }
 }

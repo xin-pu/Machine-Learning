@@ -2,7 +2,7 @@
 using Xunit;
 using Xunit.Abstractions;
 
-namespace MLNetTest
+namespace MLNetTest.UtilsTest
 {
     public class NumpyTest : AbstractUnitTest
     {
@@ -27,6 +27,9 @@ namespace MLNetTest
             var C = np.array(new double[,] {{54, 32}, {66, 11}, {75, 33}});
             var res = np.linalg.solve(B, C);
             Print(res);
+
+            var d = np.matmul(B, res);
+            Print(d);
         }
     }
 }

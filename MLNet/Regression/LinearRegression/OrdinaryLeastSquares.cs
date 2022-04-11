@@ -6,11 +6,15 @@ namespace MLNet.Regression.LinearRegression
     public class OrdinaryLeastSquares : LinearRegression
     {
         public OrdinaryLeastSquares(
-            string name,
             PrimaryType primaryType = PrimaryType.Polynomial,
             int alpha = 16) :
-            base(name, primaryType, alpha)
+            base("OrdinaryLeastSquares", primaryType, alpha)
         {
+        }
+
+        internal override NDarray slove(NDarray X, NDarray Y)
+        {
+            return np.linalg.pinv(X).dot(Y);
         }
 
         internal override NDarray fit(NDarray X, NDarray Y)

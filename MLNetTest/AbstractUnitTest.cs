@@ -15,8 +15,9 @@ namespace MLNetTest
 
         internal void Print<T>(T[] array)
         {
-            _testOutputHelper.WriteLine(string.Join(",", array));
+            _testOutputHelper.WriteLine(string.Join("\r\n", array));
         }
+
 
         internal void Print(object obj)
         {
