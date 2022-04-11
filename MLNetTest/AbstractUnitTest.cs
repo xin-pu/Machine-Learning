@@ -19,9 +19,9 @@ namespace MLNetTest
         }
 
 
-        internal void Print(object obj)
+        internal void Print(object? obj)
         {
-            _testOutputHelper.WriteLine(obj.ToString());
+            _testOutputHelper.WriteLine(obj?.ToString());
         }
     }
 }

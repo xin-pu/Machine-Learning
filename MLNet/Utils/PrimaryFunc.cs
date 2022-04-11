@@ -2,6 +2,17 @@
 {
     public class PrimaryFunc
     {
+        #region func
+
+        /// <summary>
+        ///     多项式奇函数
+        ///     return column [1,x,x^2,....x^order]
+        /// </summary>
+        public static Func<double, int, double[]> getPolyPrimary = (x, order) =>
+        {
+            return Enumerable.Range(0, order).Select(o => Math.Pow(x, o)).ToArray();
+        };
+
         /// <summary>
         ///     三角基函数
         ///     return column [1,sin(x/2),cos(x/2),....sin(15x/2),cos(15x/2)
@@ -19,14 +30,7 @@
             return res;
         };
 
-        /// <summary>
-        ///     多项式奇函数
-        ///     return column [1,x,x^2,....x^order]
-        /// </summary>
-        public static Func<double, int, double[]> getPolyPrimary = (x, order) =>
-        {
-            return Enumerable.Range(0, order).Select(o => Math.Pow(x, o)).ToArray();
-        };
+        #endregion
     }
 
     public enum PrimaryType

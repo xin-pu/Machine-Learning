@@ -7,17 +7,16 @@ namespace MLNet.Regression.LinearRegression
     ///     多元线性回归
     ///     y=α + β1*x1 + β2*x2 + ... + βn*xn
     /// </summary>
-    public class LinearRegression : LinearModel
+    public class Ridge : LinearModel
     {
-        public LinearRegression()
+        public Ridge()
             : base("LinearRegression")
         {
         }
 
-
         public override NDarray Slove(NDarray x, NDarray y)
         {
-            return np.linalg.pinv(x).dot(y);
+            throw new NotImplementedException();
         }
 
         public override NDarray SGD(NDarray x, NDarray y)
@@ -27,7 +26,7 @@ namespace MLNet.Regression.LinearRegression
 
         public override NDarray Pred(NDarray x)
         {
-            return x.multiply(Theda);
+            throw new NotImplementedException();
         }
     }
 }

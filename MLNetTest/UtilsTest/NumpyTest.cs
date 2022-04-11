@@ -1,4 +1,5 @@
-﻿using Numpy;
+﻿using System.Linq;
+using Numpy;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -30,6 +31,23 @@ namespace MLNetTest.UtilsTest
 
             var d = np.matmul(B, res);
             Print(d);
+        }
+
+        [Fact]
+        public void Poly()
+        {
+            var x = np.ones(3, 1) * 2;
+            Print(x);
+
+            var npX = np.ones(x.shape[0], 3);
+            Enumerable.Range(0, 3).ToList().ForEach(d =>
+            {
+                var row = np.ones(x.shape[0]) * d;
+                npX[d] = np.power(x[0], row);
+            });
+            Print(npX);
+            var y = np.transpose(npX);
+            Print(y);
         }
     }
 }
