@@ -9,19 +9,16 @@ namespace MLNet.Regression.LinearRegression
     public class LMS : AbstractLinearRegression
     {
         public LMS()
-            : base("LinearRegression")
+            : base("LMS")
         {
         }
 
+
+        internal override Func<NDarray, NDarray, NDarray, NDarray> LeastSquares { get; set; }
 
         public override NDarray Slove(NDarray x, NDarray y)
         {
             return np.linalg.pinv(x).dot(y);
-        }
-
-        public override NDarray SGD(NDarray x, NDarray y)
-        {
-            throw new NotImplementedException();
         }
     }
 }

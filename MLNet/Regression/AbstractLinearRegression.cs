@@ -1,4 +1,5 @@
 ﻿using MLNet.LearningModel;
+using MLNet.Utils;
 using Numpy;
 
 namespace MLNet.Regression
@@ -20,12 +21,14 @@ namespace MLNet.Regression
         {
         }
 
+        internal abstract Func<NDarray, NDarray, NDarray, NDarray> LeastSquares { set; get; }
+
         public NDarray? TheDa { set; get; }
 
         public SloveFuc SloveFunc { set; get; }
 
 
-        public override void Fit(NDarray x, NDarray y)
+        internal override void fit(NDarray x, NDarray y, double learning_rate)
         {
             switch (SloveFunc)
             {
@@ -33,7 +36,7 @@ namespace MLNet.Regression
                     TheDa = Slove(x, y);
                     break;
                 case SloveFuc.SGD:
-                    TheDa = SGD(x, y);
+                    TheDa = sgd(x, y, learning_rate);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -44,14 +47,50 @@ namespace MLNet.Regression
 
         public abstract NDarray Slove(NDarray x, NDarray y);
 
-        public override NDarray SGD(NDarray x, NDarray y)
+
+        internal override NDarray sgd(NDarray x, NDarray y, double learning_rate)
         {
+            if (LeastSquares == null)
+                throw new Exception("Not define Loss function");
+
+            // x => 1,x1,x2,x3,...,xN
+            var X = NumpyExp.CvtToLinearX(x);
+            var theDa = np.random.randn(X.shape[1], 1);
+            Enumerable.Range(0, 100).ToList().ForEach(epoch =>
+            {
+                Log.Print?.Invoke($"{Name} Epoch:\r\n{epoch}");
+                var pred = predict(X, theDa);
+
+                var cost = NumpyExp.Power(pred - y, 2);
+            });
             return null;
         }
 
-        public override NDarray Pred(NDarray x)
+        public double Cost(NDarray x, NDarray y, NDarray theda)
         {
-            return x.multiply(TheDa);
+            var cost = predict(x, theda);
+            var power = np.ones_like(cost) * 2;
+            return np.average(np.power(cost - y, power));
+        }
+
+
+        internal NDarray predict(NDarray x, NDarray theda)
+        {
+            return np.matmul(x, theda);
+        }
+
+        internal override NDarray call(NDarray x)
+        {
+            return np.matmul(x, TheDa);
+        }
+
+
+        public override void Load(string path)
+        {
+        }
+
+        public override void Save(string path)
+        {
         }
     }
 }

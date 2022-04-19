@@ -25,6 +25,8 @@ namespace MLNet.Regression
         public Constraint Constraint { set; get; }
 
 
+        internal override Func<NDarray, NDarray, NDarray, NDarray> LeastSquares { get; set; }
+
         /// <summary>
         ///     Solve TheDa= X/Y
         /// </summary>
@@ -51,16 +53,6 @@ namespace MLNet.Regression
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        public override NDarray SGD(NDarray x, NDarray y)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override NDarray Pred(NDarray x)
-        {
-            return np.matmul(CvtToPoly(x), TheDa);
         }
 
 
