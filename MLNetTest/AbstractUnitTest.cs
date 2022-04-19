@@ -12,13 +12,13 @@ namespace MLNetTest
 
         internal ITestOutputHelper _testOutputHelper { get; }
 
-        internal void Print<T>(T[] array)
+        internal void print<T>(T[] array)
         {
             _testOutputHelper.WriteLine(string.Join("\r\n", array));
         }
 
 
-        internal void Print(object? obj)
+        internal void print(object? obj)
         {
             _testOutputHelper.WriteLine(obj?.ToString());
         }

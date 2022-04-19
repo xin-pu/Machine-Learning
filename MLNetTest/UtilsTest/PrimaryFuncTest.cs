@@ -15,14 +15,14 @@ namespace MLNetTest.UtilsTest
         public void TestPolyPrimary()
         {
             var res = PrimaryFunc.getPolyPrimary(2, 4);
-            Print(res);
+            print(res);
         }
 
         [Fact]
         public void TestTrigPrimary()
         {
             var res = PrimaryFunc.getTrigPrimary(2, 4);
-            Print(res);
+            print(res);
         }
     }
 }

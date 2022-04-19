@@ -14,7 +14,7 @@ namespace MLNetTest.Regression
         public LinearRegressionTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            Log.Print = Print;
+            Log.Print = print;
         }
 
         public NDarray X => np.expand_dims(x, -1);
@@ -28,7 +28,7 @@ namespace MLNetTest.Regression
                 SloveFunc = AbstractLinearRegression.SloveFuc.Slove
             };
             pf.Fit(X, Y);
-            Print(Y);
+            print(Y);
             var y_pred = pf.Predict(X);
         }
 
@@ -40,7 +40,7 @@ namespace MLNetTest.Regression
                 SloveFunc = AbstractLinearRegression.SloveFuc.Slove
             };
             ridge.Fit(X, Y);
-            Print(Y);
+            print(Y);
             var y_pred = ridge.Predict(X);
         }
 
@@ -53,7 +53,7 @@ namespace MLNetTest.Regression
                 SloveFunc = AbstractLinearRegression.SloveFuc.Slove
             };
             lasso.Fit(X, Y);
-            Print(Y);
+            print(Y);
             var y_pred = lasso.Predict(X);
         }
     }

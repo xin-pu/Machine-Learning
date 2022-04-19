@@ -54,14 +54,14 @@ namespace MLNet.Regression
                 throw new Exception("Not define Loss function");
 
             // x => 1,x1,x2,x3,...,xN
-            var X = NumpyExp.CvtToLinearX(x);
+            var X = np2.linear_first_order(x);
             var theDa = np.random.randn(X.shape[1], 1);
             Enumerable.Range(0, 100).ToList().ForEach(epoch =>
             {
                 Log.Print?.Invoke($"{Name} Epoch:\r\n{epoch}");
                 var pred = predict(X, theDa);
 
-                var cost = NumpyExp.Power(pred - y, 2);
+                var cost = np2.power(pred - y, 2);
             });
             return null;
         }

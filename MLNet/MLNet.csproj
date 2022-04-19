@@ -7,13 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataSet\**" />
+    <EmbeddedResource Remove="DataSet\**" />
+    <None Remove="DataSet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoDiff" Version="1.2.2" />
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="PythonPlotter" Version="0.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataSet\" />
     <Folder Include="Regression\TreeRegression\" />
   </ItemGroup>
 

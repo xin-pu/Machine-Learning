@@ -14,31 +14,63 @@ namespace MLNetTest.UtilsTest
         }
 
         [Fact]
-        public void Create()
+        public void create()
         {
-            var res = np.zeros(4, 3);
-            Print(res);
-            res[0] = np.ones(3);
-            Print(res);
+            var zeros = np.zeros(4, 3);
+            print(zeros);
+            zeros[0] = np.ones(3);
+            print(zeros);
+
+            var random = np.random.rand(4, 3);
+            print(random);
         }
+
+
+        [Fact]
+        public void multiply()
+        {
+            var x = np.array(new double[,] { { 1, 2 }, { 1, 2 } });
+            var y = np.array(new double[,] { { 2, 3 }, { 1, 2 } });
+            var res = np.matmul(x, y);
+            print(res);
+        }
+
+        [Fact]
+        public void power_1()
+        {
+            var x = np.array(new double[,] { { 1, 2, 3 }, { 1, 2, 3 } });
+            var y = np.array(new double[,] { { 2, 3, 0 }, { 1, 2, 3 } });
+            var res = np.power(x, y);
+            print(res);
+            print(res.shape);
+        }
+
+        [Fact]
+        public void power_2()
+        {
+            var x = np.array(new double[,] { { 1, 2, 3 }, { 1, 2, 3 } });
+            var res = np2.power(x, 2);
+            print(res);
+        }
+
 
         [Fact]
         public void solve()
         {
-            var B = np.array(new double[,] {{1, 3, 5}, {7, 9, 11}, {13, 15, 16}});
-            var C = np.array(new double[,] {{54, 32}, {66, 11}, {75, 33}});
+            var B = np.array(new double[,] { { 1, 3, 5 }, { 7, 9, 11 }, { 13, 15, 16 } });
+            var C = np.array(new double[,] { { 54, 32 }, { 66, 11 }, { 75, 33 } });
             var res = np.linalg.solve(B, C);
-            Print(res);
+            print(res);
 
             var d = np.matmul(B, res);
-            Print(d);
+            print(d);
         }
 
         [Fact]
         public void poly()
         {
             var x = np.ones(3, 1) * 2;
-            Print(x);
+            print(x);
 
             var npX = np.ones(x.shape[0], 3);
             Enumerable.Range(0, 3).ToList().ForEach(d =>
@@ -46,50 +78,18 @@ namespace MLNetTest.UtilsTest
                 var row = np.ones(x.shape[0]) * d;
                 npX[d] = np.power(x[0], row);
             });
-            Print(npX);
+            print(npX);
             var y = np.transpose(npX);
-            Print(y);
+            print(y);
         }
 
 
         [Fact]
-        public void multiply()
+        public void linear_first_order()
         {
-            var x = np.array(new double[,] {{1, 2}, {1, 2}});
-            var y = np.array(new double[,] {{2, 3}, {1, 2}});
-            var res = np.matmul(x, y);
-            Print(res);
-        }
-
-        [Fact]
-        public void power_1()
-        {
-            var x = np.array(new double[,] {{1, 2, 3}, {1, 2, 3}});
-            var y = np.array(new double[,] {{2, 3, 0}, {1, 2, 3}});
-            var res = np.power(x, y);
-            Print(res);
-            Print(res.shape);
-        }
-
-        [Fact]
-        public void power_2()
-        {
-            var x = np.array(new double[,] {{1, 2, 3}, {1, 2, 3}});
-            var res = NumpyExp.Power(x, 2);
-            Print(res);
-        }
-
-        [Fact]
-        public void CvtToLinearX()
-        {
-            var a = np.array(new double[,] {{1, 1, 1}, {0, 0, 0}});
-            var res = NumpyExp.CvtToLinearX(a);
-            Print(res);
-        }
-
-        [Fact]
-        public void T()
-        {
+            var a = np.array(new double[,] { { 1, 1, 1 }, { 0, 0, 0 } });
+            var res = np2.linear_first_order(a);
+            print(res);
         }
     }
 }
