@@ -7,13 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+    <PackageReference Include="AutoDiff" Version="1.2.2" />
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="PythonPlotter" Version="0.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="DataSet\" />
+    <Folder Include="Regression\TreeRegression\" />
   </ItemGroup>
 
 </Project>

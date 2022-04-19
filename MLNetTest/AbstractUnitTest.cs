@@ -1,5 +1,4 @@
-﻿using MathNet.Numerics.Random;
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 
 namespace MLNetTest
 {
@@ -10,7 +9,7 @@ namespace MLNetTest
             _testOutputHelper = testOutputHelper;
         }
 
-        internal SystemRandomSource SystemRandomSource => SystemRandomSource.Default;
+
         internal ITestOutputHelper _testOutputHelper { get; }
 
         internal void Print<T>(T[] array)

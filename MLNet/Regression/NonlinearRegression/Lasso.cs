@@ -1,4 +1,4 @@
-﻿namespace MLNet.Regression.LinearRegression
+﻿namespace MLNet.Regression
 {
     public class Lasso : PolynomialFeatures
     {

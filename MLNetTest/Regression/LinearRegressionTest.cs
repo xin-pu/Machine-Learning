@@ -1,5 +1,5 @@
 using MLNet;
-using MLNet.LearningModel;
+using MLNet.Regression;
 using MLNet.Regression.LinearRegression;
 using Numpy;
 using Xunit;
@@ -25,7 +25,7 @@ namespace MLNetTest.Regression
         {
             var pf = new PolynomialFeatures(degree: 5)
             {
-                SloveFunc = SloveFuc.Slove
+                SloveFunc = AbstractLinearRegression.SloveFuc.Slove
             };
             pf.Fit(X, Y);
             Print(Y);
@@ -37,7 +37,7 @@ namespace MLNetTest.Regression
         {
             var ridge = new Ridge(alpha: 0.1, degree: 5)
             {
-                SloveFunc = SloveFuc.Slove
+                SloveFunc = AbstractLinearRegression.SloveFuc.Slove
             };
             ridge.Fit(X, Y);
             Print(Y);
@@ -50,7 +50,7 @@ namespace MLNetTest.Regression
         {
             var lasso = new Lasso(alpha: 0.1, degree: 5)
             {
-                SloveFunc = SloveFuc.Slove
+                SloveFunc = AbstractLinearRegression.SloveFuc.Slove
             };
             lasso.Fit(X, Y);
             Print(Y);

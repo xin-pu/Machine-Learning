@@ -1,13 +1,12 @@
-﻿using MLNet.LearningModel;
-using Numpy;
+﻿using Numpy;
 
-namespace MLNet.Regression.LinearRegression
+namespace MLNet.Regression
 {
     /// <summary>
     ///     PolynomialFeatures
     ///     y=α + β1*x + β2*x^2 + ... + βn*x^n
     /// </summary>
-    public class PolynomialFeatures : LinearModel
+    public class PolynomialFeatures : AbstractLinearRegression
     {
         public PolynomialFeatures(
             Constraint constraint = Constraint.None,
