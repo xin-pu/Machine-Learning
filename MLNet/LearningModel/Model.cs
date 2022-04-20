@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using MLNet.Loss;
+using MLNet.Utils;
 using Numpy;
 
 namespace MLNet.LearningModel
@@ -26,7 +27,8 @@ namespace MLNet.LearningModel
         {
             var x_cvt = convert(x);
             var res = call(x_cvt);
-            Log.print?.Invoke($"{Name} Call:\r\n{res}");
+            if (Print)
+                Log.print?.Invoke($"{Name} Call:\r\n{res}");
             return res;
         }
 
@@ -34,8 +36,24 @@ namespace MLNet.LearningModel
         {
             var x_cvt = convert(x);
             var res = call(x_cvt);
-            Log.print?.Invoke($"{Name} Predict:\r\n{res}");
+            if (Print)
+                Log.print?.Invoke($"{Name} Predict:\r\n{res}");
             return res;
+        }
+
+        public Evaluate Evaluate(NDarray x, NDarray y)
+        {
+            var delta_abs = np.abs(Predict(x) - y);
+            var mad = delta_abs.GetData<double>().Average();
+
+            var delta_mse = np2.power(np.abs(Predict(x) - y), 2);
+            var mse = delta_mse.GetData<double>().Average();
+
+            return new Evaluate
+            {
+                MAD = mad,
+                MSE = mse
+            };
         }
 
         public void Fit(NDarray x, NDarray y, double learning_rate = 0.1, int epoch = 100)

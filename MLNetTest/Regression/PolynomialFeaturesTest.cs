@@ -29,9 +29,11 @@ namespace MLNetTest.Regression
         [Fact]
         public void PolynomialFeatures()
         {
-            var pf = new PolynomialFeatures(degree: 4) {Print = true};
+            var pf = new PolynomialFeatures(degree: 4) {Print = false};
             pf.Fit(X, Y, 1E-3, 10000);
-            print(pf.Resolve);
+
+            var evaluate = pf.Evaluate(X, Y);
+            print(evaluate);
         }
 
         [Fact]
