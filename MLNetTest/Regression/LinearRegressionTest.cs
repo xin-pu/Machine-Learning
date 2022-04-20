@@ -31,7 +31,7 @@ namespace MLNetTest.Regression
         public void Test()
         {
             var lr = new LMS {SloveFunc = AbstractLinearRegression.SloveFuc.SGD};
-            lr.Fit(X, Y, 0.2);
+            lr.Fit(X, Y);
             print(lr.TheDa);
         }
     }

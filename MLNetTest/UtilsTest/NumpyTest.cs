@@ -101,5 +101,14 @@ namespace MLNetTest.UtilsTest
             var res = np2.linear_first_order(a);
             print(res);
         }
+
+        [Fact]
+        public void sum()
+        {
+            var a = np.random.rand(5, 2);
+            print(a);
+            var res = np.sum(a, 0);
+            print(res);
+        }
     }
 }

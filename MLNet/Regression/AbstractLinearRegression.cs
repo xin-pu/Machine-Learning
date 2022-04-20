@@ -34,7 +34,7 @@ namespace MLNet.Regression
             // x => 1,x1,x2,x3,...,xN
             var X = np2.linear_first_order(x);
             TheDa = np.random.randn(X.shape[1], 1);
-            Loss = CreateLoss();
+
 
             switch (SloveFunc)
             {
@@ -49,22 +49,17 @@ namespace MLNet.Regression
             }
         }
 
-        internal virtual Term? CreateLoss()
+        internal virtual Term? CreateLoss(Variable[] w, NDarray x, NDarray y)
         {
             if (TheDa == null) return null;
-            var height = TheDa.shape[0];
-
-            var b = TheDa["0,:"].GetData<double>()[0];
-            var term = (Term) b;
-
-            foreach (var i in Enumerable.Range(1, height))
+            var batchsize = x.shape[0];
+            var list = Enumerable.Range(0, batchsize).Select(i =>
             {
-                var x_i = new Variable();
-                var w_i = TheDa[$"{i},:"].GetData<double>()[0];
-                term += w_i * x_i;
-            }
-
-            return term;
+                var rowX = x[$"{i},:"].GetData<double>();
+                var rowY = y[$"{i},:"].GetData<double>();
+                return TermBuilder.Power(rowX[0] * w[0] + rowX[1] * w[1] - rowY[0], 2);
+            });
+            return TermBuilder.Sum(list) / batchsize;
         }
 
         internal abstract NDarray slove(NDarray x, NDarray y);
@@ -72,16 +67,25 @@ namespace MLNet.Regression
         internal override NDarray sgd(NDarray x, NDarray y, double learning_rate)
         {
             var theDa = np.random.randn(x.shape[1], 1);
+
+            var w = new[] {new Variable(), new Variable()};
+
+            Loss = CreateLoss(w, x, y);
+
             Enumerable.Range(0, 100).ToList().ForEach(epoch =>
             {
                 Log.print?.Invoke($"{Name} Epoch:\t{epoch}\tStart");
-                var pred = predict(x, theDa);
-                var cost = np2.power(pred - y, 2);
 
+                var theda = theDa?.GetData<double>();
 
-                Log.print?.Invoke($"{Name} Epoch:\t{epoch}\tLoss{cost}\r\n");
+                var loss = Loss.Evaluate(w, theda);
+                var gradarray = Loss.Differentiate(w, theda);
+                var grad = np.expand_dims(np.array(gradarray), -1);
+                theDa -= learning_rate * grad;
+
+                Log.print?.Invoke($"{Name} Epoch:\t{epoch:D2}\tLoss:{loss:F4}\r\n");
             });
-            return null;
+            return theDa;
         }
 
         public double Cost(NDarray x, NDarray y, NDarray theda)
