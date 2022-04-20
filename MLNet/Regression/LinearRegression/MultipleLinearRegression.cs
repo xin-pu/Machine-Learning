@@ -12,8 +12,8 @@ namespace MLNet.Regression.LinearRegression
     /// </summary>
     public class MultipleLinearRegression : Model
     {
-        public MultipleLinearRegression()
-            : base("MultipleLinearRegression")
+        public MultipleLinearRegression(string name = "MultipleLinearRegression")
+            : base(name)
         {
         }
 
@@ -43,25 +43,37 @@ namespace MLNet.Regression.LinearRegression
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
         {
-            var resolve = np.random.randn(x.shape[1], 1);
+            var featureCount = x.shape[1];
 
-            var w = new[] {new Variable(), new Variable()};
+            var resolve = np.random.randn(featureCount, 1);
+
+            var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
 
             CostFunc = new LMSLoss(w, x, y);
 
-            Enumerable.Range(0, 100).ToList().ForEach(e =>
+            Enumerable.Range(0, epoch).ToList().ForEach(e =>
             {
-                var theda = resolve?.GetData<double>();
+                var theda = resolve.GetData<double>();
 
                 var loss = CostFunc.CostFunc.Evaluate(w, theda);
                 var gradarray = CostFunc.CostFunc.Differentiate(w, theda);
+
                 var grad = np.expand_dims(np.array(gradarray), -1);
                 resolve -= learning_rate * grad;
 
-                Log.print?.Invoke($"{Name} Epoch:\t{e:D5}\tLoss:{loss:F4}\r\n");
+                if (Print)
+                    Log.print?.Invoke($"{Name} Epoch:\t{e:D5}\tLoss:{loss:F4}");
             });
             Resolve = resolve;
         }
+
+        private double getManualLoss(double[] r, NDarray x, NDarray y)
+        {
+            var yp = np.expand_dims(np.matmul(x, np.transpose(r)), -1);
+            var res = np2.power(yp - y, 2);
+            return res.GetData<double>().Average();
+        }
+
 
         internal override NDarray call(NDarray x)
         {

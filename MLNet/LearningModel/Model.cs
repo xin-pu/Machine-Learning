@@ -20,6 +20,7 @@ namespace MLNet.LearningModel
 
         public abstract NDarray? Resolve { set; get; }
 
+        public bool Print { set; get; } = true;
 
         public NDarray Call(NDarray x)
         {

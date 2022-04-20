@@ -36,8 +36,9 @@ namespace MLNet.Loss
             var list = Enumerable.Range(0, batchsize).Select(i =>
             {
                 var rowX = x[$"{i}:{i + 1},:"];
-                var rowY = y[$"{i},:"].GetData<double>();
-                var delta = np2.matmul(rowX, w) - rowY[0];
+                var yp = y[$"{i},:"].GetData<double>();
+                var xp = np2.matmul(rowX, w);
+                var delta = xp - yp[0];
 
                 return TermBuilder.Power(delta, 2);
             });
