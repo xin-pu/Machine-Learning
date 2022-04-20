@@ -14,9 +14,7 @@ namespace MLNet.Regression.LinearRegression
         }
 
 
-        internal override Func<NDarray, NDarray, NDarray, NDarray> LeastSquares { get; set; }
-
-        public override NDarray Slove(NDarray x, NDarray y)
+        internal override NDarray slove(NDarray x, NDarray y)
         {
             return np.linalg.pinv(x).dot(y);
         }

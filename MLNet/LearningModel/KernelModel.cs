@@ -2,7 +2,8 @@
 {
     public abstract class KernelModel : Model
     {
-        protected KernelModel(string name) : base(name)
+        protected KernelModel(string name)
+            : base(name)
         {
         }
     }

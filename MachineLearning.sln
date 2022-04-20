@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLNet", "MLNet\MLNet.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLNetTest", "MLNetTest\MLNetTest.csproj", "{7F21073E-576E-4046-B1DC-5F409F443F9D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSet", "DataSet", "{27D21137-6B82-421F-BC5C-FDC3EB54176B}"
+	ProjectSection(SolutionItems) = preProject
+		DataSet\data_multivar.txt = DataSet\data_multivar.txt
+		DataSet\data_singlevar.txt = DataSet\data_singlevar.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

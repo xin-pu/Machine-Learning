@@ -1,6 +1,7 @@
 using MLNet;
 using MLNet.Regression;
 using MLNet.Regression.LinearRegression;
+using MLNet.Utils;
 using Numpy;
 using Xunit;
 using Xunit.Abstractions;
@@ -9,52 +10,29 @@ namespace MLNetTest.Regression
 {
     public class LinearRegressionTest : AbstractUnitTest
     {
-        private readonly NDarray x = np.arange(-3, 3, 0.05);
+        private readonly string singledata = @"..\..\..\..\DataSet\data_singlevar.txt";
+
 
         public LinearRegressionTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            Log.Print = print;
+            Log.print = print;
+            var data = np2.load(singledata);
+
+            X = data[":,0:1"];
+            Y = data[":,1:2"];
         }
 
-        public NDarray X => np.expand_dims(x, -1);
-        public NDarray Y => np.expand_dims(np.sin(x) + 0.3 * x, -1);
-
-        [Fact]
-        public void PolynomialFeatures()
-        {
-            var pf = new PolynomialFeatures(degree: 5)
-            {
-                SloveFunc = AbstractLinearRegression.SloveFuc.Slove
-            };
-            pf.Fit(X, Y);
-            print(Y);
-            var y_pred = pf.Predict(X);
-        }
-
-        [Fact]
-        public void Ridge()
-        {
-            var ridge = new Ridge(alpha: 0.1, degree: 5)
-            {
-                SloveFunc = AbstractLinearRegression.SloveFuc.Slove
-            };
-            ridge.Fit(X, Y);
-            print(Y);
-            var y_pred = ridge.Predict(X);
-        }
+        protected NDarray X { set; get; }
+        protected NDarray Y { set; get; }
 
 
         [Fact]
-        public void Lasso()
+        public void Test()
         {
-            var lasso = new Lasso(alpha: 0.1, degree: 5)
-            {
-                SloveFunc = AbstractLinearRegression.SloveFuc.Slove
-            };
-            lasso.Fit(X, Y);
-            print(Y);
-            var y_pred = lasso.Predict(X);
+            var lr = new LMS {SloveFunc = AbstractLinearRegression.SloveFuc.SGD};
+            lr.Fit(X, Y, 0.2);
+            print(lr.TheDa);
         }
     }
 }

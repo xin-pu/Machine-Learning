@@ -2,6 +2,6 @@
 {
     public class Log
     {
-        public static Action<object>? Print;
+        public static Action<object>? print;
     }
 }

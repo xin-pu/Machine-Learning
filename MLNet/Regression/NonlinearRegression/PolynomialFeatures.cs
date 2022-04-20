@@ -25,8 +25,6 @@ namespace MLNet.Regression
         public Constraint Constraint { set; get; }
 
 
-        internal override Func<NDarray, NDarray, NDarray, NDarray> LeastSquares { get; set; }
-
         /// <summary>
         ///     Solve TheDa= X/Y
         /// </summary>
@@ -34,7 +32,7 @@ namespace MLNet.Regression
         /// <param name="y"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public override NDarray Slove(NDarray x, NDarray y)
+        internal override NDarray slove(NDarray x, NDarray y)
         {
             if (x.ndim != 2 || x.shape[1] != 1)
                 throw new ArgumentException("Input X Shape should be [n,1]");

@@ -2,7 +2,8 @@
 {
     public abstract class LayerModel : Model
     {
-        protected LayerModel(string name) : base(name)
+        protected LayerModel(string name)
+            : base(name)
         {
         }
     }

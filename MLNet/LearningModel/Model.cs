@@ -25,14 +25,14 @@ namespace MLNet.LearningModel
         public NDarray Call(NDarray x)
         {
             var res = call(x);
-            Log.Print?.Invoke($"{Name} Call:\r\n{res}");
+            Log.print?.Invoke($"{Name} Call:\r\n{res}");
             return res;
         }
 
         public NDarray Predict(NDarray x)
         {
             var res = call(x);
-            Log.Print?.Invoke($"{Name} Predict:\r\n{res}");
+            Log.print?.Invoke($"{Name} Predict:\r\n{res}");
             return res;
         }
 

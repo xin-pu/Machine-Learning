@@ -1,4 +1,5 @@
-﻿using MLNet.LearningModel;
+﻿using AutoDiff;
+using MLNet.LearningModel;
 using MLNet.Utils;
 using Numpy;
 
@@ -21,47 +22,64 @@ namespace MLNet.Regression
         {
         }
 
-        internal abstract Func<NDarray, NDarray, NDarray, NDarray> LeastSquares { set; get; }
+        internal Term? Loss { set; get; }
 
         public NDarray? TheDa { set; get; }
 
-        public SloveFuc SloveFunc { set; get; }
+        public SloveFuc SloveFunc { set; get; } = SloveFuc.SGD;
 
 
         internal override void fit(NDarray x, NDarray y, double learning_rate)
         {
+            // x => 1,x1,x2,x3,...,xN
+            var X = np2.linear_first_order(x);
+            TheDa = np.random.randn(X.shape[1], 1);
+            Loss = CreateLoss();
+
             switch (SloveFunc)
             {
                 case SloveFuc.Slove:
-                    TheDa = Slove(x, y);
+                    TheDa = slove(X, y);
                     break;
                 case SloveFuc.SGD:
-                    TheDa = sgd(x, y, learning_rate);
+                    TheDa = sgd(X, y, learning_rate);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            Log.Print?.Invoke($"{Name} Fit:\r\n{TheDa}");
         }
 
-        public abstract NDarray Slove(NDarray x, NDarray y);
+        internal virtual Term? CreateLoss()
+        {
+            if (TheDa == null) return null;
+            var height = TheDa.shape[0];
 
+            var b = TheDa["0,:"].GetData<double>()[0];
+            var term = (Term) b;
+
+            foreach (var i in Enumerable.Range(1, height))
+            {
+                var x_i = new Variable();
+                var w_i = TheDa[$"{i},:"].GetData<double>()[0];
+                term += w_i * x_i;
+            }
+
+            return term;
+        }
+
+        internal abstract NDarray slove(NDarray x, NDarray y);
 
         internal override NDarray sgd(NDarray x, NDarray y, double learning_rate)
         {
-            if (LeastSquares == null)
-                throw new Exception("Not define Loss function");
-
-            // x => 1,x1,x2,x3,...,xN
-            var X = np2.linear_first_order(x);
-            var theDa = np.random.randn(X.shape[1], 1);
+            var theDa = np.random.randn(x.shape[1], 1);
             Enumerable.Range(0, 100).ToList().ForEach(epoch =>
             {
-                Log.Print?.Invoke($"{Name} Epoch:\r\n{epoch}");
-                var pred = predict(X, theDa);
-
+                Log.print?.Invoke($"{Name} Epoch:\t{epoch}\tStart");
+                var pred = predict(x, theDa);
                 var cost = np2.power(pred - y, 2);
+
+
+                Log.print?.Invoke($"{Name} Epoch:\t{epoch}\tLoss{cost}\r\n");
             });
             return null;
         }

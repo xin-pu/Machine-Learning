@@ -27,10 +27,20 @@ namespace MLNetTest.UtilsTest
 
 
         [Fact]
+        public void load()
+        {
+            var ones = np.random.rand(2, 1);
+            print(ones);
+            print(ones.shape);
+            var a = ones["0,:"].GetData<double>();
+            print(a);
+        }
+
+        [Fact]
         public void multiply()
         {
-            var x = np.array(new double[,] { { 1, 2 }, { 1, 2 } });
-            var y = np.array(new double[,] { { 2, 3 }, { 1, 2 } });
+            var x = np.array(new double[,] {{1, 2}, {1, 2}});
+            var y = np.array(new double[,] {{2, 3}, {1, 2}});
             var res = np.matmul(x, y);
             print(res);
         }
@@ -38,8 +48,8 @@ namespace MLNetTest.UtilsTest
         [Fact]
         public void power_1()
         {
-            var x = np.array(new double[,] { { 1, 2, 3 }, { 1, 2, 3 } });
-            var y = np.array(new double[,] { { 2, 3, 0 }, { 1, 2, 3 } });
+            var x = np.array(new double[,] {{1, 2, 3}, {1, 2, 3}});
+            var y = np.array(new double[,] {{2, 3, 0}, {1, 2, 3}});
             var res = np.power(x, y);
             print(res);
             print(res.shape);
@@ -48,7 +58,7 @@ namespace MLNetTest.UtilsTest
         [Fact]
         public void power_2()
         {
-            var x = np.array(new double[,] { { 1, 2, 3 }, { 1, 2, 3 } });
+            var x = np.array(new double[,] {{1, 2, 3}, {1, 2, 3}});
             var res = np2.power(x, 2);
             print(res);
         }
@@ -57,8 +67,8 @@ namespace MLNetTest.UtilsTest
         [Fact]
         public void solve()
         {
-            var B = np.array(new double[,] { { 1, 3, 5 }, { 7, 9, 11 }, { 13, 15, 16 } });
-            var C = np.array(new double[,] { { 54, 32 }, { 66, 11 }, { 75, 33 } });
+            var B = np.array(new double[,] {{1, 3, 5}, {7, 9, 11}, {13, 15, 16}});
+            var C = np.array(new double[,] {{54, 32}, {66, 11}, {75, 33}});
             var res = np.linalg.solve(B, C);
             print(res);
 
@@ -87,7 +97,7 @@ namespace MLNetTest.UtilsTest
         [Fact]
         public void linear_first_order()
         {
-            var a = np.array(new double[,] { { 1, 1, 1 }, { 0, 0, 0 } });
+            var a = np.array(new double[,] {{1, 1, 1}, {0, 0, 0}});
             var res = np2.linear_first_order(a);
             print(res);
         }

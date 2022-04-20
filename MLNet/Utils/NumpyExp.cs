@@ -30,5 +30,23 @@ namespace MLNet.Utils
             var p = np.ones_like(a) * power;
             return np.power(a, p);
         }
+
+
+        public static NDarray load(string filePath)
+        {
+            var lines = File.ReadAllLines(filePath).Where(l => l != "");
+            var ldata = lines
+                .Select(l => l.Split(',', ';')
+                    .Where(c => c != "")
+                    .Select(double.Parse)
+                    .ToArray())
+                .ToList();
+            var height = ldata.Count();
+            var width = ldata.Select(a => a.Count()).Max();
+            var data = np.array(new double[height, width]);
+
+            foreach (var i in Enumerable.Range(0, height)) data[i] = np.array(ldata[i]);
+            return data;
+        }
     }
 }
