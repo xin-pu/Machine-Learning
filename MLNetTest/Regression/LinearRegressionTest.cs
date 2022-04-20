@@ -1,5 +1,4 @@
 using MLNet;
-using MLNet.Regression;
 using MLNet.Regression.LinearRegression;
 using MLNet.Utils;
 using Numpy;
@@ -30,9 +29,9 @@ namespace MLNetTest.Regression
         [Fact]
         public void Test()
         {
-            var lr = new LMS {SloveFunc = AbstractLinearRegression.SloveFuc.SGD};
+            var lr = new MultipleLinearRegression();
             lr.Fit(X, Y);
-            print(lr.TheDa);
+            print(lr.Resolve);
         }
     }
 }

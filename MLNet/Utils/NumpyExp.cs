@@ -1,4 +1,5 @@
-﻿using Numpy;
+﻿using AutoDiff;
+using Numpy;
 
 namespace MLNet.Utils
 {
@@ -47,6 +48,22 @@ namespace MLNet.Utils
 
             foreach (var i in Enumerable.Range(0, height)) data[i] = np.array(ldata[i]);
             return data;
+        }
+
+        public static Term? matmul(NDarray x, Variable[] v)
+        {
+            var batchs = x.shape[0];
+            var features = x.shape[1];
+
+            if (v.Length != features)
+                return null;
+
+            var terms = Enumerable.Range(0, batchs).SelectMany(r =>
+            {
+                var row = x[$"{r},:"].GetData<double>();
+                return row.ToList().Select((c, i) => c * v[i]);
+            });
+            return TermBuilder.Sum(terms);
         }
     }
 }
