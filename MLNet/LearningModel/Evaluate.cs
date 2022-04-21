@@ -11,6 +11,7 @@ namespace MLNet.LearningModel
         public override string ToString()
         {
             var str = new StringBuilder();
+            str.AppendLine(new string('-', 30) + "Evaluate" + new string('-', 30));
             str.AppendLine($"MSE:\t{MSE:P2}");
             str.AppendLine($"MAD:\t{MAD:P2}");
             return str.ToString();

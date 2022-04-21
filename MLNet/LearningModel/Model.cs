@@ -81,17 +81,27 @@ namespace MLNet.LearningModel
         public override string ToString()
         {
             var strBuild = new StringBuilder();
-            strBuild.AppendLine("Name");
+            strBuild.AppendLine($"{Name}");
+            strBuild.AppendLine($"Resolve:\r\n{Resolve}");
             return strBuild.ToString();
         }
 
 
         #region print
 
-        public void print(object obj)
+        internal void print(object obj)
         {
             if (Print)
                 Log.print?.Invoke(obj);
+        }
+
+        public void PrintSelf()
+        {
+            Log.print?.Invoke(this);
+        }
+
+        internal void printTitle(string title)
+        {
         }
 
         #endregion

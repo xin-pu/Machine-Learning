@@ -31,7 +31,7 @@ namespace MLNetTest.Regression
         {
             var lr = new MultipleLinearRegression {Print = false};
             lr.Fit(X, Y);
-            print(lr.Resolve);
+            lr.PrintSelf();
             print(lr.Evaluate(X, Y));
         }
     }

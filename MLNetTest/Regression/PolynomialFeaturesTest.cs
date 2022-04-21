@@ -11,8 +11,6 @@ namespace MLNetTest.Regression
 {
     public class PolynomialFeaturesTest : AbstractUnitTest
     {
-        //private readonly NDarray x = np.arange(-3, 3, 0.05);
-
         public PolynomialFeaturesTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
@@ -31,7 +29,7 @@ namespace MLNetTest.Regression
         {
             var pf = new PolynomialFeatures(degree: 4) {Print = false};
             pf.Fit(X, Y, 1E-3, 10000);
-
+            print(pf.Resolve);
             var evaluate = pf.Evaluate(X, Y);
             print(evaluate);
         }
@@ -40,7 +38,6 @@ namespace MLNetTest.Regression
         public void Ridge()
         {
             var x = convert(X, 3);
-            print(x);
             var res = SloveNone(x, Y);
             print(res);
         }
