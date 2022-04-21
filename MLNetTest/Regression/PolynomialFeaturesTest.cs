@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using MLNet;
+﻿using MLNet;
 using MLNet.Regression;
-using MLNet.Utils;
 using Numpy;
 using Xunit;
 using Xunit.Abstractions;
@@ -17,7 +14,7 @@ namespace MLNetTest.Regression
             Log.print = print;
             var x = np.arange(-3, 3, 0.1);
             X = np.expand_dims(x, -1);
-            Y = np.expand_dims(1 + 2 * np2.power(x, 2) + 1.75 * np2.power(x, 3), -1);
+            Y = np.expand_dims(1 + 2 * np.sin(x), -1);
         }
 
         protected NDarray X { set; get; }
@@ -27,63 +24,45 @@ namespace MLNetTest.Regression
         [Fact]
         public void PolynomialFeatures()
         {
-            var pf = new PolynomialFeatures(degree: 4) {Print = false};
+            var pf = new PolynomialFeatures(4)
+            {
+                Print = false
+            };
             pf.Fit(X, Y, 1E-3, 10000);
+            print(X);
+
             print(pf.Resolve);
             var evaluate = pf.Evaluate(X, Y);
             print(evaluate);
+
+            print(Y);
+            print(pf.Call(X));
         }
 
         [Fact]
-        public void Ridge()
+        public void TrianglePolynomialFeatures()
         {
-            var x = convert(X, 3);
-            var res = SloveNone(x, Y);
-            print(res);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public NDarray SloveNone(NDarray x, NDarray y)
-        {
-            var phiTranspose = np.transpose(x);
-            var generalizedInverse = np.linalg.inv(np.matmul(phiTranspose, x));
-            var res = np.matmul(np.matmul(generalizedInverse, phiTranspose), y);
-            return res;
-        }
-
-
-        internal NDarray convert(NDarray x, int degree)
-        {
-            var batch = x.shape[0];
-            var features = x.shape[1];
-            if (features != 1) throw new Exception("Regression for 1 dims");
-
-            var xTranspose = np.transpose(x);
-            var npX = np.ones(degree + 1, batch);
-            Enumerable.Range(1, degree).ToList().ForEach(d =>
+            var pf = new TrianglePolynomialFeatures(15)
             {
-                var row = np.ones(x.shape[0]) * d;
-                npX[d] = np.power(xTranspose, row);
-            });
-            npX = np.transpose(npX);
-            return npX;
+                Print = false
+            };
+            pf.Fit(X, Y, 1E-2, 1000);
+            print(pf.Resolve);
+            var evaluate = pf.Evaluate(X, Y);
+            print(evaluate);
+
+            print(Y);
+            print(pf.Call(X));
         }
 
-        //[Fact]
-        //public void Lasso()
-        //{
-        //    var lasso = new Lasso(alpha: 0.1, degree: 5)
-        //    {
-        //        SloveFunc = LinearRegressionModel.SloveFuc.Slove
-        //    };
-        //    lasso.Fit(X, Y);
-        //    print(Y);
-        //    var y_pred = lasso.Predict(X);
-        //}
+        [Fact]
+        public void RidgePolynomialFeatures()
+        {
+            var ridge = new RigdePolynomialFeatures(4, 0.1);
+            ridge.Fit(X, Y);
+            ridge.PrintSelf();
+            var evaluate = ridge.Evaluate(X, Y);
+            print(evaluate);
+        }
     }
 }

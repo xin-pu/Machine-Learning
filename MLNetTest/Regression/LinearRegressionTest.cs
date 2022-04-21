@@ -30,7 +30,7 @@ namespace MLNetTest.Regression
         public void LinearRegression()
         {
             var lr = new MultipleLinearRegression {Print = false};
-            lr.Fit(X, Y);
+            lr.Fit(X, Y, 0.1, 200);
             lr.PrintSelf();
             print(lr.Evaluate(X, Y));
         }

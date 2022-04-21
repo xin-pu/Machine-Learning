@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Regression\LinearRegression\RigdePolynomialFeatures.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoDiff" Version="1.2.2" />
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="PythonPlotter" Version="0.3.2" />
