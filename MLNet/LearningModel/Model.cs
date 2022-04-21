@@ -27,8 +27,7 @@ namespace MLNet.LearningModel
         {
             var x_cvt = convert(x);
             var res = call(x_cvt);
-            if (Print)
-                Log.print?.Invoke($"{Name} Call:\r\n{res}");
+            print($"{Name} Call:\r\n{res}");
             return res;
         }
 
@@ -36,8 +35,8 @@ namespace MLNet.LearningModel
         {
             var x_cvt = convert(x);
             var res = call(x_cvt);
-            if (Print)
-                Log.print?.Invoke($"{Name} Predict:\r\n{res}");
+
+            print($"{Name} Predict:\r\n{res}");
             return res;
         }
 
@@ -60,13 +59,13 @@ namespace MLNet.LearningModel
         {
             try
             {
-                Log.print?.Invoke($"{Name} Start Fit:\r\n");
+                print($"{Name} Start Fit:\r\n");
                 var x_cvt = convert(x);
                 fit(x_cvt, y, learning_rate, epoch);
             }
             catch (Exception ex)
             {
-                Log.print?.Invoke($"{Name} Predict:\r\n{ex.Message}");
+                print($"{Name} Predict:\r\n{ex.Message}");
             }
         }
 
@@ -85,6 +84,17 @@ namespace MLNet.LearningModel
             strBuild.AppendLine("Name");
             return strBuild.ToString();
         }
+
+
+        #region print
+
+        public void print(object obj)
+        {
+            if (Print)
+                Log.print?.Invoke(obj);
+        }
+
+        #endregion
 
         #region internal
 

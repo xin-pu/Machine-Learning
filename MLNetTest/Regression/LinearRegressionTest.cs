@@ -27,11 +27,12 @@ namespace MLNetTest.Regression
 
 
         [Fact]
-        public void Test()
+        public void LinearRegression()
         {
-            var lr = new MultipleLinearRegression();
+            var lr = new MultipleLinearRegression {Print = false};
             lr.Fit(X, Y);
             print(lr.Resolve);
+            print(lr.Evaluate(X, Y));
         }
     }
 }
