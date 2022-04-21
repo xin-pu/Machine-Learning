@@ -49,7 +49,7 @@ namespace MLNet.Regression.LinearRegression
 
             var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
 
-            CostFunc = new LMSLoss(w, x, y);
+            CostFunc = new LSLoss(w, x, y);
 
             Enumerable.Range(0, epoch).ToList().ForEach(e =>
             {

@@ -9,9 +9,9 @@ namespace MLNet.Loss
         public abstract Term? CostFunc { get; set; }
     }
 
-    public class LMSLoss : LossBase
+    public class LSLoss : LossBase
     {
-        public LMSLoss(
+        public LSLoss(
             Variable[] w,
             NDarray x,
             NDarray y)

@@ -2,13 +2,30 @@
 
 namespace MLNet.LearningModel
 {
-    public class Evaluate
+    public class Metric
     {
+        /// <summary>
+        ///     Mean Square Error
+        /// </summary>
         public double MSE { set; get; }
 
         public double RMSE => Math.Sqrt(MSE);
 
+        /// <summary>
+        ///     Mean Absolute Error
+        /// </summary>
         public double MAD { set; get; }
+
+        /// <summary>
+        ///     R2 score
+        /// </summary>
+        public double R2 { set; get; }
+
+        /// <summary>
+        ///     Explained variance score
+        /// </summary>
+        public double EVS { set; get; }
+
 
         public override string ToString()
         {

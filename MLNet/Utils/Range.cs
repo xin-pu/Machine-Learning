@@ -8,7 +8,7 @@
         /// <param name="end"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        public static double[] list(double start, double end, int length = 1)
+        public static double[] linspace(double start, double end, int length = 1)
         {
             var step = (end - start) / length;
             var list = Enumerable.Range(0, length).Select(i => start + i * step).ToArray();
@@ -22,7 +22,7 @@
         /// <returns></returns>
         public static double[,] matrix(double start, double end, int length = 1)
         {
-            var array = list(start, end, length);
+            var array = linspace(start, end, length);
             return matrix(array);
         }
 
