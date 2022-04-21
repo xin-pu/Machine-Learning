@@ -6,7 +6,7 @@ using Numpy;
 namespace MLNet.Loss
 {
     /// <summary>
-    ///     Loss for Least Square
+    ///     J(la)= 0.5*sigma((y-yp)^2)
     /// </summary>
     public class LSLoss : LossBase
     {
@@ -29,18 +29,19 @@ namespace MLNet.Loss
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        internal override Term createLoss(Variable[] w, NDarray x, NDarray y)
+        internal override Term createLoss(Variable[] variables, NDarray x, NDarray y)
         {
             switch (Constraint)
             {
                 case Constraint.None:
-                    return getLeastSquareLoss(w, x, y);
+                    return getLeastSquareLoss(variables, x, y);
                 case Constraint.L1:
-                    return getLeastSquareLoss(w, x, y) + Lamdba * getLassoLoss(w);
+                    return getLeastSquareLoss(variables, x, y) + Lamdba * getLassoLoss(variables);
                 case Constraint.L2:
-                    return getLeastSquareLoss(w, x, y) + Lamdba * getRidgeLoss(w) / 2;
+                    return getLeastSquareLoss(variables, x, y) + Lamdba * getRidgeLoss(variables) / 2;
                 case Constraint.LP:
-                    return getLeastSquareLoss(w, x, y) + (1 - Lamdba) * getLassoLoss(w) + Lamdba * getRidgeLoss(w);
+                    return getLeastSquareLoss(variables, x, y) + (1 - Lamdba) * getLassoLoss(variables) +
+                           Lamdba * getRidgeLoss(variables);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
