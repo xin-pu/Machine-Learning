@@ -12,13 +12,17 @@ namespace MLNet.Regression.LinearRegression
     /// </summary>
     public class MultipleLinearRegression : Model
     {
-        public MultipleLinearRegression(string name = "MultipleLinearRegression")
+        public MultipleLinearRegression(string name = "MultipleLinearRegression",
+            Constraint constraint = Constraint.None)
             : base(name)
         {
+            Constraint = constraint;
         }
 
-        public override LossBase? CostFunc { get; set; }
-        public override NDarray? Resolve { get; set; }
+        public Constraint Constraint { set; get; }
+
+        public override LossBase CostFunc { get; set; } = null!;
+        public override NDarray Resolve { get; set; } = null!;
 
         public NDarray Slove(NDarray x, NDarray y)
         {
@@ -47,16 +51,12 @@ namespace MLNet.Regression.LinearRegression
 
             var resolve = np.random.randn(featureCount, 1);
 
-            var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
-
-            CostFunc = new LSLoss(w, x, y);
-
             Enumerable.Range(0, epoch).ToList().ForEach(e =>
             {
                 var theda = resolve.GetData<double>();
 
-                var loss = CostFunc.CostFunc.Evaluate(w, theda);
-                var gradarray = CostFunc.CostFunc.Differentiate(w, theda);
+                var loss = CostFunc.Evaluate(theda);
+                var gradarray = CostFunc.Differentiate(theda);
 
                 var grad = np.expand_dims(np.array(gradarray), -1);
                 resolve -= learning_rate * grad;
@@ -67,19 +67,20 @@ namespace MLNet.Regression.LinearRegression
             Resolve = resolve;
         }
 
-        private double getManualLoss(double[] r, NDarray x, NDarray y)
-        {
-            var yp = np.expand_dims(np.matmul(x, np.transpose(r)), -1);
-            var res = np2.power(yp - y, 2);
-            return res.GetData<double>().Average();
-        }
-
 
         internal override NDarray call(NDarray x)
         {
             if (Resolve == null) throw new Exception("Resolve is Empty");
-
             return np.matmul(x, Resolve);
+        }
+
+        internal override LossBase initialLoss(Variable[] variables, NDarray x, NDarray y)
+        {
+            return new LSLoss(variables, x, y)
+            {
+                Constraint = Constraint,
+                Lamdba = 0.1
+            };
         }
     }
 }

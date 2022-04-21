@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AutoDiff;
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
@@ -17,9 +18,9 @@ namespace MLNet.LearningModel
 
         public string Name { get; set; }
 
-        public abstract LossBase? CostFunc { set; get; }
+        public abstract LossBase CostFunc { set; get; }
 
-        public abstract NDarray? Resolve { set; get; }
+        public abstract NDarray Resolve { set; get; }
 
         public bool Print { set; get; } = true;
 
@@ -40,7 +41,7 @@ namespace MLNet.LearningModel
             return res;
         }
 
-        public Evaluate Evaluate(NDarray x, NDarray y)
+        public Metric Evaluate(NDarray x, NDarray y)
         {
             var delta_abs = np.abs(Predict(x) - y);
             var mad = delta_abs.GetData<double>().Average();
@@ -48,7 +49,7 @@ namespace MLNet.LearningModel
             var delta_mse = np2.power(np.abs(Predict(x) - y), 2);
             var mse = delta_mse.GetData<double>().Average();
 
-            return new Evaluate
+            return new Metric
             {
                 MAD = mad,
                 MSE = mse
@@ -60,7 +61,16 @@ namespace MLNet.LearningModel
             try
             {
                 print($"{Name} Start Fit:\r\n");
+
+                /// Step 1 Convert Model
                 var x_cvt = convert(x);
+
+                /// Step 2 Create Loss Function
+                var featureCount = x_cvt.shape[1];
+                var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
+                CostFunc = initialLoss(w, x_cvt, y);
+
+                /// Step 3 Fit
                 fit(x_cvt, y, learning_rate, epoch);
             }
             catch (Exception ex)
@@ -113,6 +123,8 @@ namespace MLNet.LearningModel
         internal abstract void fit(NDarray x, NDarray y, double learning_rate, int epoch);
 
         internal abstract NDarray call(NDarray x);
+
+        internal abstract LossBase initialLoss(Variable[] variables, NDarray x, NDarray y);
 
         #endregion
 

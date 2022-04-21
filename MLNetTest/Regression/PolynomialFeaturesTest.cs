@@ -1,5 +1,6 @@
 ﻿using MLNet;
 using MLNet.Regression;
+using MLNet.Utils;
 using Numpy;
 using Xunit;
 using Xunit.Abstractions;
@@ -14,7 +15,7 @@ namespace MLNetTest.Regression
             Log.print = print;
             var x = np.arange(-3, 3, 0.1);
             X = np.expand_dims(x, -1);
-            Y = np.expand_dims(1 + 2 * np.sin(x), -1);
+            Y = np.expand_dims(1 + 0.3 * np2.power(x, 3), -1);
         }
 
         protected NDarray X { set; get; }
@@ -28,8 +29,7 @@ namespace MLNetTest.Regression
             {
                 Print = false
             };
-            pf.Fit(X, Y, 1E-3, 10000);
-            print(X);
+            pf.Fit(X, Y, 1E-3, 5000);
 
             print(pf.Resolve);
             var evaluate = pf.Evaluate(X, Y);
@@ -38,31 +38,69 @@ namespace MLNetTest.Regression
             print(Y);
             print(pf.Call(X));
         }
+
+
+        [Fact]
+        public void LassoPolynomialFeatures()
+        {
+            var ridge = new PolynomialFeatures(4)
+            {
+                Constraint = Constraint.L1,
+                Print = false
+            };
+
+            ridge.Fit(X, Y, 1E-3, 10000);
+            ridge.PrintSelf();
+            var evaluate = ridge.Evaluate(X, Y);
+            print(evaluate);
+        }
+
+        [Fact]
+        public void RidgePolynomialFeatures()
+        {
+            var ridge = new PolynomialFeatures(4)
+            {
+                Constraint = Constraint.L2,
+                Print = false
+            };
+
+            ridge.Fit(X, Y, 1E-3, 5000);
+            ridge.PrintSelf();
+            var evaluate = ridge.Evaluate(X, Y);
+            print(evaluate);
+        }
+
+        [Fact]
+        public void ElasticNetPolynomialFeatures()
+        {
+            var ridge = new PolynomialFeatures(4)
+            {
+                Constraint = Constraint.ElasticNet,
+                Print = false
+            };
+
+            ridge.Fit(X, Y, 1E-3, 5000);
+            ridge.PrintSelf();
+            var evaluate = ridge.Evaluate(X, Y);
+            print(evaluate);
+        }
+
 
         [Fact]
         public void TrianglePolynomialFeatures()
         {
             var pf = new TrianglePolynomialFeatures(15)
             {
+                Constraint = Constraint.ElasticNet,
                 Print = false
             };
-            pf.Fit(X, Y, 1E-2, 1000);
+            pf.Fit(X, Y, 1E-2, 5000);
             print(pf.Resolve);
             var evaluate = pf.Evaluate(X, Y);
             print(evaluate);
 
             print(Y);
             print(pf.Call(X));
-        }
-
-        [Fact]
-        public void RidgePolynomialFeatures()
-        {
-            var ridge = new RigdePolynomialFeatures(4, 0.1);
-            ridge.Fit(X, Y);
-            ridge.PrintSelf();
-            var evaluate = ridge.Evaluate(X, Y);
-            print(evaluate);
         }
     }
 }
