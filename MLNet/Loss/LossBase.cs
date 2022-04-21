@@ -31,7 +31,7 @@ namespace MLNet.Loss
             return CostFunc.Evaluate(Variables, points);
         }
 
-        public double[] Differentiate(double[] points)
+        public double[] Gradient(double[] points)
         {
             return CostFunc.Differentiate(Variables, points);
         }

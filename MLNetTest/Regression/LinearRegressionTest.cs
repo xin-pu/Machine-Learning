@@ -1,5 +1,5 @@
 using MLNet;
-using MLNet.Regression.LinearRegression;
+using MLNet.Model.Regression.LinearRegression;
 using MLNet.Utils;
 using Numpy;
 using Xunit;

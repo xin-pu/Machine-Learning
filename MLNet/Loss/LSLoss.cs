@@ -1,5 +1,5 @@
 ﻿using AutoDiff;
-using MLNet.Regression;
+using MLNet.Model.Regression;
 using MLNet.Utils;
 using Numpy;
 

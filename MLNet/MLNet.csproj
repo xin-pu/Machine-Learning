@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Regression\LinearRegression\RigdePolynomialFeatures.cs" />
+    <Compile Remove="Model\Regression\LinearRegression\RigdePolynomialFeatures.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Regression\TreeRegression\" />
+    <Folder Include="Model\Regression\TreeRegression\" />
   </ItemGroup>
 
 </Project>

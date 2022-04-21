@@ -1,7 +1,7 @@
-﻿using MLNet.Regression.LinearRegression;
+﻿using MLNet.Model.Regression.LinearRegression;
 using Numpy;
 
-namespace MLNet.Regression
+namespace MLNet.Model.Regression
 {
     /// <summary>
     ///     PolynomialFeatures

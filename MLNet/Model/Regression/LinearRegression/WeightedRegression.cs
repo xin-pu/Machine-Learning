@@ -1,4 +1,4 @@
-﻿namespace MLNet.Regression.LinearRegression
+﻿namespace MLNet.Model.Regression.LinearRegression
 {
     internal class WeightedRegression
     {

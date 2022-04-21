@@ -1,10 +1,9 @@
 ﻿using AutoDiff;
-using MLNet.LearningModel;
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
 
-namespace MLNet.Regression.LinearRegression
+namespace MLNet.Model.Regression.LinearRegression
 {
     /// <summary>
     ///     多元线性回归
@@ -56,7 +55,7 @@ namespace MLNet.Regression.LinearRegression
                 var theda = resolve.GetData<double>();
 
                 var loss = CostFunc.Evaluate(theda);
-                var gradarray = CostFunc.Differentiate(theda);
+                var gradarray = CostFunc.Gradient(theda);
 
                 var grad = np.expand_dims(np.array(gradarray), -1);
                 resolve -= learning_rate * grad;

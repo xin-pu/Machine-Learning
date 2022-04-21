@@ -1,4 +1,4 @@
-﻿namespace MLNet.Regression
+﻿namespace MLNet.Model.Regression
 {
     public enum Constraint
     {

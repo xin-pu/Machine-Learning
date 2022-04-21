@@ -1,10 +1,11 @@
 ﻿using System.Text;
 using AutoDiff;
+using MLNet.LearningModel;
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
 
-namespace MLNet.LearningModel
+namespace MLNet.Model
 {
     /// <summary>
     ///     Learning Model

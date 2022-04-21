@@ -1,0 +1,3 @@
+﻿namespace MLNet.Model.Classify
+{
+}
