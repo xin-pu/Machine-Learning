@@ -46,9 +46,9 @@ namespace MLNet.Utils
         }
 
 
-        public static Term sigmoid(Term x)
+        public static Term sigmoid(Term x, double weight = 1)
         {
-            return 1 / (1 + TermBuilder.Exp(-x));
+            return 1.0 / (TermBuilder.Exp(-weight * x) + 1.0);
         }
     }
 }

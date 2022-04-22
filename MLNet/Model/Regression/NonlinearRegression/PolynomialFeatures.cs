@@ -1,4 +1,5 @@
 ﻿using MLNet.Model.Regression.LinearRegression;
+using MLNet.Utils;
 using Numpy;
 
 namespace MLNet.Model.Regression
@@ -26,7 +27,7 @@ namespace MLNet.Model.Regression
         /// <returns></returns>
         internal override NDarray transform(NDarray x)
         {
-            return Utils.transform.to_poly(x, Degree);
+            return transformer.to_poly(x, Degree);
         }
     }
 }

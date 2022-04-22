@@ -1,5 +1,6 @@
 ﻿using AutoDiff;
 using MLNet.Loss;
+using MLNet.Utils;
 using Numpy;
 
 namespace MLNet.Model.Regression.LinearRegression
@@ -32,7 +33,7 @@ namespace MLNet.Model.Regression.LinearRegression
         /// <returns></returns>
         internal override NDarray transform(NDarray x)
         {
-            return Utils.transform.to_linear_firstorder(x);
+            return transformer.to_linear_firstorder(x);
         }
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)

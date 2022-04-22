@@ -14,7 +14,7 @@ namespace MLNet.Model.Classify
 
         internal override NDarray transform(NDarray x)
         {
-            return Utils.transform.to_linear_firstorder(x);
+            return transformer.to_poly(x, 2);
         }
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
@@ -47,7 +47,7 @@ namespace MLNet.Model.Classify
 
         internal override LossBase initialLoss(Variable[] variables, NDarray x, NDarray y)
         {
-            return new CrossEntropy("CrossEntropy", variables, x, y);
+            return new CrossEntropy(variables, x, y);
         }
     }
 }

@@ -24,9 +24,9 @@ namespace MLNet.Utils
         /// <param name="a"></param>
         /// <param name="power"></param>
         /// <returns></returns>
-        public static NDarray sigmoid(NDarray a)
+        public static NDarray sigmoid(NDarray a, double w = 1)
         {
-            return 1 / (np.exp(-a) + 1);
+            return 1.0 / (1.0 + np.exp(-w * a));
         }
 
 

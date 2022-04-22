@@ -2,7 +2,7 @@
 
 namespace MLNet.Utils
 {
-    public static class transform
+    public static class transformer
     {
         /// <summary>
         ///     will return NDArray [1,x1,x2,x3,...,xN]
@@ -10,6 +10,18 @@ namespace MLNet.Utils
         /// <param name="a"></param>
         /// <returns></returns>
         public static NDarray to_linear_firstorder(NDarray a)
+        {
+            var b = np.ones(a.shape[0]);
+            var res = np.insert(a, 0, b, 1);
+            return res;
+        }
+
+        /// <summary>
+        ///     will return NDArray [1,x1,x2,x3,...,xN]
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static NDarray to_kernel(NDarray a)
         {
             var b = np.ones(a.shape[0]);
             var res = np.insert(a, 0, b, 1);

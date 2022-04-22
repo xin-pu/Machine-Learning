@@ -21,9 +21,9 @@ namespace MLNet.Loss
 
         public Variable[] Variables { set; get; }
 
-        public Term CreateLoss(Variable[] w, NDarray x, NDarray y)
+        public Term CreateLoss(Variable[] variables, NDarray x, NDarray y)
         {
-            return createLoss(w, x, y);
+            return createLoss(variables, x, y);
         }
 
         public double Evaluate(double[] points)

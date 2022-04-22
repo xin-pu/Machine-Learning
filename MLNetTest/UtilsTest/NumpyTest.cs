@@ -98,7 +98,7 @@ namespace MLNetTest.UtilsTest
         public void linear_first_order()
         {
             var a = np.array(new double[,] {{1, 1, 1}, {0, 0, 0}});
-            var res = transform.to_linear_firstorder(a);
+            var res = transformer.to_linear_firstorder(a);
             print(res);
         }
 
@@ -108,6 +108,15 @@ namespace MLNetTest.UtilsTest
             var a = np.random.rand(5, 2);
             print(a);
             var res = np.sum(a, 0);
+            print(res);
+        }
+
+        [Fact]
+        public void sigmoid()
+        {
+            var a = np.array(new[,] {{0.8, 0.1}, {1.2, 2}});
+            print(a);
+            var res = np2.sigmoid(a);
             print(res);
         }
     }

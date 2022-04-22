@@ -47,7 +47,7 @@ namespace MLNet.Model
             /// Step 2 Casll
             var res = call(x_cvt);
 
-            print($"{Name} Predict:\r\n{res}");
+
             return res;
         }
 
