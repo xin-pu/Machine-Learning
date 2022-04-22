@@ -1,6 +1,5 @@
 ﻿using AutoDiff;
 using MLNet.Loss;
-using MLNet.Utils;
 using Numpy;
 
 namespace MLNet.Model.Regression.LinearRegression
@@ -12,11 +11,11 @@ namespace MLNet.Model.Regression.LinearRegression
     public class MultipleLinearRegression : Model
     {
         public MultipleLinearRegression()
+            : base("MultipleLinearRegression")
         {
-            Name = "MultipleLinearRegression";
         }
 
-        public MultipleLinearRegression(string? name = "MultipleLinearRegression",
+        public MultipleLinearRegression(string name = "MultipleLinearRegression",
             Constraint constraint = Constraint.None)
             : base(name)
         {
@@ -26,26 +25,14 @@ namespace MLNet.Model.Regression.LinearRegression
         public Constraint Constraint { set; get; }
 
 
-        internal string CvtString(string path)
-        {
-            var stream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-            using var textWriter = new StreamReader(stream);
-            return textWriter.ReadToEnd();
-        }
-
-        internal NDarray slove(NDarray x, NDarray y)
-        {
-            return np.linalg.pinv(x).dot(y);
-        }
-
         /// <summary>
         ///     x => 1,x1,x2,x3,...,xN
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        internal override NDarray convert(NDarray x)
+        internal override NDarray transform(NDarray x)
         {
-            return np2.linear_first_order(x);
+            return Utils.transform.to_linear_firstorder(x);
         }
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
@@ -77,7 +64,10 @@ namespace MLNet.Model.Regression.LinearRegression
             return np.matmul(x, Resolve);
         }
 
-        internal override LossBase initialLoss(Variable[] variables, NDarray x, NDarray y)
+        internal override LossBase initialLoss(
+            Variable[] variables,
+            NDarray x,
+            NDarray y)
         {
             return new LSLoss(variables, x, y)
             {

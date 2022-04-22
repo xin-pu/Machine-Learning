@@ -47,7 +47,7 @@ namespace MLNetTest.Regression
                 Print = false
             };
 
-            ridge.Fit(X, Y, 1E-3, 10000);
+            ridge.Fit(X, Y, 1E-3, 5000);
             ridge.PrintSelf();
             var evaluate = ridge.Evaluate(X, Y);
             print(evaluate);
@@ -92,7 +92,7 @@ namespace MLNetTest.Regression
                 Constraint = Constraint.ElasticNet,
                 Print = false
             };
-            pf.Fit(X, Y, 1E-2, 5000);
+            pf.Fit(X, Y, 1E-3, 5000);
             print(pf.Resolve);
             var evaluate = pf.Evaluate(X, Y);
             print(evaluate);

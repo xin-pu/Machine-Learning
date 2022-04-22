@@ -98,7 +98,7 @@ namespace MLNetTest.UtilsTest
         public void linear_first_order()
         {
             var a = np.array(new double[,] {{1, 1, 1}, {0, 0, 0}});
-            var res = np2.linear_first_order(a);
+            var res = transform.to_linear_firstorder(a);
             print(res);
         }
 

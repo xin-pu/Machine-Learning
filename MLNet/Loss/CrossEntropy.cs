@@ -23,7 +23,7 @@ namespace MLNet.Loss
                 var fin = yp * TermBuilder.Log(xp_sigmoid) + (1 - yp) * TermBuilder.Log(1 - xp_sigmoid);
                 return fin;
             });
-            return -TermBuilder.Sum(list) / batchsize + term.getLassoLoss(w);
+            return -TermBuilder.Sum(list) / batchsize;
         }
     }
 }

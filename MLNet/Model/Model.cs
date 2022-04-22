@@ -14,7 +14,7 @@ namespace MLNet.Model
     /// </summary>
     public abstract class Model
     {
-        protected Model(string? name)
+        protected Model(string name)
         {
             Name = name;
         }
@@ -36,15 +36,15 @@ namespace MLNet.Model
 
         public NDarray Call(NDarray x)
         {
-            var x_cvt = convert(x);
-            var res = call(x_cvt);
-            print($"{Name} Call:\r\n{res}");
-            return res;
+            return Predict(x);
         }
 
         public NDarray Predict(NDarray x)
         {
-            var x_cvt = convert(x);
+            /// Step 1 Transform
+            var x_cvt = transform(x);
+
+            /// Step 2 Casll
             var res = call(x_cvt);
 
             print($"{Name} Predict:\r\n{res}");
@@ -73,7 +73,7 @@ namespace MLNet.Model
                 print($"{Name} Start Fit:\r\n");
 
                 /// Step 1 Convert Model
-                var x_cvt = convert(x);
+                var x_cvt = transform(x);
 
                 /// Step 2 Create Loss Function
                 var featureCount = x_cvt.shape[1];
@@ -82,6 +82,10 @@ namespace MLNet.Model
 
                 /// Step 3 Fit
                 fit(x_cvt, y, learning_rate, epoch);
+
+                /// Step 4 Evalate
+                var metric = Evaluate(x, y);
+                print(metric);
             }
             catch (Exception ex)
             {
@@ -120,7 +124,7 @@ namespace MLNet.Model
 
         #region internal
 
-        internal abstract NDarray convert(NDarray x);
+        internal abstract NDarray transform(NDarray x);
 
         internal abstract void fit(NDarray x, NDarray y, double learning_rate, int epoch);
 

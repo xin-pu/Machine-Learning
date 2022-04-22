@@ -12,9 +12,9 @@ namespace MLNet.Model.Classify
             Name = "BinaryLogicClassify";
         }
 
-        internal override NDarray convert(NDarray x)
+        internal override NDarray transform(NDarray x)
         {
-            return np2.linear_first_order(x);
+            return Utils.transform.to_linear_firstorder(x);
         }
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
@@ -34,7 +34,7 @@ namespace MLNet.Model.Classify
                 resolveTemp -= learning_rate * grad;
 
                 if (Print)
-                    Log.print?.Invoke($"Epoch:\t{e:D5}\tLoss:{loss:F4}");
+                    Log.print?.Invoke($"Epoch:\t{e:D4}\tLoss:{loss:F4}");
             });
             Resolve = resolveTemp;
         }

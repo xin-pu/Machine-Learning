@@ -14,7 +14,7 @@ namespace MLNet.Model.Regression
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        internal override NDarray convert(NDarray x)
+        internal override NDarray transform(NDarray x)
         {
             var batch = x.shape[0];
             var features = x.shape[1];

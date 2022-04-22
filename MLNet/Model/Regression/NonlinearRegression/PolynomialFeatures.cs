@@ -24,21 +24,9 @@ namespace MLNet.Model.Regression
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        internal override NDarray convert(NDarray x)
+        internal override NDarray transform(NDarray x)
         {
-            var batch = x.shape[0];
-            var features = x.shape[1];
-            if (features != 1) throw new Exception("Regression for 1 dims");
-
-            var xTranspose = np.transpose(x);
-            var npX = np.ones(Degree + 1, batch);
-            Enumerable.Range(1, Degree).ToList().ForEach(d =>
-            {
-                var row = np.ones(x.shape[0]) * d;
-                npX[d] = np.power(xTranspose, row);
-            });
-            npX = np.transpose(npX);
-            return npX;
+            return Utils.transform.to_poly(x, Degree);
         }
     }
 }
