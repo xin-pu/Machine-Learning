@@ -119,5 +119,13 @@ namespace MLNetTest.UtilsTest
             var res = np2.sigmoid(a);
             print(res);
         }
+
+        [Fact]
+        public void normL2()
+        {
+            var a = np.random.randn(2);
+            print(a);
+            print(np2.L2Norm(a));
+        }
     }
 }

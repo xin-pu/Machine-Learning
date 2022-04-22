@@ -29,6 +29,12 @@ namespace MLNet.Utils
             return 1.0 / (1.0 + np.exp(-w * a));
         }
 
+        public static double L2Norm(NDarray a)
+        {
+            var array = a.GetData<double>();
+            var sum = array.Select(a => Math.Pow(a, 2)).Sum();
+            return Math.Pow(sum, 0.5);
+        }
 
         public static NDarray load(string filePath)
         {

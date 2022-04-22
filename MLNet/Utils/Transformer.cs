@@ -17,15 +17,37 @@ namespace MLNet.Utils
         }
 
         /// <summary>
-        ///     will return NDArray [1,x1,x2,x3,...,xN]
+        ///     Todo  will return NDArray [1,x1,x2,x3,...,xN]
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static NDarray to_kernel(NDarray a)
+        public static NDarray to_linear_guass_kernel(NDarray a)
         {
-            var b = np.ones(a.shape[0]);
-            var res = np.insert(a, 0, b, 1);
-            return res;
+            //Todo
+            throw new Exception();
+        }
+
+        /// <summary>
+        ///     多元输入 转 高斯核模型
+        /// </summary>
+        /// <param name="a"> shape[b,N], N>=2 </param>
+        /// <returns></returns>
+        public static NDarray to_guass_kernel(NDarray a)
+        {
+            //Todo
+            throw new Exception();
+        }
+
+
+        /// <summary>
+        ///     多元输入 转 傅里叶核模型
+        /// </summary>
+        /// <param name="a"> shape[b,N], N>=2 </param>
+        /// <returns></returns>
+        public static NDarray to_fourier_kernel(NDarray a)
+        {
+            //Todo
+            throw new Exception();
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace MLNet.Model.Classify
 
         internal override NDarray transform(NDarray x)
         {
-            return transformer.to_poly(x, 2);
+            return transformer.to_linear_firstorder(x);
         }
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
