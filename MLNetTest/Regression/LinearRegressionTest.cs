@@ -1,4 +1,3 @@
-using MLNet;
 using MLNet.Model;
 using MLNet.Model.Regression.LinearRegression;
 using MLNet.Utils;
@@ -16,7 +15,6 @@ namespace MLNetTest.Regression
         public LinearRegressionTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            Log.print = print;
             var data = np2.load(singledata);
 
             X = data[":,0:1"];

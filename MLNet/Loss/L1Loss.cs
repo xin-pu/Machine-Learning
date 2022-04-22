@@ -24,7 +24,7 @@ namespace MLNet.Loss
             {
                 var rowX = x[$"{i}:{i + 1},:"];
                 var yp = y[$"{i},:"].GetData<double>();
-                var xp = np2.matmul(rowX, variables);
+                var xp = term.matmul(rowX, variables);
                 var delta = xp - yp[0];
                 var abs = TermBuilder.Power(TermBuilder.Power(delta, 2), 0.5);
                 return abs;

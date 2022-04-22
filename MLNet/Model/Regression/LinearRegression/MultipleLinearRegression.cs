@@ -2,7 +2,6 @@
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
-using YAXLib.Attributes;
 
 namespace MLNet.Model.Regression.LinearRegression
 {
@@ -17,7 +16,7 @@ namespace MLNet.Model.Regression.LinearRegression
             Name = "MultipleLinearRegression";
         }
 
-        public MultipleLinearRegression(string name = "MultipleLinearRegression",
+        public MultipleLinearRegression(string? name = "MultipleLinearRegression",
             Constraint constraint = Constraint.None)
             : base(name)
         {
@@ -25,10 +24,6 @@ namespace MLNet.Model.Regression.LinearRegression
         }
 
         public Constraint Constraint { set; get; }
-
-        [YAXDontSerialize] public override LossBase CostFunc { get; set; } = null!;
-
-        [YAXDontSerialize] public override NDarray Resolve { get; set; } = null!;
 
 
         internal string CvtString(string path)

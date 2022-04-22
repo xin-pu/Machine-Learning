@@ -1,5 +1,4 @@
-﻿using MLNet;
-using MLNet.Model.Regression;
+﻿using MLNet.Model.Regression;
 using MLNet.Utils;
 using Numpy;
 using Xunit;
@@ -12,7 +11,6 @@ namespace MLNetTest.Regression
         public PolynomialFeaturesTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            Log.print = print;
             var x = np.arange(-3, 3, 0.1);
             X = np.expand_dims(x, -1);
             Y = np.expand_dims(1 + 0.3 * np2.power(x, 3), -1);

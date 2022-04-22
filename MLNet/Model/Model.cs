@@ -14,7 +14,7 @@ namespace MLNet.Model
     /// </summary>
     public abstract class Model
     {
-        protected Model(string name)
+        protected Model(string? name)
         {
             Name = name;
         }
@@ -24,11 +24,11 @@ namespace MLNet.Model
         }
 
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        [YAXDontSerialize] public abstract LossBase CostFunc { set; get; }
+        [YAXDontSerialize] public LossBase CostFunc { set; get; } = null!;
 
-        [YAXDontSerialize] public abstract NDarray Resolve { set; get; }
+        [YAXDontSerialize] public NDarray Resolve { set; get; } = null!;
 
         public string FilePath => $"{Name}.xml";
 
@@ -149,7 +149,8 @@ namespace MLNet.Model
             var type = typeof(Model);
             var deserializer = new YAXSerializer(type);
             var model = (Model) deserializer.Deserialize(textReader);
-            model.Resolve = np.fromfile(model.FilePath);
+            var r = np.fromfile(model.FilePath);
+            model.Resolve = np.expand_dims(r, -1);
             return model;
         }
 

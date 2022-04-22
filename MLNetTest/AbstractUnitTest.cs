@@ -1,4 +1,5 @@
-﻿using Xunit.Abstractions;
+﻿using MLNet;
+using Xunit.Abstractions;
 
 namespace MLNetTest
 {
@@ -7,6 +8,7 @@ namespace MLNetTest
         public AbstractUnitTest(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
+            Log.print = print;
         }
 
 
