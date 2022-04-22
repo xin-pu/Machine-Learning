@@ -4,6 +4,8 @@ using MLNet.LearningModel;
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
+using YAXLib;
+using YAXLib.Attributes;
 
 namespace MLNet.Model
 {
@@ -17,11 +19,18 @@ namespace MLNet.Model
             Name = name;
         }
 
+        protected Model()
+        {
+        }
+
+
         public string Name { get; set; }
 
-        public abstract LossBase CostFunc { set; get; }
+        [YAXDontSerialize] public abstract LossBase CostFunc { set; get; }
 
-        public abstract NDarray Resolve { set; get; }
+        [YAXDontSerialize] public abstract NDarray Resolve { set; get; }
+
+        public string FilePath => $"{Name}.xml";
 
         public bool Print { set; get; } = true;
 
@@ -81,14 +90,6 @@ namespace MLNet.Model
         }
 
 
-        public virtual void Save(string path)
-        {
-        }
-
-        public virtual void Load(string path)
-        {
-        }
-
         public override string ToString()
         {
             var strBuild = new StringBuilder();
@@ -130,6 +131,27 @@ namespace MLNet.Model
         #endregion
 
         #region serialize
+
+        public virtual void Save(string path)
+        {
+            using var stream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
+            using var textWriter = new StreamWriter(stream);
+            var serializer = new YAXSerializer(typeof(Model));
+            serializer.Serialize(this, textWriter);
+            Resolve.tofile(FilePath, "", "");
+            textWriter.Flush();
+        }
+
+        public static Model Load(string path)
+        {
+            using var stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            using var textReader = new StreamReader(stream);
+            var type = typeof(Model);
+            var deserializer = new YAXSerializer(type);
+            var model = (Model) deserializer.Deserialize(textReader);
+            model.Resolve = np.fromfile(model.FilePath);
+            return model;
+        }
 
         #endregion
     }

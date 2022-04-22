@@ -1,4 +1,5 @@
 using MLNet;
+using MLNet.Model;
 using MLNet.Model.Regression.LinearRegression;
 using MLNet.Utils;
 using Numpy;
@@ -33,6 +34,19 @@ namespace MLNetTest.Regression
             lr.Fit(X, Y, 0.1, 200);
             lr.PrintSelf();
             print(lr.Evaluate(X, Y));
+        }
+
+        [Fact]
+        public void TestSave()
+        {
+            var lr = new MultipleLinearRegression {Print = false};
+            lr.Fit(X, Y, 0.1, 200);
+            lr.Save("test.xml");
+
+            var lrR = (MultipleLinearRegression) Model.Load("test.xml");
+            var e = lrR.Evaluate(X, Y);
+            print(lrR.Resolve);
+            print(e);
         }
     }
 }
