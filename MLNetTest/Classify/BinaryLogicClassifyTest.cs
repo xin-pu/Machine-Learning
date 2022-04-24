@@ -1,4 +1,5 @@
-﻿using MLNet.Model.Classify;
+﻿using MLNet.Kernels;
+using MLNet.Model.Classify;
 using MLNet.Utils;
 using Numpy;
 using Xunit;
@@ -25,8 +26,12 @@ namespace MLNetTest.Classify
         [Fact]
         public void BinaryLogicClassify()
         {
-            var lr = new BinaryLogicClassify {Print = true};
-            lr.Fit(X, Y);
+            var lr = new BinaryLogicClassify
+            {
+                Print = true,
+                Kernel = new Poly()
+            };
+            lr.Fit(X, Y, 0.2);
             lr.PrintSelf();
 
             var y = lr.Call(X);

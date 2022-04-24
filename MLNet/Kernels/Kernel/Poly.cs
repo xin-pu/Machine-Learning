@@ -1,6 +1,6 @@
 ﻿using Numpy;
 
-namespace MLNet.Kernel
+namespace MLNet.Kernels
 {
     public class Poly : Kernel
     {

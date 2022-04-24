@@ -1,7 +1,9 @@
 ﻿using System.Text;
 using AutoDiff;
+using MLNet.Kernels;
 using MLNet.LearningModel;
 using MLNet.Loss;
+using MLNet.Utils;
 using Numpy;
 using YAXLib;
 using YAXLib.Attributes;
@@ -28,6 +30,9 @@ namespace MLNet.Model
         [YAXDontSerialize] public LossBase CostFunc { set; get; } = null!;
 
         [YAXDontSerialize] public NDarray Resolve { set; get; } = null!;
+
+        [YAXDontSerialize] public Kernel? Kernel { set; get; }
+
 
         public string FilePath => $"{Name}.xml";
 
@@ -73,7 +78,6 @@ namespace MLNet.Model
 
                 /// Step 1 Convert Model
                 var x_cvt = transform(x);
-
 
                 /// Step 2 Create Loss Function
                 var featureCount = x_cvt.shape[1];
@@ -124,7 +128,15 @@ namespace MLNet.Model
 
         #region internal
 
-        internal abstract NDarray transform(NDarray x);
+        internal virtual NDarray transform(NDarray x)
+        {
+            if (Kernel == null)
+                return transformer.to_linear_firstorder(x);
+
+            var kernel = Kernel.Transform(x);
+            var final = transformer.to_linear_firstorder(kernel);
+            return final;
+        }
 
         internal abstract void fit(NDarray x, NDarray y, double learning_rate, int epoch, int batchsize);
 

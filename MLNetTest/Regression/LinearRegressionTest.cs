@@ -1,3 +1,4 @@
+using MLNet.Kernels;
 using MLNet.Model;
 using MLNet.Model.Regression.LinearRegression;
 using MLNet.Utils;
@@ -28,8 +29,13 @@ namespace MLNetTest.Regression
         [Fact]
         public void LinearRegression()
         {
-            var lr = new MultipleLinearRegression {Print = true};
+            var lr = new MultipleLinearRegression
+            {
+                Print = true,
+                Kernel = new Gaussian()
+            };
             lr.Fit(X, Y, 0.1, 200);
+            print(lr);
         }
 
         [Fact]

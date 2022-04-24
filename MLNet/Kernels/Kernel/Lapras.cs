@@ -1,26 +1,21 @@
 ﻿using Numpy;
 
-namespace MLNet.Kernel
+namespace MLNet.Kernels
 {
     /// <summary>
-    ///     h(i,j) =  tanh ( beta *dot( xi,xj) + theta)
+    ///     h(i,j) =  e^(-beta*Norm1(xi-xj))
     /// </summary>
     /// <param name="beta"></param>
     /// <exception cref="ArgumentException"></exception>
-    public class Sigmoid : Kernel
+    public class Lapras : Kernel
     {
-        public Sigmoid(double beta = 0.5, double theta = 0.5)
-            : base(KernelType.Sigmoid)
+        public Lapras(double beta = 1)
+            : base(KernelType.Lapras)
         {
-            if (beta <= 0.0 || theta >= 0)
-                throw new Exception("Please give Beta > 0 and Theta < 0");
             Beta = beta;
-            Theta = theta;
         }
 
         public double Beta { protected set; get; }
-
-        public double Theta { protected set; get; }
 
         public override NDarray Transform(NDarray input)
         {
@@ -36,8 +31,9 @@ namespace MLNet.Kernel
                 .AsParallel()
                 .ToList().ForEach(i =>
                 {
-                    var res = np.dot(input, x_array[i]);
-                    output[i] = np.tanh(Beta * res + Theta);
+                    var delta = x_array[i] - input;
+                    var res = np.linalg.norm(delta, 1, -1);
+                    output[i] = np.exp(-Beta * res);
                 });
 
             return output;

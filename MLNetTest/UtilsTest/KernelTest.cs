@@ -1,4 +1,4 @@
-﻿using MLNet.Kernel;
+﻿using MLNet.Kernels;
 using Numpy;
 using Xunit;
 using Xunit.Abstractions;

@@ -1,4 +1,4 @@
-﻿namespace MLNet.Kernel
+﻿namespace MLNet.Kernels
 {
     public enum KernelType
     {

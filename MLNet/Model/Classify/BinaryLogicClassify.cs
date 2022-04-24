@@ -1,5 +1,5 @@
 ﻿using AutoDiff;
-using MLNet.Kernel;
+using MLNet.Kernels;
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
