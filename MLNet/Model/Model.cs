@@ -2,7 +2,6 @@
 using AutoDiff;
 using MLNet.LearningModel;
 using MLNet.Loss;
-using MLNet.Utils;
 using Numpy;
 using YAXLib;
 using YAXLib.Attributes;
@@ -56,7 +55,7 @@ namespace MLNet.Model
             var delta_abs = np.abs(Predict(x) - y);
             var mad = delta_abs.GetData<double>().Average();
 
-            var delta_mse = np2.power(np.abs(Predict(x) - y), 2);
+            var delta_mse = np.power(np.abs(Predict(x) - y), np.array(2));
             var mse = delta_mse.GetData<double>().Average();
 
             return new Metric

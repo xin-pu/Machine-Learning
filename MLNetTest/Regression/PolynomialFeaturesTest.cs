@@ -1,5 +1,4 @@
 ﻿using MLNet.Model.Regression;
-using MLNet.Utils;
 using Numpy;
 using Xunit;
 using Xunit.Abstractions;
@@ -13,7 +12,7 @@ namespace MLNetTest.Regression
         {
             var x = np.arange(-3, 3, 0.1);
             X = np.expand_dims(x, -1);
-            Y = np.expand_dims(1 + 0.3 * np2.power(x, 3), -1);
+            Y = np.expand_dims(1 + 0.3 * np.power(x, np.array(3)), -1);
         }
 
         protected NDarray X { set; get; }

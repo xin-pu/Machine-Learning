@@ -45,21 +45,12 @@ namespace MLNetTest.UtilsTest
             print(res);
         }
 
-        [Fact]
-        public void power_1()
-        {
-            var x = np.array(new double[,] {{1, 2, 3}, {1, 2, 3}});
-            var y = np.array(new double[,] {{2, 3, 0}, {1, 2, 3}});
-            var res = np.power(x, y);
-            print(res);
-            print(res.shape);
-        }
 
         [Fact]
-        public void power_2()
+        public void power()
         {
             var x = np.array(new double[,] {{1, 2, 3}, {1, 2, 3}});
-            var res = np2.power(x, 2);
+            var res = np.power(x, np.array(2));
             print(res);
         }
 
@@ -125,7 +116,7 @@ namespace MLNetTest.UtilsTest
         {
             var a = np.random.randn(2);
             print(a);
-            print(np2.L2Norm(a));
+            print(np.linalg.norm(a, 2));
         }
     }
 }

@@ -8,18 +8,6 @@ namespace MLNet.Utils
     public static class np2
     {
         /// <summary>
-        ///     will return NDArray [x1^power,x2^power,x3^power,...,xN^power]
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="power"></param>
-        /// <returns></returns>
-        public static NDarray power(NDarray a, double power)
-        {
-            var p = np.ones_like(a) * power;
-            return np.power(a, p);
-        }
-
-        /// <summary>
         /// </summary>
         /// <param name="a"></param>
         /// <param name="power"></param>
@@ -29,12 +17,6 @@ namespace MLNet.Utils
             return 1.0 / (1.0 + np.exp(-w * a));
         }
 
-        public static double L2Norm(NDarray a)
-        {
-            var array = a.GetData<double>();
-            var sum = array.Select(a => Math.Pow(a, 2)).Sum();
-            return Math.Pow(sum, 0.5);
-        }
 
         public static NDarray load(string filePath)
         {

@@ -17,6 +17,20 @@ namespace MLNet.Utils
         }
 
         /// <summary>
+        ///     will return NDArray [1,x1,x2,x3,...,xN]
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static NDarray to_sin(NDarray a)
+        {
+            var feature = a.shape[1];
+            var b = np.ones(a.shape[0]);
+
+            var res = np.insert(a, 0, b, 1);
+            return res;
+        }
+
+        /// <summary>
         ///     Todo  will return NDArray [1,x1,x2,x3,...,xN]
         /// </summary>
         /// <param name="a"></param>

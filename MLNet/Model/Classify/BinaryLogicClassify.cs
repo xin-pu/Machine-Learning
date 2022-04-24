@@ -1,4 +1,5 @@
 ﻿using AutoDiff;
+using MLNet.Kernel;
 using MLNet.Loss;
 using MLNet.Utils;
 using Numpy;
@@ -14,7 +15,7 @@ namespace MLNet.Model.Classify
 
         internal override NDarray transform(NDarray x)
         {
-            return transformer.to_linear_firstorder(x);
+            return new GaussKernel(1).Transform(x);
         }
 
         internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
