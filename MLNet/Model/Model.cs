@@ -65,7 +65,7 @@ namespace MLNet.Model
             };
         }
 
-        public void Fit(NDarray x, NDarray y, double learning_rate = 0.1, int epoch = 100)
+        public void Fit(NDarray x, NDarray y, double learning_rate = 0.1, int epoch = 100, int batchsize = 8)
         {
             try
             {
@@ -74,13 +74,14 @@ namespace MLNet.Model
                 /// Step 1 Convert Model
                 var x_cvt = transform(x);
 
+
                 /// Step 2 Create Loss Function
                 var featureCount = x_cvt.shape[1];
                 var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
                 CostFunc = initialLoss(w, x_cvt, y);
 
                 /// Step 3 Fit
-                fit(x_cvt, y, learning_rate, epoch);
+                fit(x_cvt, y, learning_rate, epoch, batchsize);
 
                 /// Step 4 Evalate
                 var metric = Evaluate(x, y);
@@ -125,7 +126,7 @@ namespace MLNet.Model
 
         internal abstract NDarray transform(NDarray x);
 
-        internal abstract void fit(NDarray x, NDarray y, double learning_rate, int epoch);
+        internal abstract void fit(NDarray x, NDarray y, double learning_rate, int epoch, int batchsize);
 
         internal abstract NDarray call(NDarray x);
 

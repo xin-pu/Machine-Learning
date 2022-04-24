@@ -2,10 +2,9 @@
 {
     public enum KernelType
     {
-        Linear,
+        Lapras,
         Poly,
         Gauss,
-        Fourier,
         Sigmoid
     }
 }

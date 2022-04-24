@@ -67,6 +67,42 @@ namespace MLNetTest.UtilsTest
             print(d);
         }
 
+
+        [Fact]
+        public void sum()
+        {
+            var a = np.random.rand(5, 2);
+            print(a);
+            var res = np.sum(a, 0);
+            print(res);
+        }
+
+        [Fact]
+        public void sigmoid()
+        {
+            var a = np.array(new[,] {{0.8, 0.1}, {1.2, 2}});
+            print(a);
+            var res = np2.sigmoid(a);
+            print(res);
+        }
+
+        [Fact]
+        public void norm()
+        {
+            var a = np.random.randn(2);
+            print(a);
+            print(np.linalg.norm(a, 2));
+        }
+
+        [Fact]
+        public void shuffle()
+        {
+            var a = np.random.randn(5, 3);
+            print(a);
+            np.random.shuffle(a);
+            print(a);
+        }
+
         [Fact]
         public void poly()
         {
@@ -91,32 +127,6 @@ namespace MLNetTest.UtilsTest
             var a = np.array(new double[,] {{1, 1, 1}, {0, 0, 0}});
             var res = transformer.to_linear_firstorder(a);
             print(res);
-        }
-
-        [Fact]
-        public void sum()
-        {
-            var a = np.random.rand(5, 2);
-            print(a);
-            var res = np.sum(a, 0);
-            print(res);
-        }
-
-        [Fact]
-        public void sigmoid()
-        {
-            var a = np.array(new[,] {{0.8, 0.1}, {1.2, 2}});
-            print(a);
-            var res = np2.sigmoid(a);
-            print(res);
-        }
-
-        [Fact]
-        public void normL2()
-        {
-            var a = np.random.randn(2);
-            print(a);
-            print(np.linalg.norm(a, 2));
         }
     }
 }

@@ -15,10 +15,10 @@ namespace MLNet.Model.Classify
 
         internal override NDarray transform(NDarray x)
         {
-            return new GaussKernel(1).Transform(x);
+            return new Gaussian(2).Transform(x);
         }
 
-        internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
+        internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch, int batchsize)
         {
             var featureCount = x.shape[1];
 

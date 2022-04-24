@@ -2,11 +2,13 @@
 
 namespace MLNet.Kernel
 {
-    public class PolyKernel : Kernel
+    public class Poly : Kernel
     {
-        public PolyKernel(int degree)
+        public Poly(int degree = 2)
             : base(KernelType.Poly)
         {
+            if (degree <= 0)
+                throw new ArgumentException("Please give degree > 0 ");
             Degree = degree;
         }
 
@@ -24,10 +26,7 @@ namespace MLNet.Kernel
 
             Enumerable.Range(0, p)
                 .AsParallel()
-                .ToList().ForEach(i =>
-                {
-                    output[i] = np.power(1 + np.matmul(x_array[i], input.T), np.array(Degree)) - 1;
-                });
+                .ToList().ForEach(i => { output[i] = np.power(1 + np.dot(input, x_array[i]), np.array(Degree)) - 1; });
             return output;
         }
     }

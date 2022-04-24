@@ -36,7 +36,7 @@ namespace MLNet.Model.Regression.LinearRegression
             return transformer.to_linear_firstorder(x);
         }
 
-        internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch)
+        internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch, int batchsize)
         {
             var featureCount = x.shape[1];
 

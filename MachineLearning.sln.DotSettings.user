@@ -8,6 +8,11 @@
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest.GaussKernel&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.NumpyTest.power_2&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.NumpyTest.normL2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.NumpyTest.shuffle&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest.PolyKernel&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest.LaprasKernel&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest.SigmoidKernel&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

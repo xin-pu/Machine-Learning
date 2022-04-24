@@ -13,13 +13,6 @@ namespace MLNetTest.Classify
         public BinaryLogicClassifyTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            //var x = np.expand_dims(np.arange(0, 1, 0.01), -1);
-            //x["0:50,:"] -= 2;
-            //var y = np.ones_like(x);
-            //y["0:50,:"] -= 1;
-            //X = x;
-            //Y = y;
-
             var data = np2.load(singledata);
             X = data[":,1:2"];
             Y = data[":,2:3"];
@@ -33,7 +26,7 @@ namespace MLNetTest.Classify
         public void BinaryLogicClassify()
         {
             var lr = new BinaryLogicClassify {Print = true};
-            lr.Fit(X, Y, 0.2);
+            lr.Fit(X, Y);
             lr.PrintSelf();
 
             var y = lr.Call(X);

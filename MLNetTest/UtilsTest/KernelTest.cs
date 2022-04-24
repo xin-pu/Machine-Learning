@@ -10,7 +10,7 @@ namespace MLNetTest.UtilsTest
         public KernelTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            input = np.array(new double[,] {{1, 2}, {2, 4}, {3, 9}});
+            input = np.array(new double[,] {{1, 1}, {2, 2}, {3, 3}});
         }
 
         public NDarray input { set; get; }
@@ -18,15 +18,31 @@ namespace MLNetTest.UtilsTest
         [Fact]
         public void PolyKernel()
         {
-            var kernel = new PolyKernel(1);
+            var kernel = new Poly(1);
             var res = kernel.Transform(input);
             print(res);
         }
 
         [Fact]
-        public void GaussKernel()
+        public void GaussianKernel()
         {
-            var kernel = new GaussKernel(2);
+            var kernel = new Gaussian(2);
+            var res = kernel.Transform(input);
+            print(res);
+        }
+
+        [Fact]
+        public void LaprasKernel()
+        {
+            var kernel = new Lapras(2);
+            var res = kernel.Transform(input);
+            print(res);
+        }
+
+        [Fact]
+        public void SigmoidKernel()
+        {
+            var kernel = new Sigmoid(2, -2);
             var res = kernel.Transform(input);
             print(res);
         }
