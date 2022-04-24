@@ -29,9 +29,9 @@ namespace MLNetTest.Classify
             var lr = new BinaryLogicClassify
             {
                 Print = true,
-                Kernel = new Poly()
+                Kernel = new Poly(1)
             };
-            lr.Fit(X, Y, 0.2);
+            lr.Fit(X, Y, 0.2, 500);
             lr.PrintSelf();
 
             var y = lr.Call(X);

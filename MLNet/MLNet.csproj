@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="MLNet.csproj.DotSettings" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoDiff" Version="1.2.2" />
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="PythonPlotter" Version="0.3.2" />

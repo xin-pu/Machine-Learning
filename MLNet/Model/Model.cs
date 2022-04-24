@@ -13,7 +13,7 @@ namespace MLNet.Model
     /// <summary>
     ///     Learning Model
     /// </summary>
-    public abstract class Model
+    public abstract class Model : ViewModelBase
     {
         protected Model(string name)
         {

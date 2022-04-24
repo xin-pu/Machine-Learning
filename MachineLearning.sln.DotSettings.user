@@ -2,7 +2,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0c2b720a_002Df005_002D42cd_002D8368_002Dc17ac200264d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="PolynomialFeatures" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="E:\Code MachineLearning\MachineLeaning\MLNetTest" Presentation="&amp;lt;MLNetTest&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=11d3f850_002D7570_002D409f_002Da0ea_002Dab28821662de/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BinaryLogicClassify" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=11d3f850_002D7570_002D409f_002Da0ea_002Dab28821662de/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BinaryLogicClassify" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.Classify.BinaryLogicClassifyTest.BinaryLogicClassify&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest.GaussKernel&lt;/TestId&gt;&#xD;
@@ -14,6 +14,11 @@
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest.SigmoidKernel&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.KernelTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.Regression.LinearRegressionTest.LinearRegression&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=64fd0f88_002D7cd5_002D4731_002Dacc4_002Db40d6d38d081/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BinaryLogicClassify #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.Classify.BinaryLogicClassifyTest.BinaryLogicClassify&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
