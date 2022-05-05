@@ -57,17 +57,8 @@ namespace MLNet.Model
 
         public Metric Evaluate(NDarray x, NDarray y)
         {
-            var delta_abs = np.abs(Predict(x) - y);
-            var mad = delta_abs.GetData<double>().Average();
-
-            var delta_mse = np.power(np.abs(Predict(x) - y), np.array(2));
-            var mse = delta_mse.GetData<double>().Average();
-
-            return new Metric
-            {
-                MAD = mad,
-                MSE = mse
-            };
+            var y_pred = Predict(x);
+            return new Metric(y, y_pred);
         }
 
         public void Fit(NDarray x, NDarray y, double learning_rate = 0.1, int epoch = 100, int batchsize = 8)
