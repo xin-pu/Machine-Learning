@@ -132,10 +132,14 @@ namespace MLNetTest.UtilsTest
         [Fact]
         public void equal()
         {
-            var a = np.array(1, 0, 1);
-            var b = np.array(1, 1, 0);
-            var res = np.equal(a, b);
-            print(res);
+            var a = np.array(1, 0, 1, 0);
+            var b = np.array(1, 1, 0, 0);
+
+
+            var where = np.equal(a, np.array(0));
+            print(where);
+            var res2 = np.bitwise_and(np.equal(a, b), where);
+            print(res2);
         }
     }
 }

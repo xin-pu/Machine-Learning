@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using MLNet.Metrics;
 using Numpy;
 using Xunit;
@@ -71,6 +72,15 @@ namespace MLNetTest.Regression
             var errorRate = new ErrorRate();
             errorRate.Call(y_true, y_pred).Should().Be(0.4);
             print(errorRate);
+        }
+
+        [Fact]
+        public void TestConfusionMatrixs()
+        {
+            var y_true = np.array(1, 0, 1, 2, 2, 1, 1, 2, 1, 0);
+            var y_pred = np.array(1, 1, 0, 1, 2, 0, 1, 2, 1, 0);
+            var confusionMatrixs = new ConfusionMatrixs(y_true, y_pred);
+            foreach (var m in confusionMatrixs.ConfusionMatrixDict.Select(keyValuePair => keyValuePair.Value)) print(m);
         }
     }
 }
