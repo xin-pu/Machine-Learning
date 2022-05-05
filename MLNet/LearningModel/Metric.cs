@@ -39,19 +39,17 @@ namespace MLNet.LearningModel
         public override string ToString()
         {
             var str = new StringBuilder();
-            str.AppendLine(new string('-', 30) + "Evaluate" + new string('-', 30));
-            str.AppendLine($"MSE:\t{MSE:P2}");
-            str.AppendLine($"MAD:\t{MAD:P2}");
-            str.AppendLine($"EVS:\t{EVS:P2}");
-            str.AppendLine($"R2:\t{R2:P2}");
+            str.AppendLine(new string('-', 15) + "Evaluate" + new string('-', 15));
+            str.AppendLine($"MSE:\t{MSE:F4}");
+            str.AppendLine($"MAD:\t{MAD:F4}");
+            str.AppendLine($"EVS:\t{EVS:F4}");
+            str.AppendLine($"R2:\t{R2:F4}");
             return str.ToString();
         }
 
         public static double getMSE(NDarray y_true, NDarray y_pred)
         {
-            var delta_mse = np.power(np.abs(y_pred - y_true), np.array(2));
-            var mse = delta_mse.GetData<double>().Average();
-            return mse;
+            return np2.variance(y_true - y_pred);
         }
 
         public static double getMAD(NDarray y_true, NDarray y_pred)
@@ -63,9 +61,16 @@ namespace MLNet.LearningModel
 
         public static double getR2(NDarray y_true, NDarray y_pred)
         {
-            return 0;
+            return 1 - getMSE(y_true, y_pred) / np2.variance(y_true);
         }
 
+        /// <summary>
+        ///     解释回归模型的方差得分，其值取值范围是[0,1]
+        ///     越接近于1说明自变量越能解释因变量的方差变化，值越小则说明效果越差。
+        /// </summary>
+        /// <param name="y_true"></param>
+        /// <param name="y_pred"></param>
+        /// <returns>1-Var(y_true-y_pred)/Var(y_true)</returns>
         public static double getEVS(NDarray y_true, NDarray y_pred)
         {
             var delta = y_true - y_pred;
