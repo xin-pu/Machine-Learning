@@ -17,9 +17,9 @@ namespace MLNet.Loss
 
         public string Name { protected set; get; }
 
-        public Term CostFunc { get; set; }
+        public Term CostFunc { protected set; get; }
 
-        public Variable[] Variables { set; get; }
+        public Variable[] Variables { protected set; get; }
 
         public Term CreateLoss(Variable[] variables, NDarray x, NDarray y)
         {

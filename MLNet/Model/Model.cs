@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using AutoDiff;
 using MLNet.Kernels;
-using MLNet.LearningModel;
 using MLNet.Loss;
+using MLNet.Metrics;
 using MLNet.Utils;
 using Numpy;
 using YAXLib;
@@ -33,6 +33,8 @@ namespace MLNet.Model
 
         [YAXDontSerialize] public Kernel? Kernel { set; get; }
 
+        [YAXDontSerialize] public Metric[] Metrics { set; get; } = null!;
+
 
         public string FilePath => $"{Name}.xml";
 
@@ -51,14 +53,18 @@ namespace MLNet.Model
             /// Step 2 Casll
             var res = call(x_cvt);
 
-
             return res;
         }
 
-        public Metric Evaluate(NDarray x, NDarray y)
+        public void Evaluate(NDarray x, NDarray y)
         {
             var y_pred = Predict(x);
-            return new Metric(y, y_pred);
+
+            Metrics.AsParallel().ForAll(m =>
+            {
+                m.Call(y, y_pred);
+                print(m);
+            });
         }
 
         public void Fit(NDarray x, NDarray y, double learning_rate = 0.1, int epoch = 100, int batchsize = 8)
@@ -79,8 +85,7 @@ namespace MLNet.Model
                 fit(x_cvt, y, learning_rate, epoch, batchsize);
 
                 /// Step 4 Evalate
-                var metric = Evaluate(x, y);
-                print(metric);
+                Evaluate(x, y);
             }
             catch (Exception ex)
             {

@@ -29,8 +29,7 @@ namespace MLNetTest.Regression
             pf.Fit(X, Y, 1E-3, 5000);
 
             print(pf.Resolve);
-            var evaluate = pf.Evaluate(X, Y);
-            print(evaluate);
+
 
             print(Y);
             print(pf.Call(X));
@@ -48,8 +47,6 @@ namespace MLNetTest.Regression
 
             ridge.Fit(X, Y, 1E-3, 5000);
             ridge.PrintSelf();
-            var evaluate = ridge.Evaluate(X, Y);
-            print(evaluate);
         }
 
         [Fact]
@@ -63,8 +60,6 @@ namespace MLNetTest.Regression
 
             ridge.Fit(X, Y, 1E-3, 5000);
             ridge.PrintSelf();
-            var evaluate = ridge.Evaluate(X, Y);
-            print(evaluate);
         }
 
         [Fact]
@@ -78,8 +73,6 @@ namespace MLNetTest.Regression
 
             ridge.Fit(X, Y, 1E-3, 5000);
             ridge.PrintSelf();
-            var evaluate = ridge.Evaluate(X, Y);
-            print(evaluate);
         }
 
 
@@ -93,8 +86,7 @@ namespace MLNetTest.Regression
             };
             pf.Fit(X, Y, 1E-3, 5000);
             print(pf.Resolve);
-            var evaluate = pf.Evaluate(X, Y);
-            print(evaluate);
+            ;
 
             print(Y);
             print(pf.Call(X));

@@ -128,5 +128,14 @@ namespace MLNetTest.UtilsTest
             var res = transformer.to_linear_firstorder(a);
             print(res);
         }
+
+        [Fact]
+        public void equal()
+        {
+            var a = np.array(1, 0, 1);
+            var b = np.array(1, 1, 0);
+            var res = np.equal(a, b);
+            print(res);
+        }
     }
 }
