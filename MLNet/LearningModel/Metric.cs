@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using MLNet.Utils;
 using Numpy;
 
 namespace MLNet.LearningModel
@@ -9,6 +10,8 @@ namespace MLNet.LearningModel
         {
             MSE = getMSE(y_true, y_pred);
             MAD = getMAD(y_true, y_pred);
+            R2 = getR2(y_true, y_pred);
+            EVS = getEVS(y_true, y_pred);
         }
 
         /// <summary>
@@ -16,7 +19,6 @@ namespace MLNet.LearningModel
         /// </summary>
         public double MSE { set; get; }
 
-        public double RMSE => Math.Sqrt(MSE);
 
         /// <summary>
         ///     Mean Absolute Error
@@ -39,23 +41,38 @@ namespace MLNet.LearningModel
             var str = new StringBuilder();
             str.AppendLine(new string('-', 30) + "Evaluate" + new string('-', 30));
             str.AppendLine($"MSE:\t{MSE:P2}");
-            str.AppendLine($"RMSE:\t{RMSE:P2}");
             str.AppendLine($"MAD:\t{MAD:P2}");
+            str.AppendLine($"EVS:\t{EVS:P2}");
+            str.AppendLine($"R2:\t{R2:P2}");
             return str.ToString();
         }
 
-        private static double getMSE(NDarray y_true, NDarray y_pred)
+        public static double getMSE(NDarray y_true, NDarray y_pred)
         {
             var delta_mse = np.power(np.abs(y_pred - y_true), np.array(2));
             var mse = delta_mse.GetData<double>().Average();
             return mse;
         }
 
-        private static double getMAD(NDarray y_true, NDarray y_pred)
+        public static double getMAD(NDarray y_true, NDarray y_pred)
         {
             var delta_abs = np.abs(y_pred - y_true);
             var mad = delta_abs.GetData<double>().Average();
             return mad;
+        }
+
+        public static double getR2(NDarray y_true, NDarray y_pred)
+        {
+            return 0;
+        }
+
+        public static double getEVS(NDarray y_true, NDarray y_pred)
+        {
+            var delta = y_true - y_pred;
+            var varuance_with_pred = np2.variance(delta);
+
+            var variance_y_true = np2.variance(y_true);
+            return 1 - varuance_with_pred / variance_y_true;
         }
     }
 }
