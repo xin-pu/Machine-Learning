@@ -10,13 +10,6 @@ namespace MLNet.Losses
     /// </summary>
     public class LSLoss : Loss
     {
-        public LSLoss(
-            Variable[] w,
-            NDarray x,
-            NDarray y) : base(w, x, y)
-        {
-        }
-
         public Constraint Constraint { set; get; }
 
         public int Features { set; get; }

@@ -56,7 +56,7 @@ namespace MLNet.Models
 
         public NDarray Call(NDarray x)
         {
-            return call(x);
+            return Predict(x);
         }
 
         public NDarray Predict(NDarray x)
@@ -81,6 +81,12 @@ namespace MLNet.Models
             });
         }
 
+        /// <summary>
+        ///     Mini Batch
+        /// </summary>
+        /// <param name="traindatas_x"></param>
+        /// <param name="trandatas_y"></param>
+        /// <param name="trainConfig"></param>
         public void Fit(
             NDarray traindatas_x,
             NDarray trandatas_y,
@@ -91,28 +97,32 @@ namespace MLNet.Models
                 print($"{Name} Start Fit:\r\n");
 
                 /// Step 1 Convert Model
-                var x_cvt = transform(traindatas_x);
+                traindatas_x = transform(traindatas_x);
 
-                /// Step 2 Create Loss Function
-                var featureCount = x_cvt.shape[1];
-                var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
-                CostFunc = initialLoss(w, x_cvt, trandatas_y);
+                /// Step 2 Initial Variables and Temp Weights
+                InitialWeights(traindatas_x, trandatas_y);
 
                 /// Step 3 Fit
+                Enumerable.Range(0, trainConfig.Epoch).ToList()
+                    .ForEach(epoch =>
+                    {
+                        foreach (var batch in Enumerable.Range(0, traindatas_x.shape[0] / trainConfig.Batch))
+                        {
+                            var batch_x = traindatas_x[$"{batch}:{(batch + 1) * trainConfig.Batch}"];
+                            var batch_y = trandatas_y[$"{batch}:{(batch + 1) * trainConfig.Batch}"];
 
-                var resolveTemp = np.random.randn(featureCount, 1);
+                            /// get grad and loss at this step
+                            var (gradarray, loss) = CostFunc.Call(Resolve, batch_x, batch_y);
 
-                Enumerable.Range(0, trainConfig.Epoch).ToList().ForEach(e =>
-                {
-                    var (gradarray, loss) = CostFunc.Call(resolveTemp);
+                            /// update weight by optimizer
+                            Resolve = Optimizer.Call(Resolve, gradarray);
+                        }
 
-                    var grad = np.expand_dims(np.array(gradarray), -1);
-                    resolveTemp -= trainConfig.LearningRate * grad;
 
-                    if (Print)
-                        Log.print?.Invoke($"Epoch:\t{e:D4}\tLoss:{loss:F4}");
-                });
-                Resolve = resolveTemp;
+                        if (Print)
+                            Log.print?.Invoke($"Epoch:\t{epoch:D4}");
+                    });
+
 
                 /// Step 4 Evalate
                 Evaluate(traindatas_x, trandatas_y);
@@ -121,6 +131,13 @@ namespace MLNet.Models
             {
                 print($"{Name} Predict:\r\n{ex.Message}");
             }
+        }
+
+        internal void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
+        {
+            Variables = initialVariables(traindatas_x, trandatas_y);
+            Resolve = np.random.randn(Variables.Length, 1);
+            CostFunc.Compile(Variables);
         }
 
 
@@ -164,10 +181,9 @@ namespace MLNet.Models
             return final;
         }
 
+        internal abstract Variable[] initialVariables(NDarray x, NDarray y);
 
         internal abstract NDarray call(NDarray x);
-
-        internal abstract Loss initialLoss(Variable[] variables, NDarray x, NDarray y);
 
         #endregion
 

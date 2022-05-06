@@ -1,5 +1,6 @@
 using MLNet.Kernels;
 using MLNet.LearningModel;
+using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Models;
 using MLNet.Models.Regression;
@@ -46,7 +47,7 @@ namespace MLNetTest.Regression
         public void TestSave()
         {
             var lr = new MultipleLinearRegression {Print = false};
-            lr.Compile(new SGD(), null, new Metric[] {new MSE(), new EVS()});
+            lr.Compile(new SGD(), new LSLoss(), new Metric[] {new MSE(), new EVS()});
             lr.Fit(X, Y, new TrainConfig());
             lr.Save("test.xml");
 

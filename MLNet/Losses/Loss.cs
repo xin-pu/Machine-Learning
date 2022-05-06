@@ -9,26 +9,25 @@ namespace MLNet.Losses
     /// </summary>
     public abstract class Loss
     {
-        protected Loss(Variable[] variables, NDarray x, NDarray y)
+        protected Loss()
         {
             Name = GetType().Name;
-            Variables = variables;
-            CostFunc = CreateLoss(Variables, x, y);
         }
 
         public string Name { protected set; get; }
 
-        public Term CostFunc { protected set; get; }
+        public Term CostFunc { protected set; get; } = null!;
 
-        public Variable[] Variables { protected set; get; }
+        public Variable[] Variables { protected set; get; } = null!;
 
-        public Term CreateLoss(Variable[] variables, NDarray x, NDarray y)
+        public void Compile(Variable[] variables)
         {
-            return createLoss(variables, x, y);
+            Variables = variables;
         }
 
-        public Tuple<NDarray, double> Call(NDarray weights)
+        public Tuple<NDarray, double> Call(NDarray weights, NDarray x, NDarray y)
         {
+            CostFunc = createLoss(Variables, x, y);
             var points = weights.GetData<double>();
             var loss = CostFunc.Evaluate(Variables, points);
             var grad = CostFunc.Differentiate(Variables, points);

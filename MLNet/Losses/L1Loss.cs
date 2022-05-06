@@ -9,11 +9,6 @@ namespace MLNet.Losses
     /// </summary>
     public class L1Loss : Loss
     {
-        public L1Loss(Variable[] variables, NDarray x, NDarray y)
-            : base(variables, x, y)
-        {
-        }
-
         public int Features { set; get; }
 
         internal override Term createLoss(Variable[] variables, NDarray x, NDarray y)

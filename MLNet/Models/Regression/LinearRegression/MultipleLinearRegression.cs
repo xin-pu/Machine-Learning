@@ -1,5 +1,4 @@
 ﻿using AutoDiff;
-using MLNet.Losses;
 using MLNet.Utils;
 using Numpy;
 
@@ -30,23 +29,18 @@ namespace MLNet.Models.Regression
             return transformer.to_linear_firstorder(x);
         }
 
+        internal override Variable[] initialVariables(NDarray x, NDarray y)
+        {
+            var featureCount = x.shape[1];
+            var variables = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
+            return variables;
+        }
+
 
         internal override NDarray call(NDarray x)
         {
             if (Resolve == null) throw new Exception("Resolve is Empty");
             return np.matmul(x, Resolve);
-        }
-
-        internal override Loss initialLoss(
-            Variable[] variables,
-            NDarray x,
-            NDarray y)
-        {
-            return new LSLoss(variables, x, y)
-            {
-                Constraint = Constraint,
-                Lamdba = 0.1
-            };
         }
     }
 }

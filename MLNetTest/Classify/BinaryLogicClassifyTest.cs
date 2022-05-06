@@ -1,9 +1,5 @@
-﻿using MLNet.Kernels;
-using MLNet.LearningModel;
-using MLNet.Models.Classify;
-using MLNet.Utils;
+﻿using MLNet.Utils;
 using Numpy;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace MLNetTest.Classify
@@ -24,19 +20,19 @@ namespace MLNetTest.Classify
         protected NDarray Y { set; get; }
 
 
-        [Fact]
-        public void BinaryLogicClassify()
-        {
-            var lr = new BinaryLogicClassify
-            {
-                Print = true,
-                Kernel = new Poly(1)
-            };
-            lr.Fit(X, Y, new TrainConfig());
-            lr.PrintSelf();
+        //[Fact]
+        //public void BinaryLogicClassify()
+        //{
+        //    var lr = new BinaryLogicClassify
+        //    {
+        //        Print = true,
+        //        Kernel = new Poly(1)
+        //    };
+        //    lr.Fit(X, Y, new TrainConfig());
+        //    lr.PrintSelf();
 
-            var y = lr.Call(X);
-            print(y);
-        }
+        //    var y = lr.Call(X);
+        //    print(y);
+        //}
     }
 }

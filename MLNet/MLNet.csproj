@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Classify\BinaryLogicClassify.cs" />
     <Compile Remove="Models\Regression\LinearRegression\RigdePolynomialFeatures.cs" />
     <Compile Remove="Models\Regression\NonlinearRegression\PolynomialFeatures.cs" />
     <Compile Remove="Models\Regression\NonlinearRegression\TrianglePolynomialFeatures.cs" />
@@ -33,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Classify\" />
     <Folder Include="Models\Regression\NonlinearRegression\" />
   </ItemGroup>
 

@@ -6,11 +6,6 @@ namespace MLNet.Losses
 {
     public class CrossEntropy : Loss
     {
-        public CrossEntropy(Variable[] variables, NDarray x, NDarray y)
-            : base(variables, x, y)
-        {
-        }
-
         internal override Term createLoss(Variable[] variables, NDarray x, NDarray y)
         {
             var batchsize = x.shape[0];
