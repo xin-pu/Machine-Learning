@@ -1,6 +1,6 @@
 ﻿using AutoDiff;
 using MLNet.Kernels;
-using MLNet.Loss;
+using MLNet.Losses;
 using MLNet.Utils;
 using Numpy;
 
@@ -46,7 +46,7 @@ namespace MLNet.Model.Classify
             return np2.sigmoid(np.matmul(x, Resolve));
         }
 
-        internal override LossBase initialLoss(Variable[] variables, NDarray x, NDarray y)
+        internal override Loss initialLoss(Variable[] variables, NDarray x, NDarray y)
         {
             return new CrossEntropy(variables, x, y);
         }

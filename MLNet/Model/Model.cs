@@ -1,8 +1,9 @@
 ﻿using System.Text;
 using AutoDiff;
 using MLNet.Kernels;
-using MLNet.Loss;
+using MLNet.Losses;
 using MLNet.Metrics;
+using MLNet.Optimizers;
 using MLNet.Utils;
 using Numpy;
 using YAXLib;
@@ -27,13 +28,16 @@ namespace MLNet.Model
 
         public string? Name { get; set; }
 
-        [YAXDontSerialize] public LossBase CostFunc { set; get; } = null!;
 
         [YAXDontSerialize] public NDarray Resolve { set; get; } = null!;
 
-        [YAXDontSerialize] public Kernel? Kernel { set; get; }
+        [YAXDontSerialize] public Kernel Kernel { set; get; } = null!;
 
-        [YAXDontSerialize] public Metric[] Metrics { set; get; } = null!;
+        [YAXDontSerialize] public Loss CostFunc { protected set; get; } = null!;
+
+        [YAXDontSerialize] public Metric[] Metrics { protected set; get; } = null!;
+
+        [YAXDontSerialize] public Optimizer Optimizer { protected set; get; } = null!;
 
 
         public string FilePath => $"{Name}.xml";
@@ -44,6 +48,20 @@ namespace MLNet.Model
         {
             return Predict(x);
         }
+
+        /// <summary>
+        ///     Configures the model for training.
+        /// </summary>
+        /// <param name="optimizer"></param>
+        /// <param name="loss"></param>
+        /// <param name="metric"></param>
+        public void Compile(Optimizer optimizer, Loss loss, Metric[] metric)
+        {
+            Optimizer = optimizer;
+            CostFunc = loss;
+            Metrics = metric;
+        }
+
 
         public NDarray Predict(NDarray x)
         {
@@ -138,7 +156,7 @@ namespace MLNet.Model
 
         internal abstract NDarray call(NDarray x);
 
-        internal abstract LossBase initialLoss(Variable[] variables, NDarray x, NDarray y);
+        internal abstract Loss initialLoss(Variable[] variables, NDarray x, NDarray y);
 
         #endregion
 

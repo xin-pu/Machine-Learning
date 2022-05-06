@@ -3,12 +3,12 @@ using MLNet.Model.Regression;
 using MLNet.Utils;
 using Numpy;
 
-namespace MLNet.Loss
+namespace MLNet.Losses
 {
     /// <summary>
     ///     J(la)= 0.5*sigma((y-yp)^2)
     /// </summary>
-    public class LSLoss : LossBase
+    public class LSLoss : Loss
     {
         public LSLoss(
             Variable[] w,

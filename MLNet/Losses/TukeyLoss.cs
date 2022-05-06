@@ -1,11 +1,11 @@
 ﻿using AutoDiff;
 using Numpy;
 
-namespace MLNet.Loss
+namespace MLNet.Losses
 {
     /// <summary>
     /// </summary>
-    public class TukeyLoss : LossBase
+    public class TukeyLoss : Loss
     {
         public TukeyLoss(string name, Variable[] variables, NDarray x, NDarray y)
             : base(name, variables, x, y)

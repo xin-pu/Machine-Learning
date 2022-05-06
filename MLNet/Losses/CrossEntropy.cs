@@ -2,9 +2,9 @@
 using MLNet.Utils;
 using Numpy;
 
-namespace MLNet.Loss
+namespace MLNet.Losses
 {
-    public class CrossEntropy : LossBase
+    public class CrossEntropy : Loss
     {
         public CrossEntropy(Variable[] variables, NDarray x, NDarray y)
             : base("CrossEntropy", variables, x, y)

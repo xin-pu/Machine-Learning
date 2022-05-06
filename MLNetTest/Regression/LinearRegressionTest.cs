@@ -33,9 +33,9 @@ namespace MLNetTest.Regression
             var lr = new MultipleLinearRegression
             {
                 Print = true,
-                Kernel = new Gaussian(),
-                Metrics = new Metric[] {new MSE(), new EVS()}
+                Kernel = new Gaussian()
             };
+            lr.Compile(null, null, new Metric[] {new MSE(), new EVS()});
             lr.Fit(X, Y, 0.1, 200);
             print(lr);
         }

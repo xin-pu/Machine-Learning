@@ -1,5 +1,5 @@
 ﻿using AutoDiff;
-using MLNet.Loss;
+using MLNet.Losses;
 using MLNet.Utils;
 using Numpy;
 
@@ -65,7 +65,7 @@ namespace MLNet.Model.Regression.LinearRegression
             return np.matmul(x, Resolve);
         }
 
-        internal override LossBase initialLoss(
+        internal override Loss initialLoss(
             Variable[] variables,
             NDarray x,
             NDarray y)

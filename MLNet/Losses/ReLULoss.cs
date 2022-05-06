@@ -1,9 +1,9 @@
 ﻿using AutoDiff;
 using Numpy;
 
-namespace MLNet.Loss
+namespace MLNet.Losses
 {
-    public class ReLULoss : LossBase
+    public class ReLULoss : Loss
     {
         public ReLULoss(Variable[] variables, NDarray x, NDarray y)
             : base("ReLU", variables, x, y)

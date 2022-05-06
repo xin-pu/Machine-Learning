@@ -1,9 +1,9 @@
 ﻿using AutoDiff;
 using Numpy;
 
-namespace MLNet.Loss
+namespace MLNet.Losses
 {
-    public class SoftmaxLoss : LossBase
+    public class SoftmaxLoss : Loss
     {
         public SoftmaxLoss(Variable[] variables, NDarray x, NDarray y)
             : base("SoftmaxLoss", variables, x, y)

@@ -1,14 +1,14 @@
 ﻿using AutoDiff;
 using Numpy;
 
-namespace MLNet.Loss
+namespace MLNet.Losses
 {
     /// <summary>
     ///     This is abstract loss base
     /// </summary>
-    public abstract class LossBase
+    public abstract class Loss
     {
-        protected LossBase(string name, Variable[] variables, NDarray x, NDarray y)
+        protected Loss(string name, Variable[] variables, NDarray x, NDarray y)
         {
             Name = name;
             Variables = variables;
