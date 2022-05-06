@@ -34,7 +34,8 @@ namespace MLNet.Kernels
 
             Enumerable.Range(0, p)
                 .AsParallel()
-                .ToList().ForEach(i =>
+                .ToList()
+                .ForEach(i =>
                 {
                     var res = np.dot(input, x_array[i]);
                     output[i] = np.tanh(Beta * res + Theta);

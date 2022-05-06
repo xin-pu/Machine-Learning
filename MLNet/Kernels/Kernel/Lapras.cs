@@ -29,7 +29,8 @@ namespace MLNet.Kernels
 
             Enumerable.Range(0, p)
                 .AsParallel()
-                .ToList().ForEach(i =>
+                .ToList()
+                .ForEach(i =>
                 {
                     var delta = x_array[i] - input;
                     var res = np.linalg.norm(delta, 1, -1);

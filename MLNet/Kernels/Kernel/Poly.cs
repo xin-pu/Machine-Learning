@@ -26,7 +26,8 @@ namespace MLNet.Kernels
 
             Enumerable.Range(0, p)
                 .AsParallel()
-                .ToList().ForEach(i => { output[i] = np.power(1 + np.dot(input, x_array[i]), np.array(Degree)) - 1; });
+                .ToList()
+                .ForEach(i => { output[i] = np.power(1 + np.dot(input, x_array[i]), np.array(Degree)) - 1; });
             return output;
         }
     }
