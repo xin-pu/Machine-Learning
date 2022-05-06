@@ -15,6 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSet", "DataSet", "{27D2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{C3D790D4-9CBC-4122-BEDC-7829FAD93EB4}"
 	ProjectSection(SolutionItems) = preProject
+		Document\frame.png = Document\frame.png
+		Document\优化算法.png = Document\优化算法.png
+		Document\总框架.png = Document\总框架.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56312993-AD3C-40EE-AF5C-706D27046579}"
+	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
