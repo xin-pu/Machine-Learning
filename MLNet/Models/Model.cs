@@ -9,7 +9,7 @@ using Numpy;
 using YAXLib;
 using YAXLib.Attributes;
 
-namespace MLNet.Model
+namespace MLNet.Models
 {
     /// <summary>
     ///     Learning Model

@@ -4,7 +4,7 @@ using MLNet.Losses;
 using MLNet.Utils;
 using Numpy;
 
-namespace MLNet.Model.Classify
+namespace MLNet.Models.Classify
 {
     public class BinaryLogicClassify : Model
     {

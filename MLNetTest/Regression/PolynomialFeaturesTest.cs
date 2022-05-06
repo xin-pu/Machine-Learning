@@ -1,4 +1,4 @@
-﻿using MLNet.Model.Regression;
+﻿using MLNet.Models.Regression;
 using Numpy;
 using Xunit;
 using Xunit.Abstractions;

@@ -1,6 +1,6 @@
 ﻿using Numpy;
 
-namespace MLNet.Model.Regression
+namespace MLNet.Models.Regression
 {
     public class TrianglePolynomialFeatures : PolynomialFeatures
     {

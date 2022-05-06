@@ -1,5 +1,5 @@
 ﻿using MLNet.Kernels;
-using MLNet.Model.Classify;
+using MLNet.Models.Classify;
 using MLNet.Utils;
 using Numpy;
 using Xunit;

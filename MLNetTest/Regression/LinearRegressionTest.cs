@@ -1,7 +1,7 @@
 using MLNet.Kernels;
 using MLNet.Metrics;
-using MLNet.Model;
-using MLNet.Model.Regression.LinearRegression;
+using MLNet.Models;
+using MLNet.Models.Regression;
 using MLNet.Optimizers;
 using MLNet.Utils;
 using Numpy;

@@ -3,7 +3,7 @@ using MLNet.Losses;
 using MLNet.Utils;
 using Numpy;
 
-namespace MLNet.Model.Regression.LinearRegression
+namespace MLNet.Models.Regression
 {
     /// <summary>
     ///     多元线性回归

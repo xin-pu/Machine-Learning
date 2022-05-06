@@ -8,12 +8,15 @@
 
   <ItemGroup>
     <Compile Remove="DataSet\**" />
+    <Compile Remove="Models\Regression\TreeRegression\**" />
     <EmbeddedResource Remove="DataSet\**" />
+    <EmbeddedResource Remove="Models\Regression\TreeRegression\**" />
     <None Remove="DataSet\**" />
+    <None Remove="Models\Regression\TreeRegression\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\Regression\LinearRegression\RigdePolynomialFeatures.cs" />
+    <Compile Remove="Models\Regression\LinearRegression\RigdePolynomialFeatures.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,10 +28,6 @@
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="PythonPlotter" Version="0.3.2" />
     <PackageReference Include="YAXLib" Version="3.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\Regression\TreeRegression\" />
   </ItemGroup>
 
 </Project>
