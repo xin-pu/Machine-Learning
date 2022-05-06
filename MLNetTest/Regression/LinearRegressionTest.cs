@@ -1,4 +1,5 @@
 using MLNet.Kernels;
+using MLNet.LearningModel;
 using MLNet.Metrics;
 using MLNet.Models;
 using MLNet.Models.Regression;
@@ -37,7 +38,7 @@ namespace MLNetTest.Regression
                 Kernel = new Gaussian()
             };
             lr.Compile(new SGD(), null, new Metric[] {new MSE(), new EVS()});
-            lr.Fit(X, Y, 0.1, 200);
+            lr.Fit(X, Y, new TrainConfig());
             print(lr);
         }
 
@@ -45,7 +46,8 @@ namespace MLNetTest.Regression
         public void TestSave()
         {
             var lr = new MultipleLinearRegression {Print = false};
-            lr.Fit(X, Y, 0.1, 200);
+            lr.Compile(new SGD(), null, new Metric[] {new MSE(), new EVS()});
+            lr.Fit(X, Y, new TrainConfig());
             lr.Save("test.xml");
 
             var lrR = (MultipleLinearRegression) Model.Load("test.xml");

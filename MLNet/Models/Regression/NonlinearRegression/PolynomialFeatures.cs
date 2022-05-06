@@ -11,7 +11,6 @@ namespace MLNet.Models.Regression
     {
         public PolynomialFeatures(
             int degree = 1)
-            : base("PolynomialFeatures")
         {
             Degree = degree;
         }

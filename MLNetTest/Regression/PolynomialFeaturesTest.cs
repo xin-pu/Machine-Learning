@@ -1,6 +1,4 @@
-﻿using MLNet.Models.Regression;
-using Numpy;
-using Xunit;
+﻿using Numpy;
 using Xunit.Abstractions;
 
 namespace MLNetTest.Regression
@@ -19,77 +17,77 @@ namespace MLNetTest.Regression
         protected NDarray Y { set; get; }
 
 
-        [Fact]
-        public void PolynomialFeatures()
-        {
-            var pf = new PolynomialFeatures(4)
-            {
-                Print = false
-            };
-            pf.Fit(X, Y, 1E-3, 5000);
+        //[Fact]
+        //public void PolynomialFeatures()
+        //{
+        //    var pf = new PolynomialFeatures(4)
+        //    {
+        //        Print = false
+        //    };
+        //    pf.Fit(X, Y, 1E-3, 5000);
 
-            print(pf.Resolve);
-
-
-            print(Y);
-            print(pf.Call(X));
-        }
+        //    print(pf.Resolve);
 
 
-        [Fact]
-        public void LassoPolynomialFeatures()
-        {
-            var ridge = new PolynomialFeatures(4)
-            {
-                Constraint = Constraint.L1,
-                Print = false
-            };
-
-            ridge.Fit(X, Y, 1E-3, 5000);
-            ridge.PrintSelf();
-        }
-
-        [Fact]
-        public void RidgePolynomialFeatures()
-        {
-            var ridge = new PolynomialFeatures(4)
-            {
-                Constraint = Constraint.L2,
-                Print = false
-            };
-
-            ridge.Fit(X, Y, 1E-3, 5000);
-            ridge.PrintSelf();
-        }
-
-        [Fact]
-        public void ElasticNetPolynomialFeatures()
-        {
-            var ridge = new PolynomialFeatures(4)
-            {
-                Constraint = Constraint.ElasticNet,
-                Print = false
-            };
-
-            ridge.Fit(X, Y, 1E-3, 5000);
-            ridge.PrintSelf();
-        }
+        //    print(Y);
+        //    print(pf.Call(X));
+        //}
 
 
-        [Fact]
-        public void TrianglePolynomialFeatures()
-        {
-            var pf = new TrianglePolynomialFeatures(15)
-            {
-                Constraint = Constraint.ElasticNet,
-                Print = false
-            };
-            pf.Fit(X, Y, 1E-3, 5000);
-            print(pf.Resolve);
-            ;
+        //[Fact]
+        //public void LassoPolynomialFeatures()
+        //{
+        //    var ridge = new PolynomialFeatures(4)
+        //    {
+        //        Constraint = Constraint.L1,
+        //        Print = false
+        //    };
 
-            print(Y);
-            print(pf.Call(X));
-        }
+        //    ridge.Fit(X, Y, 1E-3, 5000);
+        //    ridge.PrintSelf();
+        //}
+
+        //[Fact]
+        //public void RidgePolynomialFeatures()
+        //{
+        //    var ridge = new PolynomialFeatures(4)
+        //    {
+        //        Constraint = Constraint.L2,
+        //        Print = false
+        //    };
+
+        //    ridge.Fit(X, Y, 1E-3, 5000);
+        //    ridge.PrintSelf();
+        //}
+
+        //[Fact]
+        //public void ElasticNetPolynomialFeatures()
+        //{
+        //    var ridge = new PolynomialFeatures(4)
+        //    {
+        //        Constraint = Constraint.ElasticNet,
+        //        Print = false
+        //    };
+
+        //    ridge.Fit(X, Y, 1E-3, 5000);
+        //    ridge.PrintSelf();
+        //}
+
+
+        //[Fact]
+        //public void TrianglePolynomialFeatures()
+        //{
+        //    var pf = new TrianglePolynomialFeatures(15)
+        //    {
+        //        Constraint = Constraint.ElasticNet,
+        //        Print = false
+        //    };
+        //    pf.Fit(X, Y, 1E-3, 5000);
+        //    print(pf.Resolve);
+        //    ;
+
+        //    print(Y);
+        //    print(pf.Call(X));
+        //}
     }
 }

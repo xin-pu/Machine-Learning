@@ -1,4 +1,5 @@
 ﻿using MLNet.Kernels;
+using MLNet.LearningModel;
 using MLNet.Models.Classify;
 using MLNet.Utils;
 using Numpy;
@@ -31,7 +32,7 @@ namespace MLNetTest.Classify
                 Print = true,
                 Kernel = new Poly(1)
             };
-            lr.Fit(X, Y, 0.2, 500);
+            lr.Fit(X, Y, new TrainConfig());
             lr.PrintSelf();
 
             var y = lr.Call(X);

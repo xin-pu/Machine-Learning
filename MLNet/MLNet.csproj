@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <Compile Remove="Models\Regression\LinearRegression\RigdePolynomialFeatures.cs" />
+    <Compile Remove="Models\Regression\NonlinearRegression\PolynomialFeatures.cs" />
+    <Compile Remove="Models\Regression\NonlinearRegression\TrianglePolynomialFeatures.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,10 @@
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="PythonPlotter" Version="0.3.2" />
     <PackageReference Include="YAXLib" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Regression\NonlinearRegression\" />
   </ItemGroup>
 
 </Project>

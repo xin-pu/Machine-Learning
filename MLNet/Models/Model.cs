@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using AutoDiff;
 using MLNet.Kernels;
+using MLNet.LearningModel;
 using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Optimizers;
@@ -16,17 +17,15 @@ namespace MLNet.Models
     /// </summary>
     public abstract class Model : ViewModelBase
     {
-        protected Model(string name)
-        {
-            Name = name;
-        }
-
         protected Model()
         {
+            Name = GetType().Name;
         }
 
 
-        public string? Name { get; set; }
+        public string Name { protected get; set; }
+        public string FilePath => $"{Name}.xml";
+        public bool Print { set; get; } = true;
 
 
         [YAXDontSerialize] public NDarray Resolve { set; get; } = null!;
@@ -35,19 +34,12 @@ namespace MLNet.Models
 
         [YAXDontSerialize] public Loss CostFunc { protected set; get; } = null!;
 
-        [YAXDontSerialize] public Metric[] Metrics { protected set; get; } = null!;
+        [YAXDontSerialize] public Metric[] Metrics { protected set; get; } = { };
 
         [YAXDontSerialize] public Optimizer Optimizer { protected set; get; } = null!;
 
+        [YAXDontSerialize] public Variable[] Variables { protected set; get; } = { };
 
-        public string FilePath => $"{Name}.xml";
-
-        public bool Print { set; get; } = true;
-
-        public NDarray Call(NDarray x)
-        {
-            return Predict(x);
-        }
 
         /// <summary>
         ///     Configures the model for training.
@@ -62,16 +54,20 @@ namespace MLNet.Models
             Metrics = metric;
         }
 
+        public NDarray Call(NDarray x)
+        {
+            return call(x);
+        }
 
         public NDarray Predict(NDarray x)
         {
             /// Step 1 Transform
             var x_cvt = transform(x);
 
-            /// Step 2 Casll
-            var res = call(x_cvt);
+            /// Step 2 Casll 
+            var y_pred = call(x_cvt);
 
-            return res;
+            return y_pred;
         }
 
         public void Evaluate(NDarray x, NDarray y)
@@ -85,25 +81,41 @@ namespace MLNet.Models
             });
         }
 
-        public void Fit(NDarray x, NDarray y, double learning_rate = 0.1, int epoch = 100, int batchsize = 8)
+        public void Fit(
+            NDarray traindatas_x,
+            NDarray trandatas_y,
+            TrainConfig trainConfig)
         {
             try
             {
                 print($"{Name} Start Fit:\r\n");
 
                 /// Step 1 Convert Model
-                var x_cvt = transform(x);
+                var x_cvt = transform(traindatas_x);
 
                 /// Step 2 Create Loss Function
                 var featureCount = x_cvt.shape[1];
                 var w = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
-                CostFunc = initialLoss(w, x_cvt, y);
+                CostFunc = initialLoss(w, x_cvt, trandatas_y);
 
                 /// Step 3 Fit
-                fit(x_cvt, y, learning_rate, epoch, batchsize);
+
+                var resolveTemp = np.random.randn(featureCount, 1);
+
+                Enumerable.Range(0, trainConfig.Epoch).ToList().ForEach(e =>
+                {
+                    var (gradarray, loss) = CostFunc.Call(resolveTemp);
+
+                    var grad = np.expand_dims(np.array(gradarray), -1);
+                    resolveTemp -= trainConfig.LearningRate * grad;
+
+                    if (Print)
+                        Log.print?.Invoke($"Epoch:\t{e:D4}\tLoss:{loss:F4}");
+                });
+                Resolve = resolveTemp;
 
                 /// Step 4 Evalate
-                Evaluate(x, y);
+                Evaluate(traindatas_x, trandatas_y);
             }
             catch (Exception ex)
             {
@@ -152,7 +164,6 @@ namespace MLNet.Models
             return final;
         }
 
-        internal abstract void fit(NDarray x, NDarray y, double learning_rate, int epoch, int batchsize);
 
         internal abstract NDarray call(NDarray x);
 

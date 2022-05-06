@@ -11,14 +11,8 @@ namespace MLNet.Models.Regression
     /// </summary>
     public class MultipleLinearRegression : Model
     {
-        public MultipleLinearRegression()
-            : base("MultipleLinearRegression")
-        {
-        }
+        public MultipleLinearRegression(Constraint constraint = Constraint.None)
 
-        public MultipleLinearRegression(string name = "MultipleLinearRegression",
-            Constraint constraint = Constraint.None)
-            : base(name)
         {
             Constraint = constraint;
         }
@@ -34,24 +28,6 @@ namespace MLNet.Models.Regression
         internal override NDarray transform(NDarray x)
         {
             return transformer.to_linear_firstorder(x);
-        }
-
-        internal override void fit(NDarray x, NDarray y, double learning_rate, int epoch, int batchsize)
-        {
-            var featureCount = x.shape[1];
-
-            var resolveTemp = np.random.randn(featureCount, 1);
-
-            Enumerable.Range(0, epoch).ToList().ForEach(e =>
-            {
-                var (grad, loss) = CostFunc.Call(resolveTemp);
-
-                resolveTemp = Optimizer?.Call(resolveTemp, grad);
-
-                if (Print)
-                    Log.print?.Invoke($"{Name} Epoch:\t{e:D5}\tLoss:{loss:F4}");
-            });
-            Resolve = resolveTemp;
         }
 
 
