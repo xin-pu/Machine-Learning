@@ -7,7 +7,7 @@ namespace MLNet.Losses
     public class CrossEntropy : Loss
     {
         public CrossEntropy(Variable[] variables, NDarray x, NDarray y)
-            : base("CrossEntropy", variables, x, y)
+            : base(variables, x, y)
         {
         }
 

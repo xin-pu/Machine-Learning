@@ -7,8 +7,7 @@ namespace MLNet.Losses
     /// </summary>
     public class TukeyLoss : Loss
     {
-        public TukeyLoss(string name, Variable[] variables, NDarray x, NDarray y)
-            : base(name, variables, x, y)
+        public TukeyLoss(Variable[] variables, NDarray x, NDarray y) : base(variables, x, y)
         {
         }
 

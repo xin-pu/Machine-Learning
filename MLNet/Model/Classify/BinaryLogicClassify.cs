@@ -26,10 +26,7 @@ namespace MLNet.Model.Classify
 
             Enumerable.Range(0, epoch).ToList().ForEach(e =>
             {
-                var theda = resolveTemp.GetData<double>();
-
-                var loss = CostFunc.Evaluate(theda);
-                var gradarray = CostFunc.Gradient(theda);
+                var (gradarray, loss) = CostFunc.Call(resolveTemp);
 
                 var grad = np.expand_dims(np.array(gradarray), -1);
                 resolveTemp -= learning_rate * grad;

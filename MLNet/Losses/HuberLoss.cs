@@ -9,8 +9,8 @@ namespace MLNet.Losses
     /// </summary>
     public class HuberLoss : Loss
     {
-        public HuberLoss(string name, Variable[] variables, NDarray x, NDarray y)
-            : base(name, variables, x, y)
+        public HuberLoss(Variable[] variables, NDarray x, NDarray y)
+            : base(variables, x, y)
         {
         }
 

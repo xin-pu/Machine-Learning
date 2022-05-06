@@ -2,6 +2,7 @@ using MLNet.Kernels;
 using MLNet.Metrics;
 using MLNet.Model;
 using MLNet.Model.Regression.LinearRegression;
+using MLNet.Optimizers;
 using MLNet.Utils;
 using Numpy;
 using Xunit;
@@ -35,7 +36,7 @@ namespace MLNetTest.Regression
                 Print = true,
                 Kernel = new Gaussian()
             };
-            lr.Compile(null, null, new Metric[] {new MSE(), new EVS()});
+            lr.Compile(new SGD(), null, new Metric[] {new MSE(), new EVS()});
             lr.Fit(X, Y, 0.1, 200);
             print(lr);
         }

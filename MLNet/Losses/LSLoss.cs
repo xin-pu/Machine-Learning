@@ -13,7 +13,7 @@ namespace MLNet.Losses
         public LSLoss(
             Variable[] w,
             NDarray x,
-            NDarray y) : base("LSLoss", w, x, y)
+            NDarray y) : base(w, x, y)
         {
         }
 

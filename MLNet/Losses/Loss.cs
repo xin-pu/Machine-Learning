@@ -1,4 +1,5 @@
-﻿using AutoDiff;
+﻿using System.Text;
+using AutoDiff;
 using Numpy;
 
 namespace MLNet.Losses
@@ -8,9 +9,9 @@ namespace MLNet.Losses
     /// </summary>
     public abstract class Loss
     {
-        protected Loss(string name, Variable[] variables, NDarray x, NDarray y)
+        protected Loss(Variable[] variables, NDarray x, NDarray y)
         {
-            Name = name;
+            Name = GetType().Name;
             Variables = variables;
             CostFunc = CreateLoss(Variables, x, y);
         }
@@ -26,16 +27,22 @@ namespace MLNet.Losses
             return createLoss(variables, x, y);
         }
 
-        public double Evaluate(double[] points)
+        public Tuple<NDarray, double> Call(NDarray weights)
         {
-            return CostFunc.Evaluate(Variables, points);
-        }
-
-        public double[] Gradient(double[] points)
-        {
-            return CostFunc.Differentiate(Variables, points);
+            var points = weights.GetData<double>();
+            var loss = CostFunc.Evaluate(Variables, points);
+            var grad = CostFunc.Differentiate(Variables, points);
+            return new Tuple<NDarray, double>(grad, loss);
         }
 
         internal abstract Term createLoss(Variable[] w, NDarray x, NDarray y);
+
+
+        public override string ToString()
+        {
+            var str = new StringBuilder();
+            str.AppendLine($"---{Name}---");
+            return str.ToString();
+        }
     }
 }

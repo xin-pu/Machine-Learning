@@ -44,13 +44,9 @@ namespace MLNet.Model.Regression.LinearRegression
 
             Enumerable.Range(0, epoch).ToList().ForEach(e =>
             {
-                var theda = resolveTemp.GetData<double>();
+                var (grad, loss) = CostFunc.Call(resolveTemp);
 
-                var loss = CostFunc.Evaluate(theda);
-                var gradarray = CostFunc.Gradient(theda);
-
-                var grad = np.expand_dims(np.array(gradarray), -1);
-                resolveTemp -= learning_rate * grad;
+                resolveTemp = Optimizer?.Call(resolveTemp, grad);
 
                 if (Print)
                     Log.print?.Invoke($"{Name} Epoch:\t{e:D5}\tLoss:{loss:F4}");

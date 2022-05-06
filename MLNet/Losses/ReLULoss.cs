@@ -6,7 +6,7 @@ namespace MLNet.Losses
     public class ReLULoss : Loss
     {
         public ReLULoss(Variable[] variables, NDarray x, NDarray y)
-            : base("ReLU", variables, x, y)
+            : base(variables, x, y)
         {
         }
 
