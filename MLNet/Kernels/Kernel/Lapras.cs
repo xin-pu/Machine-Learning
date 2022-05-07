@@ -17,7 +17,7 @@ namespace MLNet.Kernels
 
         public double Beta { protected set; get; }
 
-        public override NDarray Transform(NDarray input)
+        public override NDarray Call(NDarray input)
         {
             var p = input.shape[0];
 

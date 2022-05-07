@@ -1,16 +1,15 @@
-﻿using Numpy;
-
-namespace MLNet.Kernels
+﻿namespace MLNet.Kernels
 {
-    public abstract class Kernel
+    /// <summary>
+    ///     核模型转换
+    /// </summary>
+    public abstract class Kernel : Transform
     {
-        protected Kernel(KernelType kernelType)
+        protected Kernel(KernelType kernelType = KernelType.Gauss)
         {
             KernelType = kernelType;
         }
 
         public KernelType KernelType { protected set; get; }
-
-        public abstract NDarray Transform(NDarray input);
     }
 }

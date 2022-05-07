@@ -3,7 +3,6 @@ using MLNet.Kernels;
 using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Optimizers;
-using MLNet.Utils;
 using Numpy;
 using Numpy.Models;
 using YAXLib.Attributes;
@@ -29,7 +28,7 @@ namespace MLNet.Models
                 print($"{trainConfig}");
 
                 /// Step 1 Convert Model
-                traindatas_x = transform(traindatas_x);
+                traindatas_x = Transform.Call(traindatas_x);
 
                 /// Step 2 Initial Variables and Temp Weights
                 InitialWeights(traindatas_x, traindatas_y);
@@ -47,7 +46,7 @@ namespace MLNet.Models
                         var batch_y = traindatas_y[index];
 
                         /// get grad and loss at this step
-                        var (grad_batch, loss) = CostFunc.Call(Resolve, batch_x, batch_y);
+                        var (grad_batch, _) = CostFunc.Call(Resolve, batch_x, batch_y);
 
                         /// update weight by optimizer
                         Resolve = Optimizer.Call(Resolve, grad_batch);
@@ -84,7 +83,7 @@ namespace MLNet.Models
         ///     模型变换
         /// </summary>
         [YAXDontSerialize]
-        public Kernel Kernel { set; get; } = null!;
+        public Transform Transform { protected set; get; } = null!;
 
         /// <summary>
         ///     损失函数
@@ -151,7 +150,7 @@ namespace MLNet.Models
         public NDarray Predict(NDarray x)
         {
             /// Step 1 Transform
-            var x_cvt = transform(x);
+            var x_cvt = Transform.Call(x);
 
             /// Step 2 Casll 
             var y_pred = call(x_cvt, new Shape(x.shape[0], 0));
@@ -162,13 +161,6 @@ namespace MLNet.Models
         #endregion
 
         #region internal
-
-        internal virtual NDarray transform(NDarray x)
-        {
-            var kernel = Kernel.Transform(x);
-            var final = transformer.to_linear_firstorder(kernel);
-            return final;
-        }
 
         internal abstract Variable[] initialVariables(NDarray x, NDarray y);
 

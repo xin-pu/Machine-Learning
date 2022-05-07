@@ -133,14 +133,6 @@ namespace MLNetTest.UtilsTest
 
 
         [Fact]
-        public void linear_first_order()
-        {
-            var a = np.array(new double[,] {{1, 1, 1}, {0, 0, 0}});
-            var res = transformer.to_linear_firstorder(a);
-            print(res);
-        }
-
-        [Fact]
         public void equal()
         {
             var a = np.array(1, 0, 1, 0);

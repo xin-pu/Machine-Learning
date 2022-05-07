@@ -10,7 +10,6 @@ namespace MLNet.Kernels
         /// <param name="beta"></param>
         /// <exception cref="ArgumentException"></exception>
         public Gaussian(double beta = 1)
-            : base(KernelType.Gauss)
         {
             if (beta <= 0)
                 throw new ArgumentException("Please give Beta != 0 ");
@@ -19,7 +18,7 @@ namespace MLNet.Kernels
 
         public double Beta { protected set; get; }
 
-        public override NDarray Transform(NDarray input)
+        public override NDarray Call(NDarray input)
         {
             var p = input.shape[0];
 

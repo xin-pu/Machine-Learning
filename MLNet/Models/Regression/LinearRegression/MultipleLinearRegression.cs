@@ -1,5 +1,5 @@
 ﻿using AutoDiff;
-using MLNet.Utils;
+using MLNet.Kernels;
 using Numpy;
 using Numpy.Models;
 
@@ -11,14 +11,9 @@ namespace MLNet.Models.Regression
     /// </summary>
     public class MultipleLinearRegression : SupervisedModel
     {
-        /// <summary>
-        ///     x => 1,x1,x2,x3,...,xN
-        /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
-        internal override NDarray transform(NDarray x)
+        public MultipleLinearRegression()
         {
-            return transformer.to_linear_firstorder(x);
+            Transform = new LinearFirstorder();
         }
 
         internal override Variable[] initialVariables(NDarray x, NDarray y)

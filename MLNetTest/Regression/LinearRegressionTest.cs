@@ -1,6 +1,5 @@
 using System.Linq;
 using MLNet;
-using MLNet.Kernels;
 using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Models;
@@ -37,15 +36,12 @@ namespace MLNetTest.Regression
         [Fact]
         public void LinearRegression()
         {
-            var lr = new MultipleLinearRegression
-            {
-                Kernel = new Gaussian()
-            };
+            var lr = new MultipleLinearRegression();
             lr.GiveOptimizer(new SGD());
             lr.GiveLoss(new LSLoss {Constraint = Constraint.None});
             lr.GiveMetric(new MSE(), new MAE());
 
-            lr.Fit(X, Y, new TrainConfig(100, 0, 1E-2));
+            lr.Fit(X, Y, new TrainConfig(100, 0, 1E-3));
             print(lr);
         }
 
