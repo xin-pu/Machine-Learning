@@ -4,7 +4,7 @@ namespace MLNet.Optimizers
 {
     public abstract class Optimizer
     {
-        protected Optimizer(double learning_rate = 1E-4)
+        protected Optimizer(double learning_rate)
         {
             Name = GetType().Name;
             LearningRate = learning_rate;

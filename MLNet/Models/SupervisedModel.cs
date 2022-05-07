@@ -60,7 +60,7 @@ namespace MLNet.Models
                     if (Print)
                     {
                         var metrics = string.Join(' ', Metrics.Select(a => a.ToString()));
-                        Log.print?.Invoke($"Epoch:\t{epoch:D4}\tVal Loss:{epochloss:F4}\t{metrics}");
+                        Log.print?.Invoke($"Epoch:\t{epoch:D4}\tVal Loss:{epochloss:F4}\t{metrics}\t{Resolve}");
                     }
                 }
             }
@@ -73,7 +73,7 @@ namespace MLNet.Models
         internal void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
         {
             Variables = initialVariables(traindatas_x, trandatas_y);
-            Resolve = np.random.randn(Variables.Length);
+            Resolve = np.ones(Variables.Length);
             CostFunc.GiveVariables(Variables);
         }
 
@@ -164,7 +164,7 @@ namespace MLNet.Models
 
         internal abstract Variable[] initialVariables(NDarray x, NDarray y);
 
-        internal abstract NDarray call(NDarray x, Shape y);
+        internal abstract NDarray call(NDarray x, Shape shape);
 
         #endregion
     }

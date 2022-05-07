@@ -3,7 +3,7 @@ using Numpy;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace MLNetTest.UtilsTest
+namespace MLNetTest.Regression
 {
     public class TransformTest : AbstractUnitTest
     {

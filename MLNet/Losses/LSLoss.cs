@@ -24,20 +24,15 @@ namespace MLNet.Losses
         /// <returns></returns>
         internal override Term createLoss(Variable[] variables, NDarray x, NDarray y)
         {
-            switch (Constraint)
+            return Constraint switch
             {
-                case Constraint.None:
-                    return getLeastSquareLoss(variables, x, y);
-                case Constraint.L1:
-                    return getLeastSquareLoss(variables, x, y) + Lamdba * getLassoLoss(variables);
-                case Constraint.L2:
-                    return getLeastSquareLoss(variables, x, y) + Lamdba * getRidgeLoss(variables) / 2;
-                case Constraint.LP:
-                    return getLeastSquareLoss(variables, x, y) + (1 - Lamdba) * getLassoLoss(variables) +
-                           Lamdba * getRidgeLoss(variables);
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                Constraint.None => getLeastSquareLoss(variables, x, y),
+                Constraint.L1 => getLeastSquareLoss(variables, x, y) + Lamdba * getLassoLoss(variables),
+                Constraint.L2 => getLeastSquareLoss(variables, x, y) + Lamdba * getRidgeLoss(variables) / 2,
+                Constraint.LP => getLeastSquareLoss(variables, x, y) + (1 - Lamdba) * getLassoLoss(variables) +
+                                 Lamdba * getRidgeLoss(variables),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         /// <summary>
@@ -50,13 +45,12 @@ namespace MLNet.Losses
         private Term getLeastSquareLoss(Variable[] w, NDarray x, NDarray y)
         {
             var batchsize = x.shape[0];
-            Features = x.shape[1];
             var list = Enumerable.Range(0, batchsize).Select(i =>
             {
                 var rowX = x[$"{i}:{i + 1},:"];
-                var yp = y[$"{i},:"].GetData<double>();
-                var xp = term.matmul(rowX, w);
-                var delta = xp - yp[0];
+                var y_true = y[$"{i},:"].GetData<double>();
+                var y_pred_term = term.matmulRow(rowX, w);
+                var delta = y_pred_term - y_true[0];
 
                 return TermBuilder.Power(delta, 2);
             });

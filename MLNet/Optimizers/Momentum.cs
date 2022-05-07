@@ -4,7 +4,8 @@ namespace MLNet.Optimizers
 {
     public class Momentum : Optimizer
     {
-        public Momentum(double gamma = 0)
+        public Momentum(double learningrate, double gamma = 0)
+            : base(learningrate)
         {
             Gamma = gamma;
         }

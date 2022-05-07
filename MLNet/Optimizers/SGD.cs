@@ -8,6 +8,10 @@ namespace MLNet.Optimizers
     /// </summary>
     public class SGD : Optimizer
     {
+        public SGD(double learning_rate) : base(learning_rate)
+        {
+        }
+
         internal override NDarray call(NDarray weight, NDarray grad)
         {
             var delta = grad * LearningRate;

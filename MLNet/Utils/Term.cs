@@ -5,7 +5,7 @@ namespace MLNet.Utils
 {
     public class term
     {
-        public static Term matmul(NDarray x, Variable[] v)
+        public static Term matmulRow(NDarray x, Variable[] v)
         {
             var batchs = x.shape[0];
             var features = x.shape[1];
@@ -13,12 +13,10 @@ namespace MLNet.Utils
             if (v.Length != features)
                 throw new Exception();
 
-            var terms = Enumerable.Range(0, batchs).SelectMany(r =>
-            {
-                var row = x[$"{r},:"].GetData<double>();
-                return row.ToList().Select((c, i) => c * v[i]);
-            });
-            return TermBuilder.Sum(terms);
+            var row = x[$"{0}:"].GetData<double>();
+            var allTerm = row.Select((c, i) => c * v[i]);
+
+            return TermBuilder.Sum(allTerm);
         }
 
         /// <summary>

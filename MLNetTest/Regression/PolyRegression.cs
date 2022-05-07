@@ -1,37 +1,40 @@
-﻿using Numpy;
+﻿using System.Linq;
+using MLNet;
+using MLNet.Losses;
+using MLNet.Metrics;
+using MLNet.Models.Regression;
+using MLNet.Optimizers;
+using Numpy;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace MLNetTest.Regression
 {
-    public class PolynomialFeaturesTest : AbstractUnitTest
+    public class PolyRegression : AbstractUnitTest
     {
-        public PolynomialFeaturesTest(ITestOutputHelper testOutputHelper)
+        public PolyRegression(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            var x = np.arange(-3, 3, 0.1);
-            X = np.expand_dims(x, -1);
-            Y = np.expand_dims(1 + 0.3 * np.power(x, np.array(3)), -1);
+            var x = Enumerable.Range(0, 100).Select(a => a * 0.01).ToArray();
+            X = np.expand_dims(np.array(x), -1);
+            Y = np.expand_dims(0.8 + np.power(X, np.array(2)), -1);
         }
 
         protected NDarray X { set; get; }
         protected NDarray Y { set; get; }
 
 
-        //[Fact]
-        //public void PolynomialFeatures()
-        //{
-        //    var pf = new PolynomialFeatures(4)
-        //    {
-        //        Print = false
-        //    };
-        //    pf.Fit(X, Y, 1E-3, 5000);
+        [Fact]
+        public void PolynomialFeatures()
+        {
+            var pr = new MLNet.Models.Regression.PolyRegression(3);
+            pr.GiveOptimizer(new SGD(1E-2));
+            pr.GiveLoss(new LSLoss {Constraint = Constraint.None});
+            pr.GiveMetric(new MSE(), new MAE());
+            pr.Fit(X, Y, new TrainConfig(90, learningRate: 1));
 
-        //    print(pf.Resolve);
-
-
-        //    print(Y);
-        //    print(pf.Call(X));
-        //}
+            print(pr);
+        }
 
 
         //[Fact]

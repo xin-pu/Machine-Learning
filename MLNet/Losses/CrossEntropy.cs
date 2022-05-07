@@ -13,7 +13,7 @@ namespace MLNet.Losses
             {
                 var rowX = x[$"{i}:{i + 1},:"];
                 var yp = y[$"{i},:"].GetData<double>()[0];
-                var xp = term.matmul(rowX, variables);
+                var xp = term.matmulRow(rowX, variables);
                 var xp_sigmoid = term.sigmoid(xp);
                 var fin = yp * TermBuilder.Log(xp_sigmoid) + (1 - yp) * TermBuilder.Log(1 - xp_sigmoid);
                 return fin;
