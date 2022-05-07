@@ -40,7 +40,7 @@ namespace MLNetTest.Regression
             lr.GiveLoss(new LSLoss {Constraint = Constraint.None});
             lr.GiveMetric(new MSE(), new MAE());
 
-            lr.Fit(X, Y, new TrainConfig(90, learningRate: 1E-4));
+            lr.Fit(X, Y, new TrainConfig(90));
             print(lr);
         }
     }

@@ -15,9 +15,9 @@ namespace MLNetTest.Regression
         public PolyRegression(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper)
         {
-            var x = Enumerable.Range(0, 100).Select(a => a * 0.01).ToArray();
+            var x = Enumerable.Range(0, 100).Select(a => a * 0.05 - 1).ToArray();
             X = np.expand_dims(np.array(x), -1);
-            Y = np.expand_dims(0.8 + np.power(X, np.array(2)), -1);
+            Y = 1 - 3 * np.power(X, np.array(1)) + 2 * np.power(X, np.array(2));
         }
 
         protected NDarray X { set; get; }
@@ -27,11 +27,11 @@ namespace MLNetTest.Regression
         [Fact]
         public void PolynomialFeatures()
         {
-            var pr = new MLNet.Models.Regression.PolyRegression(3);
-            pr.GiveOptimizer(new SGD(1E-2));
-            pr.GiveLoss(new LSLoss {Constraint = Constraint.None});
+            var pr = new MLNet.Models.Regression.PolyRegression(2);
+            pr.GiveOptimizer(new SGD(2E-2));
+            pr.GiveLoss(new LSLoss {Constraint = Constraint.L2});
             pr.GiveMetric(new MSE(), new MAE());
-            pr.Fit(X, Y, new TrainConfig(90, learningRate: 1));
+            pr.Fit(X, Y, new TrainConfig(500));
 
             print(pr);
         }
