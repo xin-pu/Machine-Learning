@@ -1,6 +1,6 @@
 ﻿using Numpy;
 
-namespace MLNet.Kernels
+namespace MLNet.Transforms
 {
     /// <summary>
     ///     模型转换器

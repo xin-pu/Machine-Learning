@@ -34,10 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LearningModel\" />
     <Folder Include="Models\Classify\" />
     <Folder Include="Models\Regression\NonlinearRegression\" />
-    <Folder Include="Transforms\" />
   </ItemGroup>
 
 </Project>

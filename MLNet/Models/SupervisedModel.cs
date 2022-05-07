@@ -1,8 +1,8 @@
 ﻿using AutoDiff;
-using MLNet.Kernels;
 using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Optimizers;
+using MLNet.Transforms;
 using Numpy;
 using Numpy.Models;
 using YAXLib.Attributes;
@@ -150,10 +150,10 @@ namespace MLNet.Models
         public NDarray Predict(NDarray x)
         {
             /// Step 1 Transform
-            var x_cvt = Transform.Call(x);
+            var x_transformed = Transform.Call(x);
 
-            /// Step 2 Casll 
-            var y_pred = call(x_cvt, new Shape(x.shape[0], 0));
+            /// Step 2 Predict 
+            var y_pred = call(x_transformed, new Shape(x.shape[0], 0));
 
             return y_pred;
         }

@@ -1,6 +1,6 @@
 ﻿using Numpy;
 
-namespace MLNet.Kernels
+namespace MLNet.Transforms
 {
     /// <summary>
     ///     input: [x1,x2,x3,...,xN]

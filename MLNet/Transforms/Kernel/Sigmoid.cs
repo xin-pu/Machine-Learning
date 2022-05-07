@@ -1,6 +1,6 @@
 ﻿using Numpy;
 
-namespace MLNet.Kernels
+namespace MLNet.Transforms
 {
     /// <summary>
     ///     h(i,j) =  tanh ( beta *dot( xi,xj) + theta)

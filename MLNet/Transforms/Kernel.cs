@@ -1,4 +1,4 @@
-﻿namespace MLNet.Kernels
+﻿namespace MLNet.Transforms
 {
     /// <summary>
     ///     核模型转换
