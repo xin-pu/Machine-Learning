@@ -1,11 +1,11 @@
 ﻿using AutoDiff;
 using MLNet.Kernels;
-using MLNet.LearningModel;
 using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Optimizers;
 using MLNet.Utils;
 using Numpy;
+using Numpy.Models;
 using YAXLib.Attributes;
 
 namespace MLNet.Models
@@ -55,7 +55,8 @@ namespace MLNet.Models
 
                     var (_, epochloss) = CostFunc.Call(Resolve, traindatas_x, traindatas_y);
 
-                    Evaluate(traindatas_y, call(traindatas_x));
+                    var pred_y = call(traindatas_x, traindatas_y.shape);
+                    Evaluate(traindatas_y, pred_y);
 
                     if (Print)
                     {
@@ -153,7 +154,7 @@ namespace MLNet.Models
             var x_cvt = transform(x);
 
             /// Step 2 Casll 
-            var y_pred = call(x_cvt);
+            var y_pred = call(x_cvt, new Shape(x.shape[0], 0));
 
             return y_pred;
         }
@@ -171,7 +172,7 @@ namespace MLNet.Models
 
         internal abstract Variable[] initialVariables(NDarray x, NDarray y);
 
-        internal abstract NDarray call(NDarray x);
+        internal abstract NDarray call(NDarray x, Shape y);
 
         #endregion
     }

@@ -1,5 +1,6 @@
+using System.Linq;
+using MLNet;
 using MLNet.Kernels;
-using MLNet.LearningModel;
 using MLNet.Losses;
 using MLNet.Metrics;
 using MLNet.Models;
@@ -22,8 +23,11 @@ namespace MLNetTest.Regression
         {
             var data = np2.load(singledata);
 
-            X = data[":,0:1"];
-            Y = data[":,1:2"];
+            //X = data[":,0:1"];
+            //Y = data[":,1:2"];
+            var x = Enumerable.Range(0, 100).Select(a => (double) a).ToArray();
+            X = np.expand_dims(np.array(x), -1);
+            Y = X * 2.75;
         }
 
         protected NDarray X { set; get; }
@@ -38,10 +42,10 @@ namespace MLNetTest.Regression
                 Kernel = new Gaussian()
             };
             lr.GiveOptimizer(new SGD());
-            lr.GiveLoss(new LSLoss());
+            lr.GiveLoss(new LSLoss {Constraint = Constraint.None});
             lr.GiveMetric(new MSE(), new MAE());
 
-            lr.Fit(X, Y, new TrainConfig(10000, 0, 5E-1));
+            lr.Fit(X, Y, new TrainConfig(100, 0, 1E-2));
             print(lr);
         }
 

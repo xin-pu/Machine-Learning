@@ -35,10 +35,6 @@ namespace MLNet.Models
                 Log.print?.Invoke(obj);
         }
 
-        public void PrintSelf()
-        {
-            Log.print?.Invoke(this);
-        }
 
         internal void printTitle(string title)
         {

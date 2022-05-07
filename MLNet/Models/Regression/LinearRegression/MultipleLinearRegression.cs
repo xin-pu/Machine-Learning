@@ -1,6 +1,7 @@
 ﻿using AutoDiff;
 using MLNet.Utils;
 using Numpy;
+using Numpy.Models;
 
 namespace MLNet.Models.Regression
 {
@@ -27,10 +28,11 @@ namespace MLNet.Models.Regression
             return variables;
         }
 
-        internal override NDarray call(NDarray x)
+        internal override NDarray call(NDarray x, Shape shape)
         {
             if (Resolve == null) throw new Exception("Resolve is Empty");
-            return np.matmul(x, Resolve);
+            var y_pred = np.matmul(x, Resolve);
+            return np.reshape(y_pred, shape);
         }
     }
 }
