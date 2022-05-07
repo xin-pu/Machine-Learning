@@ -38,10 +38,10 @@ namespace MLNetTest.Regression
                 Kernel = new Gaussian()
             };
             lr.GiveOptimizer(new SGD());
-            lr.GiveLoss(new L1Loss());
+            lr.GiveLoss(new LSLoss());
             lr.GiveMetric(new MSE(), new MAE());
 
-            lr.Fit(X, Y, new TrainConfig());
+            lr.Fit(X, Y, new TrainConfig(10000, 0, 5E-1));
             print(lr);
         }
 

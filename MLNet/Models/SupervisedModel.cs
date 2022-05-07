@@ -16,47 +16,53 @@ namespace MLNet.Models
         ///     小批量随机梯度下降
         /// </summary>
         /// <param name="traindatas_x"></param>
-        /// <param name="trandatas_y"></param>
+        /// <param name="traindatas_y"></param>
         /// <param name="trainConfig"></param>
         public void Fit(
             NDarray traindatas_x,
-            NDarray trandatas_y,
+            NDarray traindatas_y,
             TrainConfig trainConfig)
         {
             try
             {
-                print($"{Name} Start Fit:\r\n");
+                printTitle($"{Name} Start Fit");
+                print($"{trainConfig}");
 
                 /// Step 1 Convert Model
                 traindatas_x = transform(traindatas_x);
 
                 /// Step 2 Initial Variables and Temp Weights
-                InitialWeights(traindatas_x, trandatas_y);
+                InitialWeights(traindatas_x, traindatas_y);
 
                 /// Step 3 Fit
-                Enumerable.Range(0, trainConfig.Epoch).ToList()
-                    .ForEach(epoch =>
+                foreach (var epoch in Enumerable.Range(0, trainConfig.Epoch))
+                {
+                    var final_batch = trainConfig.Batch == 0 ? traindatas_x.len : trainConfig.Batch;
+                    var steps = (int) Math.Ceiling(1.0 * traindatas_x.shape[0] / final_batch);
+
+                    foreach (var batch in Enumerable.Range(0, steps))
                     {
-                        foreach (var batch in Enumerable.Range(0, traindatas_x.shape[0] / trainConfig.Batch))
-                        {
-                            var batch_x = traindatas_x[$"{batch}:{(batch + 1) * trainConfig.Batch}"];
-                            var batch_y = trandatas_y[$"{batch}:{(batch + 1) * trainConfig.Batch}"];
+                        var index = $"{batch * final_batch}:{(batch + 1) * final_batch},:";
+                        var batch_x = traindatas_x[index];
+                        var batch_y = traindatas_y[index];
 
-                            /// get grad and loss at this step
-                            var (gradarray, loss) = CostFunc.Call(Resolve, batch_x, batch_y);
+                        /// get grad and loss at this step
+                        var (grad_batch, loss) = CostFunc.Call(Resolve, batch_x, batch_y);
 
-                            /// update weight by optimizer
-                            Resolve = Optimizer.Call(Resolve, gradarray);
-                        }
+                        /// update weight by optimizer
+                        Resolve = Optimizer.Call(Resolve, grad_batch);
+                    }
 
+                    var (_, epochloss) = CostFunc.Call(Resolve, traindatas_x, traindatas_y);
 
-                        if (Print)
-                            Log.print?.Invoke($"Epoch:\t{epoch:D4}");
-                    });
+                    Evaluate(traindatas_y, call(traindatas_x));
 
-
-                /// Step 4 Evalate
-                Evaluate(traindatas_x, trandatas_y);
+                    if (Print)
+                    {
+                        var metrics = string.Join(' ', Metrics.Select(a => a.ToString()));
+                        Log.print?.Invoke($"Epoch:\t{epoch:D4}\tVal Loss:{epochloss:F4}\t{metrics}");
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -67,7 +73,7 @@ namespace MLNet.Models
         internal void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
         {
             Variables = initialVariables(traindatas_x, trandatas_y);
-            Resolve = np.random.randn(Variables.Length, 1);
+            Resolve = np.random.randn(Variables.Length);
             CostFunc.GiveVariables(Variables);
         }
 
@@ -129,13 +135,11 @@ namespace MLNet.Models
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        internal void Evaluate(NDarray x, NDarray y)
+        internal void Evaluate(NDarray y_true, NDarray y_pred)
         {
             if (Metrics.Length == 0) return;
 
-            var y_pred = Predict(x);
-
-            Metrics.AsParallel().ForAll(m => { m.Call(y, y_pred); });
+            Metrics.ToList().ForEach(m => { m.Call(y_true, y_pred); });
         }
 
         /// <summary>

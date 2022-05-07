@@ -10,7 +10,8 @@ namespace MLNet.Optimizers
     {
         internal override NDarray call(NDarray weight, NDarray grad)
         {
-            return weight - LearningRate * grad;
+            var delta = grad * LearningRate;
+            return np.subtract(weight, delta);
         }
     }
 }

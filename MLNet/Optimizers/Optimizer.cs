@@ -4,13 +4,14 @@ namespace MLNet.Optimizers
 {
     public abstract class Optimizer
     {
-        protected Optimizer()
+        protected Optimizer(double learning_rate = 1E-4)
         {
             Name = GetType().Name;
+            LearningRate = learning_rate;
         }
 
         public string Name { protected set; get; }
-        public double LearningRate { set; get; } = 1E-4;
+        public double LearningRate { protected set; get; }
 
 
         public NDarray Call(NDarray weight, NDarray grad)

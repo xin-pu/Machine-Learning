@@ -100,7 +100,18 @@ namespace MLNetTest.UtilsTest
             var a = np.random.randn(5, 3);
             print(a);
             np.random.shuffle(a);
+
             print(a);
+        }
+
+        [Fact]
+        public void index()
+        {
+            var a = np.random.randn(5, 3);
+            print(a);
+            var index = "1:3,:";
+            var batch_x = a[index];
+            print(batch_x);
         }
 
         [Fact]
