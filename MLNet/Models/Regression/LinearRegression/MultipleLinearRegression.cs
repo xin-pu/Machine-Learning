@@ -8,17 +8,8 @@ namespace MLNet.Models.Regression
     ///     多元线性回归
     ///     y=α + β1*x1 + β2*x2 + ... + βn*xn
     /// </summary>
-    public class MultipleLinearRegression : Model
+    public class MultipleLinearRegression : SupervisedModel
     {
-        public MultipleLinearRegression(Constraint constraint = Constraint.None)
-
-        {
-            Constraint = constraint;
-        }
-
-        public Constraint Constraint { set; get; }
-
-
         /// <summary>
         ///     x => 1,x1,x2,x3,...,xN
         /// </summary>
@@ -35,7 +26,6 @@ namespace MLNet.Models.Regression
             var variables = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
             return variables;
         }
-
 
         internal override NDarray call(NDarray x)
         {

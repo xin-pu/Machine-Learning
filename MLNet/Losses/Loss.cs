@@ -20,7 +20,7 @@ namespace MLNet.Losses
 
         public Variable[] Variables { protected set; get; } = null!;
 
-        public void Compile(Variable[] variables)
+        public void GiveVariables(Variable[] variables)
         {
             Variables = variables;
         }

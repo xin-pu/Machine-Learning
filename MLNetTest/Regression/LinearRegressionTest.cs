@@ -35,10 +35,12 @@ namespace MLNetTest.Regression
         {
             var lr = new MultipleLinearRegression
             {
-                Print = true,
                 Kernel = new Gaussian()
             };
-            lr.Compile(new SGD(), null, new Metric[] {new MSE(), new EVS()});
+            lr.GiveOptimizer(new SGD());
+            lr.GiveLoss(new L1Loss());
+            lr.GiveMetric(new MSE(), new MAE());
+
             lr.Fit(X, Y, new TrainConfig());
             print(lr);
         }
@@ -46,8 +48,10 @@ namespace MLNetTest.Regression
         [Fact]
         public void TestSave()
         {
-            var lr = new MultipleLinearRegression {Print = false};
-            lr.Compile(new SGD(), new LSLoss(), new Metric[] {new MSE(), new EVS()});
+            var lr = new MultipleLinearRegression();
+            lr.GiveOptimizer(new SGD());
+            lr.GiveLoss(new L1Loss());
+            lr.GiveMetric(new MSE(), new MAE());
             lr.Fit(X, Y, new TrainConfig());
             lr.Save("test.xml");
 
