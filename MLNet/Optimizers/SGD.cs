@@ -12,10 +12,10 @@ namespace MLNet.Optimizers
         {
         }
 
-        internal override NDarray call(NDarray weight, NDarray grad, int epoch = 0)
+        internal override NDarray call(NDarray weight, NDarray grad, int epoch)
         {
-            var delta = grad * LearningRate;
-            return np.subtract(weight, delta);
+            var delta = -grad * LearningRate;
+            return weight + delta;
         }
     }
 }

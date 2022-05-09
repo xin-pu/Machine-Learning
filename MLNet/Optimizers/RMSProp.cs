@@ -10,27 +10,24 @@ namespace MLNet.Optimizers
             Beta = beta;
         }
 
-
+        /// <summary>
+        ///     衰减率
+        /// </summary>
         public double Beta { protected set; get; }
 
-        public NDarray AccumulativeVariable { set; get; } = null!;
+        /// <summary>
+        ///     参数梯度平方的累计值
+        /// </summary>
+        public NDarray G { set; get; } = null!;
 
-        internal override NDarray call(NDarray weight, NDarray grad, int epoch = 0)
+        internal override NDarray call(NDarray weight, NDarray grad, int epoch)
         {
             if (epoch == 0)
-                AccumulativeVariable = np.zeros_like(weight);
+                G = np.zeros_like(weight);
 
-            AccumulativeVariable = Beta * AccumulativeVariable + (1 - Beta) * np.square(grad);
-
-            return UpdateWeight(weight, grad);
-        }
-
-        internal NDarray UpdateWeight(NDarray weight, NDarray grad)
-        {
-            var d = LearningRate / np.sqrt(AccumulativeVariable + Epsilon);
-            var delta = np.multiply(d, grad);
-            var updateWeight = np.subtract(weight, delta);
-            return updateWeight;
+            G = Beta * G + (1 - Beta) * np.square(grad);
+            var delta = -np.multiply(LearningRate / np.sqrt(G + epsilon), grad);
+            return weight + delta;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace MLNet.Optimizers
 {
     public abstract class Optimizer
     {
-        internal const double Epsilon = 1E-7;
+        internal const double epsilon = 1E-7;
 
         protected Optimizer(double learning_rate)
         {
@@ -21,6 +21,6 @@ namespace MLNet.Optimizers
             return call(weight, grad, epoch);
         }
 
-        internal abstract NDarray call(NDarray weight, NDarray grad, int epoch = 0);
+        internal abstract NDarray call(NDarray weight, NDarray grad, int epoch);
     }
 }

@@ -10,15 +10,28 @@ namespace MLNet.Optimizers
             Beta2 = beta2;
         }
 
+        /// <summary>
+        ///     M 衰减率
+        /// </summary>
         public double Beta1 { protected set; get; }
+
+        /// <summary>
+        ///     G 衰减率
+        /// </summary>
         public double Beta2 { protected set; get; }
 
+        /// <summary>
+        ///     梯度平方的指数加权平均
+        /// </summary>
         public NDarray M { protected set; get; } = null!;
 
+        /// <summary>
+        ///     梯度的指数加权平均
+        /// </summary>
         public NDarray G { protected set; get; } = null!;
 
 
-        internal override NDarray call(NDarray weight, NDarray grad, int epoch = 0)
+        internal override NDarray call(NDarray weight, NDarray grad, int epoch)
         {
             if (epoch == 0)
             {
@@ -32,9 +45,10 @@ namespace MLNet.Optimizers
             var m = M / (1 - Beta1);
             var g = G / (1 - Beta2);
 
-            var delta_weight = LearningRate / np.sqrt(g + Epsilon) * m;
+            ///参数更新差值
+            var delta_weight = -LearningRate / np.sqrt(g + epsilon) * m;
 
-            return weight - delta_weight;
+            return weight + delta_weight;
         }
     }
 }

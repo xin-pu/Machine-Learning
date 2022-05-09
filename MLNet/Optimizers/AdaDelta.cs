@@ -9,26 +9,35 @@ namespace MLNet.Optimizers
             Beta = 0.9;
         }
 
+        /// <summary>
+        ///     衰减率
+        /// </summary>
         public double Beta { protected set; get; }
-        public NDarray AccumulativeVariable { set; get; } = null!;
-        public NDarray Chi { set; get; } = null!;
+
+        /// <summary>
+        ///     参数梯度平方的累计值
+        /// </summary>
+        public NDarray G { protected set; get; } = null!;
+
+        /// <summary>
+        ///     参数更新差值δθ的平方的指数衰减权移动平均
+        /// </summary>
+        public NDarray Χ { protected set; get; } = null!;
 
 
-        internal override NDarray call(NDarray weight, NDarray grad, int epoch = 0)
+        internal override NDarray call(NDarray weight, NDarray grad, int epoch)
         {
             if (epoch == 0)
             {
-                AccumulativeVariable = np.zeros_like(weight);
-                Chi = np.zeros_like(weight);
+                G = np.zeros_like(weight);
+                Χ = np.zeros_like(weight);
             }
 
-            AccumulativeVariable = Beta * AccumulativeVariable + (1 - Beta) * np.square(grad);
+            G = Beta * G + (1 - Beta) * np.square(grad);
 
-            var d = (Chi + Epsilon) / (AccumulativeVariable + Epsilon);
-            var ss = np.sqrt(d);
-            var deltaGrad = np.multiply(ss, grad);
+            var deltaGrad = np.multiply(np.sqrt((Χ + epsilon) / (G + epsilon)), grad);
 
-            Chi = Beta * Chi + (1 - Beta) * np.square(deltaGrad);
+            Χ = Beta * Χ + (1 - Beta) * np.square(deltaGrad);
 
             return weight - deltaGrad;
         }

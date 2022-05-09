@@ -4,22 +4,28 @@ namespace MLNet.Optimizers
 {
     public class Momentum : Optimizer
     {
-        public Momentum(double learningrate, double gamma = 0.9)
+        public Momentum(double learningrate, double rho = 0.9)
             : base(learningrate)
         {
-            Gamma = gamma;
+            Rho = rho;
         }
 
-        public double Gamma { set; get; }
+        /// <summary>
+        ///     动量因子
+        /// </summary>
+        public double Rho { set; get; }
 
+        /// <summary>
+        ///     负梯度的加权移动平均 => 参数更新方向
+        /// </summary>
         public NDarray DeltaTheda { protected set; get; } = null!;
 
-        internal override NDarray call(NDarray weight, NDarray grad, int epoch = 0)
+        internal override NDarray call(NDarray weight, NDarray grad, int epoch)
         {
             if (epoch == 0)
                 DeltaTheda = np.zeros_like(weight);
 
-            DeltaTheda = Gamma * DeltaTheda - LearningRate * grad;
+            DeltaTheda = Rho * DeltaTheda - LearningRate * grad;
 
             return weight + DeltaTheda;
         }
