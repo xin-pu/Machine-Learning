@@ -45,6 +45,17 @@ namespace MLNetTest.UtilsTest
             print(res);
         }
 
+        [Fact]
+        public void multiply2()
+        {
+            var x = np.array(1.0, 2.0);
+            var y = np.array(0.3, 1.0);
+            var res = np.multiply(x, y);
+            print(res);
+
+            print(0.3 * x);
+        }
+
 
         [Fact]
         public void power()

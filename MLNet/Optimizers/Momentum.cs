@@ -12,7 +12,8 @@ namespace MLNet.Optimizers
 
         public double Gamma { set; get; }
 
-        internal override NDarray call(NDarray weight, NDarray grad)
+
+        internal override NDarray call(NDarray weight, NDarray grad, int epoch = 0)
         {
             throw new NotImplementedException();
         }

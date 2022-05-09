@@ -17,7 +17,7 @@ namespace MLNetTest.Regression
         {
             var weights = np.ones(2, 1);
             var grad = np.ones(2, 1);
-            weights = new SGD(1E-2).Call(weights, grad);
+            weights = new SGD(1E-2).Call(weights, grad, 0);
             print(weights);
         }
     }

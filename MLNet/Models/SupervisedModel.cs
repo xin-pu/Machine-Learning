@@ -49,7 +49,7 @@ namespace MLNet.Models
                         var (grad_batch, _) = CostFunc.Call(Resolve, batch_x, batch_y);
 
                         /// update weight by optimizer
-                        Resolve = Optimizer.Call(Resolve, grad_batch);
+                        Resolve = Optimizer.Call(Resolve, grad_batch, epoch);
                     }
 
                     var (_, epochloss) = CostFunc.Call(Resolve, traindatas_x, traindatas_y);
