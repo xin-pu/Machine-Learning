@@ -1,7 +1,6 @@
 ﻿namespace MLNet.Optimizers
 {
-  、
-    public class Exponential : LRSchedule
+    public class Exponential : Annealing
     {
         /// <summary>
         ///     学习率指数衰减

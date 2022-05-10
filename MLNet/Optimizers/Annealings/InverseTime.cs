@@ -1,6 +1,6 @@
 ﻿namespace MLNet.Optimizers
 {
-    public class InverseTime : LRSchedule
+    public class InverseTime : Annealing
     {
         /// <summary>
         ///     逆时衰减

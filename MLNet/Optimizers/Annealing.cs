@@ -2,9 +2,9 @@
 
 namespace MLNet.Optimizers
 {
-    public abstract class LRSchedule : SGD
+    public abstract class Annealing : SGD
     {
-        protected LRSchedule(double learningrate)
+        protected Annealing(double learningrate)
             : base(learningrate)
         {
         }
