@@ -3,9 +3,9 @@
 ################################################################################
 
 /.vs
-/LinearRegression/bin
-/LinearRegression/obj
 /MLNet/bin
 /MLNet/obj
 /MLNetTest/bin
 /MLNetTest/obj
+/Demo/bin/Debug/net6.0
+/Demo/obj
