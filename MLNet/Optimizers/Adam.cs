@@ -4,7 +4,7 @@ namespace MLNet.Optimizers
 {
     public class Adam : Optimizer
     {
-        public Adam(double learning_rate = 0.001, double beta1 = 0.9, double beta2 = 0.99) : base(learning_rate)
+        public Adam(double workLearningRate = 0.001, double beta1 = 0.9, double beta2 = 0.99) : base(workLearningRate)
         {
             Beta1 = beta1;
             Beta2 = beta2;
@@ -46,7 +46,7 @@ namespace MLNet.Optimizers
             var g = G / (1 - Beta2);
 
             ///参数更新差值
-            var delta_weight = -LearningRate / np.sqrt(g + epsilon) * m;
+            var delta_weight = -WorkLearningRate / np.sqrt(g + epsilon) * m;
 
             return weight + delta_weight;
         }

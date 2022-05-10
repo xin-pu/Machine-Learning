@@ -28,7 +28,7 @@ namespace MLNetTest.Classify
         //        Print = true,
         //        Kernel = new Poly(1)
         //    };
-        //    lr.Fit(X, Y, new TrainConfig());
+        //    lr.Fit(X, Y, new TrainPlan());
         //    lr.PrintSelf();
 
         //    var y = lr.Call(X);

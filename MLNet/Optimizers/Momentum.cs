@@ -25,7 +25,7 @@ namespace MLNet.Optimizers
             if (epoch == 0)
                 DeltaTheda = np.zeros_like(weight);
 
-            DeltaTheda = Rho * DeltaTheda - LearningRate * grad;
+            DeltaTheda = Rho * DeltaTheda - WorkLearningRate * grad;
 
             return weight + DeltaTheda;
         }

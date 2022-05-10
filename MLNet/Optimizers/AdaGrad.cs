@@ -6,8 +6,8 @@ namespace MLNet.Optimizers
     /// </summary>
     public class AdaGrad : Optimizer
     {
-        public AdaGrad(double learning_rate)
-            : base(learning_rate)
+        public AdaGrad(double workLearningRate)
+            : base(workLearningRate)
         {
         }
 
@@ -22,7 +22,7 @@ namespace MLNet.Optimizers
                 G = np.zeros_like(weight);
 
             G += np.square(grad);
-            var delta = -np.multiply(LearningRate / np.sqrt(G + epsilon), grad);
+            var delta = -np.multiply(WorkLearningRate / np.sqrt(G + epsilon), grad);
             return weight + delta;
         }
     }

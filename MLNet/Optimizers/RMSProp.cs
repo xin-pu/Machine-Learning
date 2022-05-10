@@ -4,8 +4,8 @@ namespace MLNet.Optimizers
 {
     public class RMSProp : Optimizer
     {
-        public RMSProp(double learning_rate, double beta = 0.9)
-            : base(learning_rate)
+        public RMSProp(double workLearningRate, double beta = 0.9)
+            : base(workLearningRate)
         {
             Beta = beta;
         }
@@ -26,7 +26,7 @@ namespace MLNet.Optimizers
                 G = np.zeros_like(weight);
 
             G = Beta * G + (1 - Beta) * np.square(grad);
-            var delta = -np.multiply(LearningRate / np.sqrt(G + epsilon), grad);
+            var delta = -np.multiply(WorkLearningRate / np.sqrt(G + epsilon), grad);
             return weight + delta;
         }
     }

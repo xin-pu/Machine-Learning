@@ -16,16 +16,16 @@ namespace MLNet.Models
         /// </summary>
         /// <param name="traindatas_x"></param>
         /// <param name="traindatas_y"></param>
-        /// <param name="trainConfig"></param>
+        /// <param name="trainPlan"></param>
         public void Fit(
             NDarray traindatas_x,
             NDarray traindatas_y,
-            TrainConfig trainConfig)
+            TrainPlan trainPlan)
         {
             try
             {
                 printTitle($"{Name} Start Fit");
-                print($"{trainConfig}");
+                print($"{trainPlan}");
 
                 /// Step 1 Convert Model
                 traindatas_x = Transform.Call(traindatas_x);
@@ -34,9 +34,9 @@ namespace MLNet.Models
                 InitialWeights(traindatas_x, traindatas_y);
 
                 /// Step 3 Fit
-                foreach (var epoch in Enumerable.Range(0, trainConfig.Epoch))
+                foreach (var epoch in Enumerable.Range(0, trainPlan.Epoch))
                 {
-                    var final_batch = trainConfig.Batch == 0 ? traindatas_x.len : trainConfig.Batch;
+                    var final_batch = trainPlan.Batch == 0 ? traindatas_x.len : trainPlan.Batch;
                     var steps = (int) Math.Ceiling(1.0 * traindatas_x.shape[0] / final_batch);
 
                     foreach (var batch in Enumerable.Range(0, steps))
@@ -97,6 +97,7 @@ namespace MLNet.Models
         [YAXDontSerialize]
         public Optimizer Optimizer { protected set; get; } = null!;
 
+
         /// <summary>
         ///     参数
         /// </summary>
@@ -111,6 +112,7 @@ namespace MLNet.Models
         {
             Optimizer = optimizer;
         }
+
 
         /// <summary>
         ///     赋损失函数

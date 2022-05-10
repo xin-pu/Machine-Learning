@@ -6,14 +6,16 @@ namespace MLNet.Optimizers
     {
         internal const double epsilon = 1E-7;
 
-        protected Optimizer(double learning_rate)
+        protected Optimizer(
+            double learningrate)
         {
             Name = GetType().Name;
-            LearningRate = learning_rate;
+            InitLearningRate = WorkLearningRate = learningrate;
         }
 
         public string Name { protected set; get; }
-        public double LearningRate { protected set; get; }
+        public double WorkLearningRate { protected set; get; }
+        public double InitLearningRate { protected set; get; }
 
 
         public NDarray Call(NDarray weight, NDarray grad, int epoch)
