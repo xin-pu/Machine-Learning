@@ -73,6 +73,7 @@ namespace MLNet.Models
         internal void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
         {
             Variables = initialVariables(traindatas_x, trandatas_y);
+            // Todo Add different function for weights 
             Resolve = np.random.random_(Variables.Length);
             CostFunc.GiveVariables(Variables);
         }
