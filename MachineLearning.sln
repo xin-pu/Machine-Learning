@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSet", "DataSet", "{27D2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{C3D790D4-9CBC-4122-BEDC-7829FAD93EB4}"
 	ProjectSection(SolutionItems) = preProject
+		Document\demolog.png = Document\demolog.png
 		Document\frame.png = Document\frame.png
 		Document\优化算法.png = Document\优化算法.png
 		Document\总框架.png = Document\总框架.png
