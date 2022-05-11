@@ -7,7 +7,7 @@ namespace MLNet.Losses
     /// <summary>
     ///     逻辑回归的Softmax
     /// </summary>
-    public class SoftmaxLoss : Loss
+    public class Softmax : Loss
     {
         public int Features { set; get; }
 
