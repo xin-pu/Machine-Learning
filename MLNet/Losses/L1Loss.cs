@@ -24,7 +24,7 @@ namespace MLNet.Losses
                 var abs = TermBuilder.Power(TermBuilder.Power(delta, 2), 0.5);
                 return abs;
             });
-            return TermBuilder.Sum(list);
+            return TermBuilder.Sum(list) / batchsize;
         }
     }
 }

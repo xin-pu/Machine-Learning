@@ -2,6 +2,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a1ebf3c6_002Dc76a_002D4640_002Da956_002D0e3f9426ee93/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PolynomialFeatures #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.Regression.PolyRegression.PolynomialFeatures&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7F21073E-576E-4046-B1DC-5F409F443F9D::net6.0::MLNetTest.UtilsTest.AutoDiffTest.Test&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
