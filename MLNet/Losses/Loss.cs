@@ -44,4 +44,24 @@ namespace MLNet.Losses
             return str.ToString();
         }
     }
+
+    public abstract class ClassifyLoss : Loss
+    {
+        protected ClassifyLoss(int classes)
+        {
+        }
+    }
+
+    public class SoftmaxLoss : Loss
+    {
+        public SoftmaxLoss(int[] classes)
+        {
+        }
+
+
+        internal override Term createLoss(Variable[] w, NDarray x, NDarray y)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

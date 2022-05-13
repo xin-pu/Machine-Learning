@@ -1,27 +1,20 @@
-﻿using AutoDiff;
-using MLNet.Transforms;
+﻿using MLNet.Transforms;
 using Numpy;
 using Numpy.Models;
 
 namespace MLNet.Models.Regression
 {
-    /// <summary>
-    ///     多元线性回归
-    ///     y=α + β1*x1 + β2*x2 + ... + βn*xn
-    /// </summary>
     public class MultipleLinearRegression : SupervisedModel
     {
+        /// <summary>
+        ///     多元线性回归
+        ///     y=α + β1*x1 + β2*x2 + ... + βn*xn
+        /// </summary>
         public MultipleLinearRegression()
         {
             Transform = new LinearFirstorder();
         }
 
-        internal override Variable[] initialVariables(NDarray x, NDarray y)
-        {
-            var featureCount = x.shape[1];
-            var variables = Enumerable.Range(0, featureCount).Select(_ => new Variable()).ToArray();
-            return variables;
-        }
 
         internal override NDarray call(NDarray x, Shape shape)
         {
