@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSet", "DataSet", "{27D2
 	ProjectSection(SolutionItems) = preProject
 		DataSet\data_multivar.txt = DataSet\data_multivar.txt
 		DataSet\data_singlevar.txt = DataSet\data_singlevar.txt
+		DataSet\iris.data = DataSet\iris.data
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{C3D790D4-9CBC-4122-BEDC-7829FAD93EB4}"
