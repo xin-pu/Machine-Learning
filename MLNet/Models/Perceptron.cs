@@ -87,6 +87,15 @@ namespace MLNet.Models
             return np.ones(x.shape[0]);
         }
 
+        /// <summary>
+        ///     赋损失函数
+        /// </summary>
+        /// <param name="loss"></param>
+        public void GiveLoss(MultiClassLoss loss)
+        {
+            CostFunc = loss;
+        }
+
         #region Core
 
         /// <summary>
