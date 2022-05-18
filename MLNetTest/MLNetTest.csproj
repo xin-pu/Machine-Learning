@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="AutoDiff" Version="1.2.2" />
     <PackageReference Include="FluentAssertions" Version="6.6.0" />
+    <PackageReference Include="LaYumba.Functional" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Numpy" Version="3.7.1.28" />
     <PackageReference Include="Pandas.NET" Version="0.3.0" />
