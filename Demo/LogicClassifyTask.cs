@@ -1,6 +1,5 @@
 ﻿using MLNet;
 using MLNet.Losses;
-using MLNet.Metrics;
 using MLNet.Models;
 using MLNet.Optimizers;
 using Numpy;
@@ -17,11 +16,11 @@ namespace Demo
 
 
             var pr = new Perceptron(Enumerable.Range(0, 4).ToArray());
-            var trainPlan = new TrainPlan(1000, learningRate: 5E-2);
+            var trainPlan = new TrainPlan(50, learningRate: 5E-2);
 
             pr.GiveOptimizer(new Momentum(trainPlan.LearningRate));
             pr.GiveLoss(new SoftmaxMutlitClassLoss(4));
-            pr.GiveMetric(new Accuracy());
+            pr.GiveMetric();
             pr.Fit(X, Y, trainPlan);
         }
     }

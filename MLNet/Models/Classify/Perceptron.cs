@@ -1,6 +1,5 @@
 ﻿using AutoDiff;
 using MLNet.Losses;
-using MLNet.Utils;
 using Numpy;
 using Numpy.Models;
 using YAXLib.Attributes;
@@ -89,10 +88,10 @@ namespace MLNet.Models
 
         internal override NDarray call(NDarray x, Shape shape)
         {
-            var matmul = np.matmul(x, np.transpose(Resolve));
-            var active = np2.sigmoid(matmul);
-            var resharp = np.reshape(active, x.shape[0], Variables.Count);
-            var final = np.argmax(resharp, -1);
+            var matmul = np.exp(np.matmul(x, np.transpose(Resolve)));
+            var sum = np.sum(matmul, -1, keepdims: true);
+            var active = np.divide(matmul, sum);
+            var final = np.argmax(active, -1);
             var finalResharp = np.expand_dims(final, -1);
             return finalResharp;
         }
