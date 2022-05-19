@@ -1,5 +1,4 @@
-﻿using MLNet.Utils;
-using Numpy;
+﻿using Numpy;
 
 namespace MLNet.Metrics
 {
@@ -15,7 +14,7 @@ namespace MLNet.Metrics
             var mse = np.power(delta, np.array(2))
                 .GetData<double>()
                 .Average();
-            return 1 - mse / np2.variance(y_true);
+            return 1 - mse / np.var(y_true);
         }
     }
 }

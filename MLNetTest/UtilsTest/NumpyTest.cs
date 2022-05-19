@@ -106,6 +106,14 @@ namespace MLNetTest.UtilsTest
         }
 
         [Fact]
+        public void var()
+        {
+            var a = np.random.rand(2, 2);
+            print(a);
+            print(np.var(a));
+        }
+
+        [Fact]
         public void shuffle()
         {
             var a = np.random.randn(5, 3);

@@ -2,7 +2,7 @@
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/SolBuilderDuo/UseMsbuildSolutionBuilder/@EntryValue">NewVersion</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a1ebf3c6_002Dc76a_002D4640_002Da956_002D0e3f9426ee93/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PolynomialFeatures #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::241AF7AA-2CA4-4D7B-BD2C-E15D446C49D3::net6.0::MLNetTest.Func.OptionTest.Test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::241AF7AA-2CA4-4D7B-BD2C-E15D446C49D3::net6.0::MLNetTest.UtilsTest.NumpyTest.var&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

@@ -27,7 +27,7 @@ namespace MLNet.Losses
         {
             Variables = variables;
         }
-   
+
         public Tuple<NDarray, double> Call(NDarray weights, NDarray x, NDarray y)
         {
             CostFunc = createLoss(Variables, x, y);

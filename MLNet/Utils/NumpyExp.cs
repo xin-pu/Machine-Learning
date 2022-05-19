@@ -14,20 +14,7 @@ namespace MLNet.Utils
         /// <returns></returns>
         public static NDarray sigmoid(NDarray a, double w = 1)
         {
-            return 1.0 / (1.0 + np.exp(-w * a));
-        }
-
-        public static double variance(NDarray a)
-        {
-            var mean = a.GetData<double>().Average();
-
-            var delta = np.subtract(a, np.array(mean));
-
-            var varuance = np.power(delta, np.array(2))
-                .GetData<double>()
-                .Average();
-
-            return varuance;
+            return 1 / (1 + np.exp(-w * a));
         }
 
 

@@ -1,5 +1,4 @@
-﻿using MLNet.Utils;
-using Numpy;
+﻿using Numpy;
 
 namespace MLNet.Metrics
 {
@@ -12,9 +11,9 @@ namespace MLNet.Metrics
         internal override double call(NDarray y_true, NDarray y_pred)
         {
             var delta = y_true - y_pred;
-            var varuance_with_pred = np2.variance(delta);
+            var varuance_with_pred = np.var(delta);
 
-            var variance_y_true = np2.variance(y_true);
+            var variance_y_true = np.var(y_true);
             return 1 - varuance_with_pred / variance_y_true;
         }
     }
