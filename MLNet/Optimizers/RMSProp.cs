@@ -4,6 +4,11 @@ namespace MLNet.Optimizers
 {
     public class RMSProp : Optimizer
     {
+        /// <summary>
+        ///     自适应学习率
+        /// </summary>
+        /// <param name="workLearningRate"></param>
+        /// <param name="beta"></param>
         public RMSProp(double workLearningRate, double beta = 0.9)
             : base(workLearningRate)
         {

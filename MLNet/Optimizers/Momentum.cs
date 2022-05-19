@@ -4,6 +4,11 @@ namespace MLNet.Optimizers
 {
     public class Momentum : Optimizer
     {
+        /// <summary>
+        ///     动量法
+        /// </summary>
+        /// <param name="learningrate"></param>
+        /// <param name="rho"></param>
         public Momentum(double learningrate, double rho = 0.9)
             : base(learningrate)
         {

@@ -6,6 +6,10 @@ namespace MLNet.Optimizers
     {
         internal const double epsilon = 1E-7;
 
+        /// <summary>
+        ///     优化器
+        /// </summary>
+        /// <param name="learningrate"></param>
         protected Optimizer(
             double learningrate)
         {

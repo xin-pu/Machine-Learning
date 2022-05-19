@@ -6,6 +6,11 @@ namespace MLNet.Optimizers
     /// </summary>
     public class AdaGrad : Optimizer
     {
+        /// <summary>
+        ///     自适应学习率
+        ///     adapter gradient algorithm
+        /// </summary>
+        /// <param name="beta">学习率</param>
         public AdaGrad(double workLearningRate)
             : base(workLearningRate)
         {
