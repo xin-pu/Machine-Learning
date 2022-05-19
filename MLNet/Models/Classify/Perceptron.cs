@@ -1,5 +1,6 @@
 ﻿using AutoDiff;
 using MLNet.Losses;
+using MLNet.Utils;
 using Numpy;
 using Numpy.Models;
 using YAXLib.Attributes;
@@ -76,7 +77,7 @@ namespace MLNet.Models
                     if (Print)
                     {
                         var metrics = string.Join(' ', Metrics.Select(a => a.ToString()));
-                        Log.print?.Invoke($"Epoch:\t{epoch:D4}\tVal Loss:{epochloss:F4}\t{metrics}\t{Resolve}");
+                        Log.print?.Invoke($"Epoch:\t{epoch:D4}\tVal Loss:{epochloss:F4}\t{metrics}");
                     }
                 }
             }
@@ -88,7 +89,12 @@ namespace MLNet.Models
 
         internal override NDarray call(NDarray x, Shape shape)
         {
-            return np.ones(x.shape[0]);
+            var matmul = np.matmul(x, np.transpose(Resolve));
+            var active = np2.sigmoid(matmul);
+            var resharp = np.reshape(active, x.shape[0], Variables.Count);
+            var final = np.argmax(resharp, -1);
+            var finalResharp = np.expand_dims(final, -1);
+            return finalResharp;
         }
 
         /// <summary>

@@ -36,8 +36,8 @@ namespace MLNet.Losses
             var variablesList = Variables.SelectMany(a => a.Value).ToArray();
             var loss = CostFunc.Evaluate(variablesList, points);
             var grad = CostFunc.Differentiate(variablesList, points);
-
-            return new Tuple<NDarray, double>(grad, loss);
+            var Grad = np.reshape(np.array(grad), weights.shape);
+            return new Tuple<NDarray, double>(Grad, loss);
         }
 
         internal abstract Term createLoss(Dictionary<int, Variable[]> w, NDarray x, NDarray y);

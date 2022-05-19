@@ -18,6 +18,7 @@ namespace MLNet.Models
         protected Model()
         {
             Name = GetType().Name;
+            Transform = new LinearFirstorder();
         }
 
 
@@ -84,6 +85,11 @@ namespace MLNet.Models
         public virtual void GiveMetric(params Metric[] metrics)
         {
             Metrics = metrics;
+        }
+
+        public virtual void GiveTransform(Transform transform)
+        {
+            Transform = transform;
         }
 
         #endregion

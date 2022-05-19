@@ -5,4 +5,4 @@ using MLNet;
 
 Log.print = Console.WriteLine;
 Console.WriteLine("Start");
-PolyRegressionTask.Run();
+PerceptronTask.Run();
