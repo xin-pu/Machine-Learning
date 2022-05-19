@@ -4,6 +4,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::241AF7AA-2CA4-4D7B-BD2C-E15D446C49D3::net6.0::MLNetTest.UtilsTest.NumpyTest.var&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::241AF7AA-2CA4-4D7B-BD2C-E15D446C49D3::net6.0::MLNetTest.Regression.MetricTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::241AF7AA-2CA4-4D7B-BD2C-E15D446C49D3::net6.0::MLNetTest.DataProvider.DataProvider.IrisDataSet&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

@@ -3,7 +3,7 @@ using MLNet.Utils;
 using Numpy;
 using Numpy.Models;
 
-namespace MLNet.Models.Classify
+namespace MLNet.Models
 {
     public class BinaryLogicClassify : SupervisedModel
     {
