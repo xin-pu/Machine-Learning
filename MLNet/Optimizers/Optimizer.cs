@@ -2,6 +2,9 @@
 
 namespace MLNet.Optimizers
 {
+    /// <summary>
+    ///     抽象实现小批量梯度下降法
+    /// </summary>
     public abstract class Optimizer
     {
         internal const double epsilon = 1E-7;

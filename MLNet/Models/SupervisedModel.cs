@@ -78,7 +78,7 @@ namespace MLNet.Models
             }
         }
 
-        internal void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
+        public override void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
         {
             Variables = initialVariables(traindatas_x, trandatas_y);
             // Todo Add different function for weights 

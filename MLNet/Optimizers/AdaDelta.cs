@@ -4,7 +4,6 @@ namespace MLNet.Optimizers
 {
     public class AdaDelta : Optimizer
     {
-      
         public AdaDelta(double beta = 0.9) : base(0)
         {
             Beta = 0.9;

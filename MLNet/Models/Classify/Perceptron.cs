@@ -28,7 +28,7 @@ namespace MLNet.Models
             return variablesDict;
         }
 
-        internal void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
+        public override void InitialWeights(NDarray traindatas_x, NDarray trandatas_y)
         {
             Variables = initialVariables(traindatas_x, trandatas_y);
             Resolve = np.random.random_(Variables.Count, traindatas_x.shape[1]);

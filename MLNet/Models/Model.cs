@@ -22,7 +22,7 @@ namespace MLNet.Models
         }
 
 
-        public string Name { protected get; set; }
+        public string Name { protected set; get; }
         public string FilePath => $"{Name}.xml";
         public bool Print { protected set; get; } = true;
 
@@ -30,22 +30,16 @@ namespace MLNet.Models
         #region MyRegion
 
         /// <summary>
-        ///     解
-        /// </summary>
-        [YAXDontSerialize]
-        public NDarray Resolve { protected set; get; } = null!;
-
-        /// <summary>
         ///     模型变换
         /// </summary>
         [YAXDontSerialize]
-        public Transform Transform { protected set; get; } = null!;
+        public Transform Transform { protected set; get; }
 
         /// <summary>
-        ///     评估器
+        ///     解
         /// </summary>
         [YAXDontSerialize]
-        public Metric[] Metrics { protected set; get; } = { };
+        public NDarray Resolve { set; get; } = null!;
 
         /// <summary>
         ///     优化器
@@ -60,6 +54,12 @@ namespace MLNet.Models
         public Loss CostFunc { protected set; get; } = null!;
 
         /// <summary>
+        ///     评估器
+        /// </summary>
+        [YAXDontSerialize]
+        public Metric[] Metrics { protected set; get; } = { };
+
+        /// <summary>
         ///     赋优化器
         /// </summary>
         /// <param name="optimizer"></param>
@@ -68,6 +68,14 @@ namespace MLNet.Models
             Optimizer = optimizer;
         }
 
+        /// <summary>
+        ///     赋模型变换
+        /// </summary>
+        /// <param name="transform"></param>
+        public virtual void GiveTransform(Transform transform)
+        {
+            Transform = transform;
+        }
 
         /// <summary>
         ///     赋损失函数
@@ -87,11 +95,6 @@ namespace MLNet.Models
             Metrics = metrics;
         }
 
-        public virtual void GiveTransform(Transform transform)
-        {
-            Transform = transform;
-        }
-
         #endregion
 
         #region Public Function for Model
@@ -101,6 +104,8 @@ namespace MLNet.Models
             NDarray traindatas_y,
             TrainPlan trainPlan);
 
+
+        public abstract void InitialWeights(NDarray traindatas_x, NDarray trandatas_y);
 
         /// <summary>
         ///     评估
