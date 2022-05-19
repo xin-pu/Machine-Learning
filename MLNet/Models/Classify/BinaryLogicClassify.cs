@@ -7,6 +7,9 @@ namespace MLNet.Models.Classify
 {
     public class BinaryLogicClassify : SupervisedModel
     {
+        /// <summary>
+        ///     逻辑二分类
+        /// </summary>
         public BinaryLogicClassify()
         {
             Name = "BinaryLogicClassify";

@@ -4,6 +4,9 @@ using YAXLib.Attributes;
 
 namespace MLNet.Models
 {
+    /// <summary>
+    ///     无监督学习模型
+    /// </summary>
     public abstract class SupervisedModel : Model
     {
         #region Core

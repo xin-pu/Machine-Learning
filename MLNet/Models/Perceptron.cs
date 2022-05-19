@@ -8,6 +8,10 @@ namespace MLNet.Models
 {
     public class Perceptron : Model
     {
+        /// <summary>
+        ///     感知机 多分类模型
+        /// </summary>
+        /// <param name="classes"></param>
         public Perceptron(int[] classes)
         {
             Classes = classes;

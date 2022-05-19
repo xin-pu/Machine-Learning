@@ -7,6 +7,7 @@ namespace MLNet.Models.Regression
     public class PolyRegression : SupervisedModel
     {
         /// <summary>
+        ///     非线性回归，多项式函数逼近
         ///     PolynomialFeatures
         ///     y=α + β1*x + β2*x^2 + ... + βn*x^n
         /// </summary>
