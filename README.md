@@ -19,6 +19,8 @@ pr.Fit(X, Y, trainPlan);
 
 ![frame](Document/总框架.png)
 
+![frame](Document/优化算法.png)
+
 ![frame](Document/监督学习.png)
 
-![frame](Document/优化算法.png)
+![frame](Document/无监督学习.png)
